@@ -1,0 +1,94 @@
+/* Custom Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Progress Section Customization */
+h2, h5 {
+    font-size: 1.4rem;  /* Smaller font size */
+    font-weight: bold;
+}
+
+.progress-container {
+    margin-top: 30px;
+    margin-bottom: 30px; /* More space between progress bars */
+}
+
+.progress-container h5 {
+    margin-bottom: 10px; /* Add space between title and progress bar */
+    font-size: 1.1rem; /* Slightly smaller font size for progress titles */
+}
+
+/* Progress Bar Customization */
+.progress {
+    height: 25px; /* Slightly smaller progress bar height */
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+      /* Progress bar color */
+
+    font-size: 1rem; /* Smaller font size for percentage text */
+    line-height: 25px; /* Center the text vertically within the bar */
+    color: white; /* Set the text color to white */
+    text-align: center; /* Center the percentage text */
+}
+
+/* Navbar Customization */
+.navbar {
+
+    margin-bottom: 20px;
+}
+
+.navbar-nav {
+
+    margin-left: 0; /* Align navbar items to the left */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;  /* Smaller navbar font size */
+    font-weight: bold;
+}
+
+.navbar-brand {
+    padding-right: 20px; /* Space between logo and navbar links */
+}
+
+/* Icons in Titles */
+h2 i, h5 i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 1.3rem; /* Slightly larger icons */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 767px) {
+    .navbar-nav {
+        text-align: left; /* Ensure the navbar links stay left-aligned */
+    }
+}
+/* Custom Card Styling */
+.card {
+    margin-bottom: 20px;
+    border-radius: 8px; /* Optional: makes the card corners rounded */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+}
+
+.card-title {
+    font-size: 1.25rem; /* Optional: adjust the font size of the title */
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.btn-primary {
+    background-color: #236C93; /* Optional: update button color */
+    border-color: #236C93; /* Optional: update button border color */
+}
