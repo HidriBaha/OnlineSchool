@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    --header-height: 8vh;
+    text-decoration: none;
+    --margin-top: 1vh;
+    --margin-left: 1vw;
+    --margin-right: 1vw;
+    color: black;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    width: 100vw;
+    z-index: 100;
+    border-bottom: solid black 0.2vh;
+}
+
+.kursinhalt {
+    position: relative;
+    margin-top: calc(var(--header-height) + var(--margin-top));
+}
+
+.kursinhalt > * {
+    border: solid black 0.1vh;
+    border-radius: 0.4vh;
+    margin-top: var(--margin-top);
+    margin-left: var(--margin-left);
+    margin-right: var(--margin-right);
+}
+
+.edit {
+    text-align: right;
+    border: none;
+}
+
+.save {
+    text-align: right;
+    border: none;
+    margin-bottom: 0.5vh;
+}
+
+h2 {
+    border-bottom: solid black 0.2vh;
+}
+
+.test {
+    height: var(--header-height);
+    width: 100vw;
+}
+
+a.fill-div {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+#edit-button {
+    background-color: darkgrey;
+    border: solid black 0.3vh;
+    border-radius: 0.4vh;
+    padding: 0.5vw;
+}
+
+#edit-button:hover {
+    cursor: pointer; /* Change cursor when hovering over save button lul */
+}
+
+#save-button {
+    background-color: lawngreen;
+    border: solid black 0.3vh;
+    border-radius: 0.4vh;
+    margin-right: 1vw;
+}
+
+#save-button:hover {
+    cursor: pointer; /* Change cursor when hovering over save button lul */
+}
+
+#abort-button {
+    background-color: red;
+    border: solid black 0.3vh;
+    border-radius: 0.4vh;
+    margin-right: 2vw;
+}
+
+#abort-button:hover {
+    cursor: pointer; /* Change cursor when hovering over save button lul */
+}
+
+.input-text {
+    border: solid black 0.1vh;
+    border-radius: 0.3vh;
+}
+
+.beschreibung {
+    background-color: deeppink;
+}
+
+.solution-field {
+    border: solid black 0.1vh;
+}
+
+.definition {
+    padding-bottom: 0.5vh;
+}
