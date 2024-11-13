@@ -1,4 +1,7 @@
 <?php
+session_start(); // Session starten
+
+
 // Verbindungsdaten zur SQL-Datenbank
 $servername = "localhost";
 $username = "root";
@@ -44,11 +47,12 @@ if ($result->num_rows > 0) {
         }
         exit();
     } else {
-        header("Location: login_failure.html");
+        //$_SESSION['error'] = "E-Mail oder Falsches Passwort nicht gefunden.";
         exit();
     }
 } else {
-    header("Location: login_failure.html");
+    //$_SESSION['error'] = "E-Mail oder Falsches Passwort nicht gefunden.";
+    header("Location: index.html");
     exit();
 }
 

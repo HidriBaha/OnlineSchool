@@ -22,7 +22,7 @@ include "kurs.php";
         <div class="container">
             <!-- School Logo on the left -->
             <a class="navbar-brand" href="#">
-                <img src="../img/school-logo.png" class="logo" alt="School Logo">
+                <img src="../../img/school-logo.png" class="logo" alt="School Logo">
             </a>
 
             <!-- Navbar Links (Aligned to Left) -->
