@@ -1,6 +1,6 @@
 <?php
 global $kurs;
-include "kurs.php";
+include "../kurs.php";
 
 
 ?>
