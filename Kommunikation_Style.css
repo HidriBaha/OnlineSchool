@@ -8,7 +8,8 @@ body{
     display: grid;
     justify-self: center;
     justify-items: center;
-    width: calc(100% - 100px);
+    min-width: fit-content;
+    width: calc(100% - 200px);
 }
 
 #openChatBtn{
@@ -17,12 +18,41 @@ body{
 }
 
 table {
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     border: 2px solid #236C93;
     border-radius: 5px;
+    overflow: scroll;
+}
+
+.sender{
+    max-width: 200px;
     overflow: hidden;
-    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.recipient{
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topic{
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.date{
+    text-align: right;
+}
+
+.date:hover{
+    white-space: normal;
 }
 
 th, td {
@@ -30,6 +60,11 @@ th, td {
     border: none;
     border-bottom: 2px solid #236C93;
     text-align: left;
+}
+
+td:hover {
+    overflow: visible;
+    white-space: revert;
 }
 
 /* Optional: Stil für die Kopfzeile */
