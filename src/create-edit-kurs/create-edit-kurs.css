@@ -1,0 +1,71 @@
+textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.create-edit-kurs-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 80%;
+    margin: auto auto 0 auto;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.kapitel-outer-container {
+    width: 96%;
+    margin: auto auto 0 auto;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.kapitel-container {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.kapitel-header-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.kapitel-button-row-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    margin: auto 0 auto auto;
+}
+
+.kapitel-input-button {
+    height: fit-content;
+    border: 1px solid black;
+    background: none;
+    border-radius: 6px;
+}
+
+.kapitel-input-button:hover {
+    background: lightgray;
+}
+
+.loesungen-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0 10px 0;
+}
+
+.loesung-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.action-button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    padding: 20px 0 0 0;
+    margin: 0;
+}
