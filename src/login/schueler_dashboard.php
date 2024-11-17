@@ -3,7 +3,7 @@ session_start();
 
 // Überprüfen, ob der Benutzer eingeloggt ist und die Rolle "schüler" hat
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'schüler') {
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 ?>

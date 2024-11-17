@@ -1,5 +1,4 @@
 <?php
-include "data.php";
 $messages = [
     [
         "sender" => "M.Mustermann@HSGG.com",
@@ -82,8 +81,10 @@ $klassen = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <title>Nachrichten-Übersicht</title>
-    <link rel="stylesheet" href="Kommunikation_Style.css">
+    <link rel="stylesheet" href="/kommunikation/Kommunikation_Style.css">
 </head>
 <body>
 <div id="main">
@@ -188,5 +189,7 @@ $klassen = [
     }
 
 </script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"> </script>
 </body>
 </html>

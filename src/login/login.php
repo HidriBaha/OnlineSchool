@@ -1,3 +1,5 @@
+
+
 <?php
 session_start(); // Session starten
 
@@ -5,8 +7,8 @@ session_start(); // Session starten
 // Verbindungsdaten zur SQL-Datenbank
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "SchulDB"; // Aktualisierter Datenbankname
+$password = "123";
+$dbname = "schuldb"; // Aktualisierter Datenbankname
 
 // Verbindung zur Datenbank herstellen
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -34,18 +36,10 @@ if ($result->num_rows > 0) {
         $_SESSION['email'] = $row['email'];
         $_SESSION['role'] = $row['rolle'];
         $_SESSION['vorname'] = $row['vorname']; // Vorname für Begrüßung speichern
-
+        //  console.log("Role from PHP:", role);
         // Benutzer abhängig von der Rolle weiterleiten
-        if ($row['rolle'] == 'schüler') {
-            header("Location: schueler_dashboard.php");     //TODO:
-        } elseif ($row['rolle'] == 'lehrer') {
-            header("Location: lehrer_dashboard.php");       //TODO:
-        } elseif ($row['rolle'] == 'eltern') {
-            header("Location: eltern_dashboard.php");       //TODO:
-        } elseif ($row['rolle'] == 'admin') {
-            header("Location: admin_dashboard.php"); // Optional für Admins
-        }
-        exit();
+        echo "Logged in as: " . $_SESSION['role'];
+        header("Location: ../index.php");        exit();
     } else {
         //$_SESSION['error'] = "E-Mail oder Falsches Passwort nicht gefunden.";
         exit();
@@ -53,6 +47,7 @@ if ($result->num_rows > 0) {
 } else {
     //$_SESSION['error'] = "E-Mail oder Falsches Passwort nicht gefunden.";
     header("Location: index.html");
+    echo "Logged in role is: " . $_SESSION['role'];
     exit();
 }
 
