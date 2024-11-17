@@ -1,6 +1,13 @@
 <?php
 session_start(); // Start the session to access session variables
- // Include the communication file to access the communication functions
+include "../src/messages.php"; // Include the communication data (messages array and class data)
+// Sort the messages array by date in descending order to get the most recent messages first
+usort($messages, function ($a, $b) {
+    return strtotime($b['date']) - strtotime($a['date']);
+});
+
+// Get the most recent 4 messages
+$recentMessages = array_slice($messages, 0, 4);
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -190,8 +197,24 @@ session_start(); // Start the session to access session variables
             </thead>
             <tbody>
             <!-- Messages go here -->
+
+
+            <?php
+            // Get the latest 4 messages from $messages
+            $recentMessages = array_slice($messages, -4);
+            foreach ($recentMessages as $message) {
+                echo '<tr>';
+                echo '<td>' . htmlspecialchars($message['recipient']) . '</td>';
+                echo '<td>' . htmlspecialchars($message['topic']) . '</td>';
+                echo '<td>' . htmlspecialchars($message['date']) . '</td>';
+                echo '</tr>';
+            }
+            ?>
             </tbody>
         </table>
+        <a href="/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
+
+
     </div>
 </section>
 <script>
