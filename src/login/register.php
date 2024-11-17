@@ -2,8 +2,8 @@
 // Verbindungsdaten zur SQL-Datenbank
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "SchulDB";
+$password = "123";
+$dbname = "schuldb";
 
 // Verbindung zur Datenbank herstellen
 $conn = new mysqli($servername, $username, $password, $dbname);

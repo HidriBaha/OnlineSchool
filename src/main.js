@@ -32,21 +32,38 @@ document.getElementById("submitForm").addEventListener("click", function(event) 
         alert("Please fill in all fields!");
     }
 });
+document.getElementById("profileIcon").addEventListener("click", function(event) {
+    event.preventDefault();
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+});
+
+// Close dropdowns if clicking outside
+document.addEventListener("click", function(event) {
+    if (!event.target.closest("#communicationIcon") && !event.target.closest("#communicationDropdown")) {
+        document.getElementById("communicationDropdown").style.display = "none";
+    }
+    if (!event.target.closest("#profileIcon") && !event.target.closest("#profileDropdown")) {
+        document.getElementById("profileDropdown").style.display = "none";
+    }
+});
 
 // Role-based visibility handling
 
-const role = 2; // Set role (1 = student, 2 = teacher)
+//const role = 1; // Set role (1 = student, 2 = teacher)
+console.log("Role from PHP:", role);
+
 
 // Handle visibility of elements based on role
 window.addEventListener("DOMContentLoaded", function() {
-    if (role === 1) {
+    if (role === "schüler") {
         // Hide communication table for students
         document.getElementById("communicationTable").style.display = "none";
 
         // Show progress and courses as usual for students
         document.getElementById("progressSection").style.display = "block";
         document.getElementById("meineKurseSection").style.display = "block";
-    } else if (role === 2) {
+    } else if (role === "lehrer") {
         // Hide progress section for teachers
         document.getElementById("progressSection").style.display = "none";
 
