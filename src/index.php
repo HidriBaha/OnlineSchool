@@ -28,7 +28,7 @@ $recentMessages = array_slice($messages, 0, 4);
     <div class="container">
         <!-- Schullogo links -->
         <a class="navbar-brand" href="#">
-            <img src="logo.png" class="logo" alt="Schullogo">
+            <img src="img/logo.png" class="logo" alt="Schullogo">
         </a>
 
         <!-- Navbar-Links (Links ausgerichtet) -->

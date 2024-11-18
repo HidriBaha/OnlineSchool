@@ -2,6 +2,7 @@
 global $kurs;
 global $kurse;
 global $kurseThema;
+global $kurseTitle;
 const THEMA = "thema";
 const KURS_ID = "kursID";
 
@@ -13,6 +14,7 @@ $kurse = [
         [
             "titel" => "Geometrie I",
             "author" => "user",
+            "img"=>"../img/quarder.png",
             "beschreibung" => "Eine kurze Erklärung zum Kurs Geometrie I. Dieser Kurs behandelt die Grundlagen der Geometrie, einschließlich Formen, Winkel und Flächen.",
             "kapitel" => [
                 [
@@ -56,6 +58,7 @@ $kurse = [
         [
             "titel" => "Geometrie II",
             "author" => "user",
+            "img"=>"../img/quarder.png",
             "beschreibung" => "Das ist der zweite Kurs",
             "kapitel" => [
                 [
@@ -108,6 +111,7 @@ $kurse = [
         [
             "titel" => "Geometrie III",
             "author" => "user",
+            "img"=>"../img/quarder.png",
             "beschreibung" => "Das ist der dritte Kurs",
             "kapitel" => [
                 [
@@ -157,6 +161,7 @@ $kurse = [
         [
             "titel" => "Zahlenmengen I",
             "author" => "user",
+            "img"=>"../img/zahlenmenge.svg",
             "beschreibung" => "Dieser Kurs behandelt verschiedene Zahlenmengen und ihre Eigenschaften und hilft den Schülern, verschiedene Zahloperationen zu verstehen.",
             "kapitel" => [
                 [
@@ -236,6 +241,7 @@ $kurse = [
         [
             "titel" => "Zahlenmengen II",
             "author" => "user",
+            "img"=>"../img/zahlenmenge.svg",
             "beschreibung" => "Ein Kurs über irrationale und reelle Zahlen.",
             "kapitel" => [
                 [
@@ -291,6 +297,7 @@ $kurse = [
         [
             "titel" => "Zahlenmengen III",
             "author" => "user",
+            "img"=>"../img/zahlenmenge.svg",
             "beschreibung" => "Ein Kurs über komplexe und transzendente Zahlen.",
             "kapitel" => [
                 [
@@ -348,6 +355,7 @@ $kurse = [
         [
             "titel" => "Rechengesetze I",
             "author" => "user",
+            "img"=>"../img/quarder.png",
             "beschreibung" => "Ein Kurs über grundlegende Rechengesetze wie das Kommutativ-, Assoziativ- und Distributivgesetz.",
             "kapitel" => [
                 [
@@ -427,6 +435,7 @@ $kurse = [
         [
             "titel" => "Rechengesetze II",
             "author" => "user",
+            "img"=>"../img/quarder.png",
             "beschreibung" => "Ein Kurs über erweiterte Rechengesetze wie das Potenzgesetz und das Wurzelgesetz.",
             "kapitel" => [
                 [
@@ -482,6 +491,7 @@ $kurse = [
         [
             "titel" => "Rechengesetze III",
             "author" => "user",
+            "img"=>"../img/quarder.png",
             "beschreibung" => "Ein Kurs über Logarithmengesetze und besondere Regeln der Mathematik.",
             "kapitel" => [
                 [
@@ -537,6 +547,11 @@ $kurse = [
     ]
 ];
 
+$kurseTitle=[
+    "geometrie"=>"Geometrie",
+    "zahlenmenge"=>"Zahlenmenge",
+    "rechengesetze"=>"Rechengesetze",
+];
 
 $kurs = $kurse[$thema][$kursID];
 $kurseThema = $kurse[$thema];

@@ -1,0 +1,40 @@
+.outer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.progress-bar{
+    width: 60%;
+    background-color: #236C93;
+}
+
+.course-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.course-container:active{
+    background: lightgray;
+}
+
+.course-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.kurs-liste{
+}
+
+.preview-container{
+    display: none;
+    width: 50%;
+    border: solid black;
+    padding:10px;
+}
+
+img{
+    margin:10px auto 10px auto;
+}

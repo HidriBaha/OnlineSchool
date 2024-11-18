@@ -20,7 +20,7 @@ include "../kurs.php";
         <div class="container">
             <!-- Schullogo links -->
             <a class="navbar-brand" href="../index.php#">
-                <img src="../logo.png" class="logo" alt="Schullogo">
+                <img src="../img/logo.png" class="logo" alt="Schullogo">
             </a>
 
             <!-- Navbar-Links (Links ausgerichtet) -->
@@ -103,7 +103,7 @@ include "../kurs.php";
     <!-- Restlicher Seiteninhalt -->
 </header>
 <main>
-    <dialog class="create-edit-kurs-container">
+    <dialog class="container create-edit-kurs-container">
         <h1>
             <?php echo $kurs["titel"] ?>
         </h1>
