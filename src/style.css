@@ -26,7 +26,7 @@ h2, h5 {
 }
 
 .progress-bar {
-      /* Progress bar color */
+    /* Progress bar color */
 
     font-size: 1rem; /* Smaller font size for percentage text */
     line-height: 25px; /* Center the text vertically within the bar */
@@ -82,11 +82,11 @@ h2 i, h5 i {
     font-size: 1rem;
     margin-bottom: 15px;
 }
-.logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+/* Style for the logo */
+.navbar-brand .logo {
+    width: 80px;  /* Smaller width to reduce navbar height */
+    height: auto; /* Maintain the aspect ratio */
+    padding: 2px; /* Slight padding to avoid cramped look */
 }
 .btn-primary {
     background-color: #236C93; /* Optional: update button color */
