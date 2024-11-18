@@ -41,7 +41,9 @@ document.addEventListener("click", function(event) {
 
 // Role-based visibility handling
 
-const role = 2; // Set role (1 = student, 2 = teacher)
+//const role = 1; // Set role (1 = student, 2 = teacher)
+console.log("Role from PHP:", role);
+
 
 // Handle visibility of elements based on role
 window.addEventListener("DOMContentLoaded", function() {
