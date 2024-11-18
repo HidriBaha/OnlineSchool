@@ -5,16 +5,18 @@ include "../messages.php";
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="Kommunikation_Style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
     <title>Nachrichten-Übersicht</title>
-    <link rel="stylesheet" href="/kommunikation/Kommunikation_Style.css">
 </head>
 <body>
+<?php include "../Vorlage/NavBar.html"; ?>
 <div id="main">
     <button id="openChatBtn">+ Neue Nachricht</button>
-    <table>
+    <table id="messages-table">
         <colgroup>
             <col id="topic-col">
             <col id="sender-col">
@@ -23,21 +25,21 @@ include "../messages.php";
         </colgroup>
         <thead>
         <tr>
-            <th class="topic">Betreff</th>
-            <th class="sender">Absender</th>
-            <th class="recipient">Empfänger</th>
-            <th class="date">Datum / Uhrzeit</th>
+            <th class="messages-th topic">Betreff</th>
+            <th class="messages-th sender">Absender</th>
+            <th class="messages-th recipient">Empfänger</th>
+            <th class="messages-th date">Datum / Uhrzeit</th>
         </tr>
         </thead>
         <tbody>
         <?php
         foreach ($messages as $index => $message) {
             $rowId = "message-" . $index;
-            echo '<tr class="clickable" onclick="toggleRow(\'' . $rowId . '\')">';
-            echo "<td class='topic'>" . $message['topic'] . "</td>";
-            echo "<td class='sender'>" . $message['sender'] . "</td>";
-            echo "<td class='recipient'>" . $message['recipient'] . "</td>";
-            echo "<td class='date'>" . $message['date'] . "</td>";
+            echo '<tr class="messages-td clickable" onclick="toggleRow(\'' . $rowId . '\')">';
+            echo "<td class='messages-td topic'>" . $message['topic'] . "</td>";
+            echo "<td class='messages-td sender'>" . $message['sender'] . "</td>";
+            echo "<td class='messages-td recipient'>" . $message['recipient'] . "</td>";
+            echo "<td class='messages-td date'>" . $message['date'] . "</td>";
             echo "</tr>";
             echo '<tr class="hidden" id="' . $rowId . '">';
             echo '<td colspan="4">' . nl2br($message['message']) . "</td>";
@@ -48,8 +50,8 @@ include "../messages.php";
     </table>
 </div>
 
-<div id="chatContainer" class="chat-container">
-    <div class="chat-header">
+<div id="chatContainer">
+    <div id="chatHeader">
         <h3>Neue Nachricht</h3>
         <button id="closeChatBtn">_</button>
     </div>
@@ -72,7 +74,6 @@ include "../messages.php";
         </form>
     </div>
 </div>
-
 <script>
     function toggleRow(rowId) {
         let row = document.getElementById(rowId);
@@ -112,9 +113,6 @@ include "../messages.php";
             recipient.value = '';
         }
     }
-
 </script>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"> </script>
 </body>
 </html>

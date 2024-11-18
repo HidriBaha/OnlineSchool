@@ -1,10 +1,15 @@
 
+.navbar {
+    margin-bottom: 20px;
+}
+
 body{
     display: grid;
-    font-family: Verdana, serif;
 }
 
 #main{
+    font-family: Verdana, serif;
+    font-size: 10pt;
     display: grid;
     justify-self: center;
     justify-items: center;
@@ -17,7 +22,7 @@ body{
     margin-bottom: 10px;
 }
 
-table {
+#messages-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -26,25 +31,12 @@ table {
     overflow: scroll;
 }
 
-.sender{
+.col{
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.recipient{
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.topic{
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; /* Verhindert Zeilenumbrüche */
+    overflow-wrap: break-word; /* Erlaubt das Brechen von Wörtern */
 }
 
 .date{
@@ -55,25 +47,25 @@ table {
     white-space: normal;
 }
 
-th, td {
+.messages-td, .messages-th {
     padding: 10px;
     border: none;
     border-bottom: 2px solid #236C93;
     text-align: left;
 }
 
-td:hover {
-    overflow: visible;
-    white-space: revert;
-}
-
 /* Optional: Stil für die Kopfzeile */
-th {
+.messages-th {
     background-color: #236C93;
     color: white;
 }
 
-.chat-container {
+.messages-td:hover {
+    overflow: visible;
+    white-space: normal;
+}
+
+#chatContainer {
     display: none;
     grid-template-rows: 100px auto;
     position: fixed;
@@ -86,7 +78,7 @@ th {
     justify-self: center;
 }
 
-.chat-header {
+#chatHeader {
     color: white;
     background-color: #307599;
     padding: 10px;
@@ -111,6 +103,7 @@ th {
 #messageInput {
     min-height: 250px;
 }
+
 .msg-input::placeholder{
     font-family: Verdana, serif;
 }
