@@ -1,5 +1,9 @@
 // JavaScript for Dropdown Toggle
-
+document.getElementById("profileIcon").addEventListener("click", function(event) {
+    event.preventDefault();
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+});
 // Toggle communication dropdown
 document.getElementById("communicationIcon").addEventListener("click", function(event) {
     event.preventDefault();
@@ -32,11 +36,7 @@ document.getElementById("submitForm").addEventListener("click", function(event) 
         alert("Please fill in all fields!");
     }
 });
-document.getElementById("profileIcon").addEventListener("click", function(event) {
-    event.preventDefault();
-    const dropdown = document.getElementById("profileDropdown");
-    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-});
+
 
 // Close dropdowns if clicking outside
 document.addEventListener("click", function(event) {
@@ -52,7 +52,7 @@ document.addEventListener("click", function(event) {
 
 //const role = 1; // Set role (1 = student, 2 = teacher)
 console.log("Role from PHP:", role);
-
+console.log("Role from PHP:", role);
 
 // Handle visibility of elements based on role
 window.addEventListener("DOMContentLoaded", function() {

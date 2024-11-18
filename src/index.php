@@ -71,7 +71,7 @@ $recentMessages = array_slice($messages, 0, 4);
                 <div class="dropdown-menu dropdown-menu-end" id="profileDropdown" style="display: none;">
                     <a class="dropdown-item" href="#">Profil ansehen</a>
                     <a class="dropdown-item" href="#">Einstellungen</a>
-                    <a class="dropdown-item" href="../login/logout.php">Abmelden</a>
+                    <a class="dropdown-item" href="/src/login/logout.php">Abmelden</a>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-rulers" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Geometrie -->
                         <h5 class="card-title mt-3">Geometrie I</h5>
                         <p class="card-text"><?php echo $kurse["geometrie"][0]["beschreibung"] ?></p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?thema=geometrie&kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <a href="/src/create-edit-kurs/create-edit-kurs.php?thema=geometrie&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-calculator" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Zahlenmenge -->
                         <h5 class="card-title mt-3">Zahlenmenge</h5>
                         <p class="card-text"><?php echo $kurse["zahlenmenge"][0]["beschreibung"] ?></p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?thema=zahlenmenge&kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <a href="/src/create-edit-kurs/create-edit-kurs.php?thema=zahlenmenge&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -182,45 +182,44 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-journal-text" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Rechengesetze -->
                         <h5 class="card-title mt-3">Rechengesetze</h5>
                         <p class="card-text"><?php echo $kurse["rechengesetze"][0]["beschreibung"] ?></p><br>
-                        <a href="create-edit-kurs/create-edit-kurs.php?thema=rechengesetze&kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <a href="/src/create-edit-kurs/create-edit-kurs.php?thema=rechengesetze&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Communication Section -->
-    <div id="communicationTable" style="display: none;">
-        <h2>Kommunikation</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Empfänger</th>
-                <th>Betreff</th>
-                <th>Gesendet am</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Messages go here -->
-
-
-            <?php
-            // Get the latest 4 messages from $messages
-            $recentMessages = array_slice($messages, -4);
-            foreach ($recentMessages as $message) {
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($message['recipient']) . '</td>';
-                echo '<td>' . htmlspecialchars($message['topic']) . '</td>';
-                echo '<td>' . htmlspecialchars($message['date']) . '</td>';
-                echo '</tr>';
-            }
-            ?>
-            </tbody>
-        </table>
-        <a href="/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
+        <!-- Communication Section -->
+        <div id="communicationTable" style="display: none;">
+            <h2>Kommunikation</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Empfänger</th>
+                    <th>Betreff</th>
+                    <th>Gesendet am</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Messages go here -->
 
 
-    </div>
+                <?php
+                // Get the latest 4 messages from $messages
+                $recentMessages = array_slice($messages, -4);
+                foreach ($recentMessages as $message) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($message['recipient']) . '</td>';
+                    echo '<td>' . htmlspecialchars($message['topic']) . '</td>';
+                    echo '<td>' . htmlspecialchars($message['date']) . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+            <a href="/src/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
+
+
+        </div>
 </section>
 <script>
     // Expose PHP session variable to JavaScript

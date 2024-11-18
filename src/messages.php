@@ -12,7 +12,7 @@ Unser Sohn konnte sich leider nicht mehr erinnern.\n\nMit freundlichen Grüßen 
     [
         "sender" => "H.Schauerte@HSGG.com",
         "recipient" => "M.Mustermann@HSGG.com",
-        "topic" => "Das soll ein realistischerer Betreff sein test test hallo bitte funktionier",
+        "topic" => "Hausaufgaben",
         "message" => "Ihr Sohn muss noch seine Hausaufgaben nachzeigen!",
         "date" => "08.11.2024 / 12:34"
     ],
