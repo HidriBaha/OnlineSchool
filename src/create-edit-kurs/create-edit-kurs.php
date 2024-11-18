@@ -16,11 +16,10 @@ include "../kurs.php";
 </head>
 <body>
 <header>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
         <div class="container">
             <!-- Schullogo links -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../index.php#">
                 <img src="../logo.png" class="logo" alt="Schullogo">
             </a>
 
@@ -28,13 +27,13 @@ include "../kurs.php";
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../kurs-overview/Kursansicht_Geometrie.html">Geometrie</a>
+                        <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=geometrie">Geometrie</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../kurs-overview/kursansicht_Zahlenmenge.html">Zahlenmenge</a>
+                        <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=zahlenmenge">Zahlenmenge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../kurs-overview/kursansicht_Rechengesetze.html">Rechengesetze</a>
+                        <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Wiederholen</a>
@@ -101,6 +100,7 @@ include "../kurs.php";
             </div>
         </div>
     </div>
+    <!-- Restlicher Seiteninhalt -->
 </header>
 <main>
     <dialog class="create-edit-kurs-container">

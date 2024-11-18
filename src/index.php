@@ -1,6 +1,8 @@
 <?php
 session_start(); // Start the session to access session variables
-include "../src/messages.php"; // Include the communication data (messages array and class data)
+include "../src/messages.php";// Include the communication data (messages array and class data)
+include "kurs.php";
+global $kurse;
 // Sort the messages array by date in descending order to get the most recent messages first
 usort($messages, function ($a, $b) {
     return strtotime($b['date']) - strtotime($a['date']);
@@ -20,8 +22,8 @@ $recentMessages = array_slice($messages, 0, 4);
     <link rel="stylesheet" href="style.css"> <!-- Link zu style.css -->
 </head>
 <body>
-
 <!-- Navbar -->
+<header>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
     <div class="container">
         <!-- Schullogo links -->
@@ -33,13 +35,13 @@ $recentMessages = array_slice($messages, 0, 4);
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../kurs-overview/Kursansicht_Geometrie.html">Geometrie</a>
+                    <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=geometrie">Geometrie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../kurs-overview/kursansicht_Zahlenmenge.html">Zahlenmenge</a>
+                    <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=zahlenmenge">Zahlenmenge</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../kurs-overview/kursansicht_Rechengesetze.html">Rechengesetze</a>
+                    <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Wiederholen</a>
@@ -107,6 +109,8 @@ $recentMessages = array_slice($messages, 0, 4);
     </div>
 </div>
 <!-- Restlicher Seiteninhalt -->
+</header>
+<main>
 <section class="container mt-4">
     <!-- Fortschrittsbereich -->
     <div class="container mt-4">
@@ -153,8 +157,8 @@ $recentMessages = array_slice($messages, 0, 4);
                     <div class="card-body text-center">
                         <i class="bi bi-rulers" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Geometrie -->
                         <h5 class="card-title mt-3">Geometrie I</h5>
-                        <p class="card-text">Eine kurze Erklärung zum Kurs Geometrie I. Dieser Kurs behandelt die Grundlagen der Geometrie, einschließlich Formen, Winkel und Flächen.</p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <p class="card-text"><?php echo $kurse["geometrie"][0]["beschreibung"] ?></p>
+                        <a href="create-edit-kurs/create-edit-kurs.php?thema=geometrie&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -165,8 +169,8 @@ $recentMessages = array_slice($messages, 0, 4);
                     <div class="card-body text-center">
                         <i class="bi bi-calculator" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Zahlenmenge -->
                         <h5 class="card-title mt-3">Zahlenmenge</h5>
-                        <p class="card-text">Dieser Kurs behandelt verschiedene Zahlenmengen und ihre Eigenschaften und hilft den Schülern, verschiedene Zahloperationen zu verstehen.</p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?kursID=1" class="btn btn-primary">Zum Kurs</a>
+                        <p class="card-text"><?php echo $kurse["zahlenmenge"][0]["beschreibung"] ?></p>
+                        <a href="create-edit-kurs/create-edit-kurs.php?thema=zahlenmenge&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -177,9 +181,8 @@ $recentMessages = array_slice($messages, 0, 4);
                     <div class="card-body text-center">
                         <i class="bi bi-journal-text" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Rechengesetze -->
                         <h5 class="card-title mt-3">Rechengesetze</h5>
-                        <p class="card-text">Learn the fundamental arithmetic laws of operations like addition,
-                            subtraction, multiplication, and division in this course.</p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?kursID=2" class="btn btn-primary">Go to Course</a>
+                        <p class="card-text"><?php echo $kurse["rechengesetze"][0]["beschreibung"] ?></p><br>
+                        <a href="create-edit-kurs/create-edit-kurs.php?thema=rechengesetze&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -227,5 +230,6 @@ $recentMessages = array_slice($messages, 0, 4);
 
 <!-- Link to main.js -->
 <script src="main.js"></script>
+</main>
 </body>
 </html>
