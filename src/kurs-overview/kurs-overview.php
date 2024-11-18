@@ -34,8 +34,7 @@ global $kurseTitle;
                         <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=zahlenmenge">Zahlenmenge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
-                           href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
+                        <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Wiederholen</a>
@@ -106,7 +105,7 @@ global $kurseTitle;
 </header>
 <main>
     <div class="container outer">
-        <div>
+        <div class="list">
             <div class="Aufgabe-container">
                 <div class="course-title"><?php echo $kurseTitle[$_GET[THEMA] ?? "geometrie"]; ?></div>
                 <div class="progress-container mb-4">
@@ -130,7 +129,7 @@ global $kurseTitle;
                         "</div >" .
                         "</div >" .
                         "</div >" .
-                        "<div class='course-description' >" . $kursPerThema["beschreibung"] . "</div >" .
+                        "<p class='course-description' >" . $kursPerThema["beschreibung"] . "</p >" .
                         "<div hidden class='image-store'>".$kursPerThema["img"]."</div>".
                         "<a href = 'https://example.com/geometrie1' class='btn btn-primary' > Kurs starten </a >" .
                         "</div >";

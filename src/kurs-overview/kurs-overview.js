@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" >${progress}</div>
                 </div>
-                <a class="btn btn-primary" href=${link} >Kurs starten</a>
+                <a class="btn btn-primary" href=${link}>Kurs starten</a>
             `;
         });
     });
