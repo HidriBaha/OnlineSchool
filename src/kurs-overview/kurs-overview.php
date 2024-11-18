@@ -1,18 +1,19 @@
 <?php
-global $kurs;
 include "../kurs.php";
-
+global $kurseThema;
+global $kurseTitle;
 ?>
 <html lang="de">
 <head>
-    <link rel="stylesheet" href="create-edit-kurs.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Course Dashboard</title>
+    <title>Kurs Ansicht</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+          rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
-    <title></title>
+    <link rel="stylesheet" href="kurs-overview.css">
+    <script src="kurs-overview.js"></script>
 </head>
 <body>
 <header>
@@ -103,51 +104,44 @@ include "../kurs.php";
     <!-- Restlicher Seiteninhalt -->
 </header>
 <main>
-    <dialog class="container create-edit-kurs-container">
-        <h1>
-            <?php echo $kurs["titel"] ?>
-        </h1>
-        <div class="kapitel-outer-container">
-            <?php
-            foreach ($kurs["kapitel"] as $keyKapitel => $kapitel) {
-                echo "<div class='kapitel-container'>
-                          <div class='kapitel-header-row'>";
-                echo "<h2>" . ($keyKapitel + 1) . ". " . $kapitel["definition"] . "</h2>";
-                echo "<form class='kapitel-button-row-container' method='post'>
-                             <input class='btn btn-primary' type='submit' name='newDef' value='+Def'/>
-                             <input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>
-                             <input class='btn btn-primary' type='submit' name='newUebung' value='+Übung'/>
-                             <input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>";
-                echo "</form></div>";
-
-                foreach ($kapitel["erklaerungen"] as $keyDef => $def) {
-                    echo "<div class='def-container'>" . "<h3>" . ($keyKapitel + 1) . "." . ($keyDef + 1) . "    " . $def["header"] . "</h3>" . "</div>";
-
-                    echo "<textarea name='erklaerung' class='textarea-def'>" . $def["erklaerung"] . "</textarea>";
+    <div class="container outer">
+        <div class="list">
+            <div class="Aufgabe-container">
+                <div class="course-title"><?php echo $kurseTitle[$_GET[THEMA] ?? "geometrie"]; ?></div>
+                <div class="progress-container mb-4">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 60%; background-color: #236C93;"
+                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                            60%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kurs-liste">
+                <?php
+                foreach ($kurseThema as $kursPerThema) {
+                    echo "<div class='course-container'>" .
+                        "<div class='course-title'>" . $kursPerThema["titel"] . "</div>" .
+                        "<div class='progress-container mb - 4''>" .
+                        "<div class='progress'>" .
+                        "<div class='progress-bar' role='progressbar' >" .
+                        "60 %" .
+                        "</div >" .
+                        "</div >" .
+                        "</div >" .
+                        "<p class='course-description' >" . $kursPerThema["beschreibung"] . "</p >" .
+                        "<div hidden class='image-store'>".$kursPerThema["img"]."</div>".
+                        "<a href = 'https://example.com/geometrie1' class='btn btn-primary' > Kurs starten </a >" .
+                        "</div >";
                 }
-
-                foreach ($kapitel["aufgaben"] as $keyAufgabe => $aufgabe) {
-                    echo " <div class='kapitel-header-row'>" . "<div class='def-container'>" . "<h3>" . ($keyKapitel + 1) . "." . ($keyAufgabe + 1) . " Übung" . "</h3>" . "</div>" . "<form class='kapitel-button-row-container' method='post' >" . "<input class='btn btn-primary' type='submit' name='newConstraint' value='+Lösung'/>" . "</form>" . "</div>";
-
-                    echo "<textarea name='aufgaben' class='textarea-def'>" . $aufgabe["aufgabenstellung"] . "</textarea>";
-                    echo "<div class='loesungen-container'>";
-                    foreach ($aufgabe["loesungen"] as $keyLoesung => $loesung) {
-
-                        echo "<div class='loesung-container'><label class='loesung-label' for='input-loesung'>Aufgaben</label>
-                               <input id='input-loesung' name='" . $keyKapitel . "." . $keyDef . "." . $keyAufgabe . "." . $keyLoesung . "' value='" . $loesung . "'/></div>";
-
-                    }
-                    echo "</div>";
-                }
-                echo "</div>";
-            }
-            ?>
+                ?>
+            </div>
         </div>
-        <form class="action-button-container" method="post">
-            <input class="btn btn-primary" type="submit" value="Erstellen" name="create">
-            <input class="btn btn-secondary" type="submit" value="Verwerfen" name="discard">
-        </form>
-    </dialog>
+        <div class="preview-container" id="preview-container" >
+            <div></div>
+        </div>
+    </div>
 </main>
 </body>
+
 </html>
