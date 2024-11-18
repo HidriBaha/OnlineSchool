@@ -1,14 +1,5 @@
 // JavaScript for Dropdown Toggle
 
-// Toggle communication dropdown
-document.getElementById("communicationIcon").addEventListener("click", function(event) {
-    event.preventDefault();
-
-    // Open the contact form modal
-    const contactModal = new bootstrap.Modal(document.getElementById("contactModal"));
-    contactModal.show();
-});
-
 // Handle form submission
 document.getElementById("submitForm").addEventListener("click", function(event) {
     event.preventDefault();
@@ -56,14 +47,14 @@ console.log("Role from PHP:", role);
 
 // Handle visibility of elements based on role
 window.addEventListener("DOMContentLoaded", function() {
-    if (role === "schüler") {
+    if (role === 1) {
         // Hide communication table for students
         document.getElementById("communicationTable").style.display = "none";
 
         // Show progress and courses as usual for students
         document.getElementById("progressSection").style.display = "block";
         document.getElementById("meineKurseSection").style.display = "block";
-    } else if (role === "lehrer") {
+    } else if (role === 2) {
         // Hide progress section for teachers
         document.getElementById("progressSection").style.display = "none";
 

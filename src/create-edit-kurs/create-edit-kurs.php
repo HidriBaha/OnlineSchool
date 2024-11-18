@@ -18,59 +18,7 @@ include "../kurs.php";
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
-        <div class="container">
-            <!-- School Logo on the left -->
-            <a class="navbar-brand" href="#">
-                <img src="../../img/school-logo.png" class="logo" alt="School Logo">
-            </a>
-
-            <!-- Navbar Links (Aligned to Left) -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Geometrie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Zahlenmenge</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Rechengesetze</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Wiederholen</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Icons on the right -->
-            <div class="d-flex">
-                <!-- Communication Icon with Dropdown -->
-                <div class="nav-item dropdown me-3">
-                    <a href="#" class="nav-link" id="communicationIcon">
-                        <i class="bi bi-chat-dots" style="font-size: 1.5rem;"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" id="communicationDropdown" style="display: none;">
-                        <a class="dropdown-item" href="#">Message 1</a>
-                        <a class="dropdown-item" href="#">Message 2</a>
-                        <a class="dropdown-item" href="#">Message 3</a>
-                    </div>
-                </div>
-
-                <!-- User Profile Icon with Dropdown -->
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link" id="profileIcon">
-                        <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" id="profileDropdown" style="display: none;">
-                        <a class="dropdown-item" href="#">View Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php include "../Vorlage/NavBar.html" ?>
 </header>
 <main>
     <dialog class="create-edit-kurs-container">
