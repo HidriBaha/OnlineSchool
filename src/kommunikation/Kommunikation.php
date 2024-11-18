@@ -12,8 +12,10 @@ include "../messages.php";
 
     <title>Nachrichten-Übersicht</title>
 </head>
+<header>
+    <?php include "../Vorlage/NavBar.html"; ?>
+</header>
 <body>
-<?php include "../Vorlage/NavBar.html"; ?>
 <div id="main">
     <button id="openChatBtn">+ Neue Nachricht</button>
     <table id="messages-table">
@@ -53,17 +55,17 @@ include "../messages.php";
 <div id="chatContainer">
     <div id="chatHeader">
         <h3>Neue Nachricht</h3>
-        <button id="closeChatBtn">_</button>
+        <button id="closeChatBtn"></button>
     </div>
     <div id="chat-bottom">
         <form action="" method="post">
             <div>
                 <input type="text" class="msg-input" id="recipient" name="recipient" placeholder="Empfänger eingeben..." required>
-                <select name="verteiler" id="verteiler" onchange="updateRecipients()">
+                <select name="verteiler" id="verteiler" class="dropdown" onchange="updateRecipients()">
                     <option value="Klassen" selected>Klassen</option>
                     <?php
                     foreach($klassen as $name => $klasse){
-                        echo '<option value="' . $name . '">' . $name . '</option>';
+                        echo '<option class="dropdown-content" value="' . $name . '">' . $name . '</option>';
                     }
                     ?>
                 </select>
