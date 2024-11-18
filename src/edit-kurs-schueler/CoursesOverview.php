@@ -3,7 +3,7 @@
     $courseList = [
         'course1' => [
             'name' => 'Course Name 1',
-            'img-src' => 'images/SWE Kursverwaltung.png',
+            'img-src' => '../../img/SWE Kursverwaltung.png',
 	        'course-link' => 'Teacher-EditCourse.php',
         ],
         'course2' => [
