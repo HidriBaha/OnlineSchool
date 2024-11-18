@@ -10,31 +10,31 @@ include "../kurs.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Course Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
-          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
     <title></title>
 </head>
 <body>
 <header>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
         <div class="container">
-            <!-- School Logo on the left -->
-            <a class="navbar-brand" href="../index.html#">
-                <img src="../../img/school-logo.png" class="logo" alt="School Logo">
+            <!-- Schullogo links -->
+            <a class="navbar-brand" href="#">
+                <img src="../logo.png" class="logo" alt="Schullogo">
             </a>
 
-            <!-- Navbar Links (Aligned to Left) -->
+            <!-- Navbar-Links (Links ausgerichtet) -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Geometrie</a>
+                        <a class="nav-link" href="../kurs-overview/Kursansicht_Geometrie.html">Geometrie</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Zahlenmenge</a>
+                        <a class="nav-link" href="../kurs-overview/kursansicht_Zahlenmenge.html">Zahlenmenge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Rechengesetze</a>
+                        <a class="nav-link" href="../kurs-overview/kursansicht_Rechengesetze.html">Rechengesetze</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Wiederholen</a>
@@ -42,34 +42,65 @@ include "../kurs.php";
                 </ul>
             </div>
 
-            <!-- Icons on the right -->
+            <!-- Symbole rechts -->
             <div class="d-flex">
-                <!-- Communication Icon with Dropdown -->
+                <!-- Kommunikationssymbol mit Dropdown -->
                 <div class="nav-item dropdown me-3">
                     <a href="#" class="nav-link" id="communicationIcon">
                         <i class="bi bi-chat-dots" style="font-size: 1.5rem;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" id="communicationDropdown" style="display: none;">
-                        <a class="dropdown-item" href="#">Message 1</a>
-                        <a class="dropdown-item" href="#">Message 2</a>
-                        <a class="dropdown-item" href="#">Message 3</a>
+                        <a class="dropdown-item" href="#">Nachricht 1</a>
+                        <a class="dropdown-item" href="#">Nachricht 2</a>
+                        <a class="dropdown-item" href="#">Nachricht 3</a>
                     </div>
                 </div>
 
-                <!-- User Profile Icon with Dropdown -->
+                <!-- Benutzersymbol mit Dropdown -->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link" id="profileIcon">
                         <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" id="profileDropdown" style="display: none;">
-                        <a class="dropdown-item" href="#">View Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="#">Profil ansehen</a>
+                        <a class="dropdown-item" href="#">Einstellungen</a>
+                        <a class="dropdown-item" href="../login/logout.php">Abmelden</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+    <!-- Modal for Contact Form -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Kontaktformular</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Ihr Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Empfänger</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Nachricht</label>
+                            <textarea class="form-control" id="message" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                    <button type="submit" class="btn btn-primary" id="submitForm">Absenden</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 <main>
     <dialog class="create-edit-kurs-container">
