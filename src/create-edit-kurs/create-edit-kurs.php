@@ -2,7 +2,6 @@
 global $kurs;
 include "../kurs.php";
 
-
 ?>
 <html lang="de">
 <head>
@@ -21,7 +20,7 @@ include "../kurs.php";
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
         <div class="container">
             <!-- School Logo on the left -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../index.html#">
                 <img src="../../img/school-logo.png" class="logo" alt="School Logo">
             </a>
 
@@ -75,37 +74,36 @@ include "../kurs.php";
 <main>
     <dialog class="create-edit-kurs-container">
         <h1>
-            Neuer Kurs
+            <?php echo $kurs["titel"] ?>
         </h1>
         <div class="kapitel-outer-container">
             <?php
             foreach ($kurs["kapitel"] as $keyKapitel => $kapitel) {
                 echo "<div class='kapitel-container'>
                           <div class='kapitel-header-row'>";
-                echo "<h2>" . ($keyKapitel + 1) . " " . $kapitel["definition"] . "</h2>";
+                echo "<h2>" . ($keyKapitel + 1) . ". " . $kapitel["definition"] . "</h2>";
                 echo "<form class='kapitel-button-row-container' method='post'>
-                             <input class='kapitel-input-button' type='submit' name='newDef' value='+Def'/>
-                             <input class='kapitel-input-button' type='submit' name='newErklaerung' value='+Erklärung'/>
-                             <input class='kapitel-input-button' type='submit' name='newUebung' value='+Übung'/>
-                             <input class='kapitel-input-button' type='submit' name='newConstraint' value='Einschränkung'/>";
+                             <input class='btn btn-primary' type='submit' name='newDef' value='+Def'/>
+                             <input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>
+                             <input class='btn btn-primary' type='submit' name='newUebung' value='+Übung'/>
+                             <input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>";
                 echo "</form></div>";
 
                 foreach ($kapitel["erklaerungen"] as $keyDef => $def) {
-                    echo "<div class='def-container'>" . "<h3>" . ($keyKapitel + 1) . ". " . ($keyDef + 1) . "    " . $def["header"] . "</h3>" . "</div>";
+                    echo "<div class='def-container'>" . "<h3>" . ($keyKapitel + 1) . "." . ($keyDef + 1) . "    " . $def["header"] . "</h3>" . "</div>";
 
-                    echo "<textarea name='erklaerung' >" . $def["erklaerung"] . "</textarea>";
+                    echo "<textarea name='erklaerung' class='textarea-def'>" . $def["erklaerung"] . "</textarea>";
                 }
 
                 foreach ($kapitel["aufgaben"] as $keyAufgabe => $aufgabe) {
-                    echo " <div class='kapitel-header-row'>" . "<div class='def-container'>" . "<h3>" . ($keyKapitel + 1) . ". " . ($keyAufgabe + 1) . " Übung" . "</h3>" . "</div>" . "<form class='kapitel-button-row-container' method='post' >" . "<input class='kapitel-input-button' type='submit' name='newConstraint' value='+Lösung'/>" . "</form>" . "</div>";
+                    echo " <div class='kapitel-header-row'>" . "<div class='def-container'>" . "<h3>" . ($keyKapitel + 1) . "." . ($keyAufgabe + 1) . " Übung" . "</h3>" . "</div>" . "<form class='kapitel-button-row-container' method='post' >" . "<input class='btn btn-primary' type='submit' name='newConstraint' value='+Lösung'/>" . "</form>" . "</div>";
 
-                    echo "<label for='text'>Aufgaben</label>
-                     <textarea id='text' name='aufgaben' >" . $aufgabe["aufgabenstellung"] . "</textarea>";
+                    echo "<textarea name='aufgaben' class='textarea-def'>" . $aufgabe["aufgabenstellung"] . "</textarea>";
                     echo "<div class='loesungen-container'>";
                     foreach ($aufgabe["loesungen"] as $keyLoesung => $loesung) {
 
-                        echo "<div class='loesung-container'><label for='input-loesung'>Aufgaben</label>
-                               <input id='input-loesung' name='".$keyKapitel.".".$keyDef.".".$keyAufgabe.".".$keyLoesung."' value='" . $loesung . "'/></div>";
+                        echo "<div class='loesung-container'><label class='loesung-label' for='input-loesung'>Aufgaben</label>
+                               <input id='input-loesung' name='" . $keyKapitel . "." . $keyDef . "." . $keyAufgabe . "." . $keyLoesung . "' value='" . $loesung . "'/></div>";
 
                     }
                     echo "</div>";
@@ -115,8 +113,8 @@ include "../kurs.php";
             ?>
         </div>
         <form class="action-button-container" method="post">
-            <input class="action-button" type="submit" value="Erstellen" name="create">
-            <input class="action-button" type="submit" value="Verwerfen" name="discard">
+            <input class="btn btn-primary" type="submit" value="Erstellen" name="create">
+            <input class="btn btn-secondary" type="submit" value="Verwerfen" name="discard">
         </form>
     </dialog>
 </main>

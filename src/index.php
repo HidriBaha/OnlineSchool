@@ -33,13 +33,13 @@ $recentMessages = array_slice($messages, 0, 4);
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Geometrie</a>
+                    <a class="nav-link" href="../kurs-overview/Kursansicht_Geometrie.html">Geometrie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Zahlenmenge</a>
+                    <a class="nav-link" href="../kurs-overview/kursansicht_Zahlenmenge.html">Zahlenmenge</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Rechengesetze</a>
+                    <a class="nav-link" href="../kurs-overview/kursansicht_Rechengesetze.html">Rechengesetze</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Wiederholen</a>
@@ -154,7 +154,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-rulers" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Geometrie -->
                         <h5 class="card-title mt-3">Geometrie I</h5>
                         <p class="card-text">Eine kurze Erklärung zum Kurs Geometrie I. Dieser Kurs behandelt die Grundlagen der Geometrie, einschließlich Formen, Winkel und Flächen.</p>
-                        <a href="create-edit-kurs.php" class="btn btn-primary">Zum Kurs</a>
+                        <a href="create-edit-kurs/create-edit-kurs.php?kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-calculator" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Zahlenmenge -->
                         <h5 class="card-title mt-3">Zahlenmenge</h5>
                         <p class="card-text">Dieser Kurs behandelt verschiedene Zahlenmengen und ihre Eigenschaften und hilft den Schülern, verschiedene Zahloperationen zu verstehen.</p>
-                        <a href="#" class="btn btn-primary">Zum Kurs</a>
+                        <a href="create-edit-kurs/create-edit-kurs.php?kursID=1" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -177,12 +177,14 @@ $recentMessages = array_slice($messages, 0, 4);
                     <div class="card-body text-center">
                         <i class="bi bi-journal-text" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Rechengesetze -->
                         <h5 class="card-title mt-3">Rechengesetze</h5>
-                        <p class="card-text">Lernen Sie die grundlegenden Rechengesetze für Operationen wie Addition, Subtraktion, Multiplikation und Division in diesem Kurs.</p>
-                        <a href="#" class="btn btn-primary">Zum Kurs</a>
+                        <p class="card-text">Learn the fundamental arithmetic laws of operations like addition,
+                            subtraction, multiplication, and division in this course.</p>
+                        <a href="create-edit-kurs/create-edit-kurs.php?kursID=2" class="btn btn-primary">Go to Course</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Communication Section -->
     <div id="communicationTable" style="display: none;">
