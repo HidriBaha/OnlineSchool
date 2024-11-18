@@ -22,7 +22,90 @@ $recentMessages = array_slice($messages, 0, 4);
 <body>
 
 <!-- Navbar -->
-<?php include "Vorlage/NavBar.html"; ?>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
+    <div class="container">
+        <!-- Schullogo links -->
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" class="logo" alt="Schullogo">
+        </a>
+
+        <!-- Navbar-Links (Links ausgerichtet) -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Geometrie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Zahlenmenge</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Rechengesetze</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Wiederholen</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Symbole rechts -->
+        <div class="d-flex">
+            <!-- Kommunikationssymbol mit Dropdown -->
+            <div class="nav-item dropdown me-3">
+                <a href="#" class="nav-link" id="communicationIcon">
+                    <i class="bi bi-chat-dots" style="font-size: 1.5rem;"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end" id="communicationDropdown" style="display: none;">
+                    <a class="dropdown-item" href="#">Nachricht 1</a>
+                    <a class="dropdown-item" href="#">Nachricht 2</a>
+                    <a class="dropdown-item" href="#">Nachricht 3</a>
+                </div>
+            </div>
+
+            <!-- Benutzersymbol mit Dropdown -->
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link" id="profileIcon">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end" id="profileDropdown" style="display: none;">
+                    <a class="dropdown-item" href="#">Profil ansehen</a>
+                    <a class="dropdown-item" href="#">Einstellungen</a>
+                    <a class="dropdown-item" href="/src/login/logout.php">Abmelden</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Modal for Contact Form -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Kontaktformular</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ihr Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Empfänger</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Nachricht</label>
+                        <textarea class="form-control" id="message" rows="4" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                <button type="submit" class="btn btn-primary" id="submitForm">Absenden</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Restlicher Seiteninhalt -->
 <section class="container mt-4">
     <!-- Fortschrittsbereich -->
@@ -71,7 +154,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-rulers" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Geometrie -->
                         <h5 class="card-title mt-3">Geometrie I</h5>
                         <p class="card-text">Eine kurze Erklärung zum Kurs Geometrie I. Dieser Kurs behandelt die Grundlagen der Geometrie, einschließlich Formen, Winkel und Flächen.</p>
-                        <a href="create-edit-kurs/create-edit-kurs.php" class="btn btn-primary">Zum Kurs</a>
+                        <a href="/src/create-edit-kurs/create-edit-kurs.php" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -101,38 +184,38 @@ $recentMessages = array_slice($messages, 0, 4);
             </div>
         </div>
 
-    <!-- Communication Section -->
-    <div id="communicationTable" style="display: none;">
-        <h2>Kommunikation</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Empfänger</th>
-                <th>Betreff</th>
-                <th>Gesendet am</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Messages go here -->
+        <!-- Communication Section -->
+        <div id="communicationTable" style="display: none;">
+            <h2>Kommunikation</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Empfänger</th>
+                    <th>Betreff</th>
+                    <th>Gesendet am</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Messages go here -->
 
 
-            <?php
-            // Get the latest 4 messages from $messages
-            $recentMessages = array_slice($messages, -4);
-            foreach ($recentMessages as $message) {
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($message['recipient']) . '</td>';
-                echo '<td>' . htmlspecialchars($message['topic']) . '</td>';
-                echo '<td>' . htmlspecialchars($message['date']) . '</td>';
-                echo '</tr>';
-            }
-            ?>
-            </tbody>
-        </table>
-        <a href="kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
+                <?php
+                // Get the latest 4 messages from $messages
+                $recentMessages = array_slice($messages, -4);
+                foreach ($recentMessages as $message) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($message['recipient']) . '</td>';
+                    echo '<td>' . htmlspecialchars($message['topic']) . '</td>';
+                    echo '<td>' . htmlspecialchars($message['date']) . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+            <a href="/src/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
 
 
-    </div>
+        </div>
 </section>
 <script>
     // Expose PHP session variable to JavaScript
