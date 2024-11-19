@@ -13,7 +13,7 @@ include "../kurs.php";
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
     <title></title>
-</head>
+</head><
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">

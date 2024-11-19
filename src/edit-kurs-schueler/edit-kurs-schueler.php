@@ -1,28 +1,46 @@
+<!DOCTYPE html>
+
 <?php
 include "../kurs.php";
-global $kurseThema;
-global $kurseTitle;
+global $kurs;
 global $thema;
+global $kursID;
+
+$kapitelID = $_GET[KAPITEL] ?? 0;
+if ($kapitelID >= count($kurs["kapitel"])) {
+    $kapitelID = 0;
+}
+
+$kapitel = $kurs["kapitel"][$kapitelID];
+
+function getNext($kurs,$thema,$kursID,$kapitelID):string
+{
+    if (($kapitelID+1) >= count($kurs["kapitel"])) {
+        return "<a href='../kurs-overview/kurs-overview.php?thema=" . $thema . "&kursID=" . $kursID ."' class='btn btn-primary'>zurück zur &Uuml;bersicht</a>";
+    }
+
+    return "<a href='?thema=" . $thema . "&kursID=" . $kursID . "&kapitel=" . ++$kapitelID . "' class='btn btn-primary'>nächstes Kapitel</a>";
+}
 
 ?>
+
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kurs Ansicht</title>
+    <link rel="stylesheet" href="edit-kurs-schueler.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
           rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
-    <link rel="stylesheet" href="kurs-overview.css">
-    <script src="kurs-overview.js"></script>
+    <title>Lehrer_Kurs Editieren</title>
 </head>
 <body>
+<!-- Navbar -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
         <div class="container">
             <!-- Schullogo links -->
-            <a class="navbar-brand" href="../index.php#">
+            <a class="navbar-brand" href="#">
                 <img src="../img/logo.png" class="logo" alt="Schullogo">
             </a>
 
@@ -67,7 +85,7 @@ global $thema;
                     <div class="dropdown-menu dropdown-menu-end" id="profileDropdown" style="display: none;">
                         <a class="dropdown-item" href="#">Profil ansehen</a>
                         <a class="dropdown-item" href="#">Einstellungen</a>
-                        <a class="dropdown-item" href="../login/logout.php">Abmelden</a>
+                        <a class="dropdown-item" href="login/logout.php">Abmelden</a>
                     </div>
                 </div>
             </div>
@@ -107,44 +125,54 @@ global $thema;
     <!-- Restlicher Seiteninhalt -->
 </header>
 <main>
-    <div class="container outer">
-        <div class="list">
-            <div class="Aufgabe-container">
-                <div class="course-title"><?php echo $kurseTitle[$_GET[THEMA] ?? "geometrie"]; ?></div>
-                <div class="progress-container mb-4">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 60%; background-color: #236C93;"
-                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                            60%
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="kurs-liste">
-                <?php
-                foreach ($kurseThema as $key => $kursPerThema) {
-                    echo "<div class='course-container'>" .
-                        "<div class='course-title'>" . $kursPerThema["titel"] . "</div>" .
-                        "<div class='progress-container mb - 4''>" .
-                        "<div class='progress'>" .
-                        "<div class='progress-bar' role='progressbar' >" .
-                        "60 %" .
-                        "</div >" .
-                        "</div >" .
-                        "</div >" .
-                        "<p class='course-description' >" . $kursPerThema["beschreibung"] . "</p >" .
-                        "<div hidden class='image-store'>" . $kursPerThema["img"] . "</div>" .
-                        "<a href = '../edit-kurs-schueler/edit-kurs-schueler.php?thema=" . $thema . "&kursID=" . $key . "' class='btn btn-primary' > Kurs starten </a >" .
-                        "</div >";
-                }
+    <div class="container kursinhalt">
+        <!-- Get some Parameters and open Form -->
+        <?php
+        // echo "<input name='amount-tasks' type='hidden' value='" . $kurs['kapitel']['aufgaben'] . "'>";
+        echo "<form action='#' method='post'>";
+        ?> <!-- open and close form if course is being edited -->
+
+        <!-- Course Description -->
+        <h3><?php echo $kurs['beschreibung']; ?></h3>
+
+        <!-- Course contents -->
+        <div class="chapters">
+            <div class="definition">
+                <h2><?php echo $kapitel['definition']; ?></h2><br>
+                <h4>Übungserklärung:</h4>
+                <?php echo $kapitel['erklaerungen'][0]['erklaerung'];
+                if(trim($kapitel['erklaerungen'][0]['img-src'])!="")echo "<br><img id='img-help' alt='Hilfsstellung IMG' src='" . $kapitel['erklaerungen'][0]['img-src'] . "'>";
                 ?>
+                <br><br>
+                <h3>Übungen</h3>
+                <ul>
+                    <?php
+                    $taskCounter = 0;
+                    foreach ($kapitel['aufgaben'] as $aufgabe) {
+                        echo "<li>" . $aufgabe['aufgabenstellung'] . "</li><br>";
+                        if(trim($aufgabe['img-src'])!="")echo "<img class='img-task' alt='Aufgabe IMG' src='" . $aufgabe['img-src'] . "'><br>";
+                        $loesungCounter = 0;
+                        foreach ($aufgabe['loesungen'] as $loesung) {
+                            echo "<input name='submitted-'" . $taskCounter . "-" . $loesungCounter . " type='text' placeholder='Bitte Loesung eintragen' class='solution-field'>";
+                            $loesungCounter++;
+
+                            echo "<br><br>";
+                            $taskCounter++;
+                        }
+                    }
+                    ?>
+
+                </ul>
             </div>
+            <?php echo getNext($kurs,$thema,$kursID,$kapitelID); ?>
         </div>
-        <div class="preview-container" id="preview-container">
-            <div></div>
-        </div>
+
+        <!-- Edit submit buttons
+        <div class="save">
+            <a href='#' class="btn btn-secondary">abbrechen</a>
+            <a href="#" class="btn btn-primary">speichern</a>
+        </div>-->
     </div>
 </main>
 </body>
-
 </html>
