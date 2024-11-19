@@ -15,6 +15,10 @@ global $thema;
           rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
     <link rel="stylesheet" href="kurs-overview.css">
+    <script>
+    // Expose PHP session variable to JavaScript
+    const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
+    </script>
     <script src="kurs-overview.js"></script>
 </head>
 <body>

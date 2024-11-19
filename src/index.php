@@ -1,6 +1,6 @@
 <?php
 session_start(); // Start the session to access session variables
-include "../src/messages.php";// Include the communication data (messages array and class data)
+include "messages.php";// Include the communication data (messages array and class data)
 include "kurs.php";
 global $kurse;
 // Sort the messages array by date in descending order to get the most recent messages first
@@ -158,7 +158,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-rulers" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Geometrie -->
                         <h5 class="card-title mt-3">Geometrie I</h5>
                         <p class="card-text"><?php echo $kurse["geometrie"][0]["beschreibung"] ?></p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?thema=geometrie&kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <a href="edit-kurs-schueler/edit-kurs-schueler.php?thema=geometrie&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-calculator" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Zahlenmenge -->
                         <h5 class="card-title mt-3">Zahlenmenge</h5>
                         <p class="card-text"><?php echo $kurse["zahlenmenge"][0]["beschreibung"] ?></p>
-                        <a href="create-edit-kurs/create-edit-kurs.php?thema=zahlenmenge&kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <a href="edit-kurs-schueler/edit-kurs-schueler.php?thema=zahlenmenge&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@ $recentMessages = array_slice($messages, 0, 4);
                         <i class="bi bi-journal-text" style="font-size: 3rem; color: #236C93;"></i> <!-- Symbol für Rechengesetze -->
                         <h5 class="card-title mt-3">Rechengesetze</h5>
                         <p class="card-text"><?php echo $kurse["rechengesetze"][0]["beschreibung"] ?></p><br>
-                        <a href="create-edit-kurs/create-edit-kurs.php?thema=rechengesetze&kursID=0" class="btn btn-primary">Zum Kurs</a>
+                        <a href="edit-kurs-schueler/edit-kurs-schueler.php?thema=rechengesetze&kursID=0" class="btn btn-primary">Zum Kurs</a>
                     </div>
                 </div>
             </div>
@@ -216,7 +216,7 @@ $recentMessages = array_slice($messages, 0, 4);
                 ?>
                 </tbody>
             </table>
-            <a href="/src/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
+            <a href="/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
 
 
         </div>
