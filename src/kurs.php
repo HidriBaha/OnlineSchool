@@ -3,8 +3,11 @@ global $kurs;
 global $kurse;
 global $kurseThema;
 global $kurseTitle;
+global $thema;
+global $kursID;
 const THEMA = "thema";
 const KURS_ID = "kursID";
+const KAPITEL = "kapitel";
 
 $thema = $_GET[THEMA] ?? "geometrie";
 $kursID = $_GET[KURS_ID] ?? "0";
@@ -23,7 +26,7 @@ $kurse = [
                         [
                             "header" => "Erklärung zur Definition von Punkten und Linien",
                             "erklaerung" => "Ein Punkt hat keine Ausdehnung und dient als Position. Eine Linie ist eine gerade, unendlich lange Verbindung von Punkten.",
-                            "img-src" => ""
+                            "img-src" => "../img/aufgaben/gerade.png"
                         ]
                     ],
                     "aufgaben" => [
@@ -48,7 +51,7 @@ $kurse = [
                         [
                             "aufgabenstellung" => "Zeichne zwei Linien, die sich im Punkt O (0, 0) schneiden. Wähle auf der ersten Linie die Punkte A (4, 0) und B (-4, 0). Auf der zweiten Linie wähle die Punkte C (0, 5) und D (0, -5). Miss den Winkel ∠AOC mit einem Geodreieck.",
                             "tipp" => "Achte darauf, das Geodreieck genau am Punkt O (0, 0) auszurichten und die Linien präzise zu zeichnen.",
-                            "img-src" => "",
+                            "img-src" => "../img/aufgaben/winkel.png",
                             "loesungen" => [90]
                         ]
                     ]
