@@ -1,6 +1,6 @@
 <?php
 session_start(); // Start the session to access session variables
-include "../src/messages.php";// Include the communication data (messages array and class data)
+include "messages.php";// Include the communication data (messages array and class data)
 include "kurs.php";
 global $kurse;
 // Sort the messages array by date in descending order to get the most recent messages first
@@ -216,7 +216,7 @@ $recentMessages = array_slice($messages, 0, 4);
                 ?>
                 </tbody>
             </table>
-            <a href="/src/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
+            <a href="/kommunikation/Kommunikation.php" class="btn btn-primary mt-3">Alle Nachrichten anzeigen</a>
 
 
         </div>
