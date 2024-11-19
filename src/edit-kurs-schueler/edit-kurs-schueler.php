@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 
 <?php
+session_start();
 include "../kurs.php";
 global $kurs;
 global $thema;
 global $kursID;
+
+
 
 $kapitelID = $_GET[KAPITEL] ?? 0;
 if ($kapitelID >= count($kurs["kapitel"])) {
@@ -33,6 +36,8 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
           rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
     <title>Lehrer_Kurs Editieren</title>
+    <script src="../main.js"></script>
+
 </head>
 <body>
 <!-- Navbar -->
@@ -40,8 +45,8 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
         <div class="container">
             <!-- Schullogo links -->
-            <a class="navbar-brand" href="#">
-                <img src="img/logo.png" class="logo" alt="Schullogo">
+            <a class="navbar-brand" href="../index.php">
+                <img src="../img/logo.png" class="logo" alt="Schullogo">
             </a>
 
             <!-- Navbar-Links (Links ausgerichtet) -->
@@ -166,6 +171,13 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
             <?php echo getNext($kurs,$thema,$kursID,$kapitelID); ?>
         </div>
     </div>
+
+    <script>
+        // Expose PHP session variable to JavaScript
+        const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
+    </script>
+    <script src="../main.js"></script>
+
 </main>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <?php
+session_start();
+
 global $kurs;
 include "../kurs.php";
-
 ?>
 <html lang="de">
 <head>
@@ -13,7 +14,7 @@ include "../kurs.php";
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
     <title></title>
-</head><
+</head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
@@ -148,6 +149,12 @@ include "../kurs.php";
             <input class="btn btn-secondary" type="submit" value="Verwerfen" name="discard">
         </form>
     </dialog>
+    <script>
+        // Expose PHP session variable to JavaScript
+        const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
+    </script>
+    <script src="../main.js"></script>
+
 </main>
 </body>
 </html>
