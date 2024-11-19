@@ -1,9 +1,5 @@
 // JavaScript for Dropdown Toggle
-document.getElementById("profileIcon").addEventListener("click", function(event) {
-    event.preventDefault();
-    const dropdown = document.getElementById("profileDropdown");
-    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-});
+
 // Toggle communication dropdown
 document.getElementById("communicationIcon").addEventListener("click", function(event) {
     event.preventDefault();
@@ -36,7 +32,11 @@ document.getElementById("submitForm").addEventListener("click", function(event) 
         alert("Please fill in all fields!");
     }
 });
-
+document.getElementById("profileIcon").addEventListener("click", function(event) {
+    event.preventDefault();
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+});
 
 // Close dropdowns if clicking outside
 document.addEventListener("click", function(event) {
@@ -52,7 +52,7 @@ document.addEventListener("click", function(event) {
 
 //const role = 1; // Set role (1 = student, 2 = teacher)
 console.log("Role from PHP:", role);
-console.log("Role from PHP:", role);
+
 
 // Handle visibility of elements based on role
 window.addEventListener("DOMContentLoaded", function() {
@@ -63,6 +63,11 @@ window.addEventListener("DOMContentLoaded", function() {
         // Show progress and courses as usual for students
         document.getElementById("progressSection").style.display = "block";
         document.getElementById("meineKurseSection").style.display = "block";
+        const courseButtons = document.querySelectorAll(".course-button");
+        courseButtons.forEach(button => {
+            button.innerHTML = "View Course"; // Customize button text
+            button.href = "#"; // Replace with actual link to course page
+        });
     } else if (role === "lehrer") {
         // Hide progress section for teachers
         document.getElementById("progressSection").style.display = "none";
@@ -74,7 +79,7 @@ window.addEventListener("DOMContentLoaded", function() {
             button.href = "#"; // Link to edit course page (you can replace with actual URL)
         });*/
         const linksArr = document.querySelectorAll('.btn-primary');
-        const linksArrFiltered = Array.from(linksArr).filter((a, key) => key != 0);
+        const linksArrFiltered = Array.from(linksArr).filter((a, key) => key != 0&& key !=4 );
         if (role === "lehrer") {
             // Hide communication table for students
 

@@ -3,6 +3,7 @@ include "../kurs.php";
 global $kurseThema;
 global $kurseTitle;
 global $thema;
+session_start();
 
 ?>
 <html lang="de">
@@ -27,7 +28,7 @@ global $thema;
         <div class="container">
             <!-- Schullogo links -->
             <a class="navbar-brand" href="../index.php#">
-                <img src="../img/logo.png" class="logo" alt="Schullogo">
+                <img src="../img/logo.png"  class="logo" alt="Schullogo">
             </a>
 
             <!-- Navbar-Links (Links ausgerichtet) -->
@@ -148,6 +149,9 @@ global $thema;
             <div></div>
         </div>
     </div>
+
+    <script src="../main.js"></script>
+
 </main>
 </body>
 
