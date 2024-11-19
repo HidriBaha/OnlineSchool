@@ -68,11 +68,22 @@ window.addEventListener("DOMContentLoaded", function() {
         document.getElementById("progressSection").style.display = "none";
 
         // Change course button to 'Edit Course' for teachers
-        const courseButtons = document.querySelectorAll(".course-button");
+       /* const courseButtons = document.querySelectorAll(".course-button");
         courseButtons.forEach(button => {
             button.innerHTML = "Edit Course";
             button.href = "#"; // Link to edit course page (you can replace with actual URL)
-        });
+        });*/
+        const linksArr = document.querySelectorAll('.btn-primary');
+        const linksArrFiltered = Array.from(linksArr).filter((a, key) => key != 0);
+        if (role === "lehrer") {
+            // Hide communication table for students
+
+            linksArrFiltered.forEach(a => {
+                console.log(a)
+                a.innerHTML = "Kurs bearbeiten";
+                a.href = a.href.replace("/edit-kurs-schueler/edit-kurs-schueler.php", "/create-edit-kurs/create-edit-kurs.php");
+            });
+        }
 
         // Show communication table for teachers
         document.getElementById("communicationTable").style.display = "block";

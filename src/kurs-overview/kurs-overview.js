@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
     const courseContainers = document.querySelectorAll('.course-container');
     const previewContainer = document.getElementById('preview-container');
-    const kursListe =document.querySelector(".kurs-liste");
+    const kursListe = document.querySelector(".kurs-liste");
+    const linksArr = document.querySelectorAll('.btn-primary');
+    const linksArrFiltered = Array.from(linksArr).filter((a, key) => key !== 0);
+    if (role === "lehrer") {
+        // Hide communication table for students
+
+        linksArrFiltered.forEach(a => {
+            console.log(a)
+            a.innerHTML = "Kurs bearbeiten";
+            a.href = a.href.replace("/edit-kurs-schueler/edit-kurs-schueler.php", "/create-edit-kurs/create-edit-kurs.php");
+        });
+    }
 
     courseContainers.forEach(container => {
         container.addEventListener('click', function () {
@@ -11,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const imageSrc = this.querySelector('.image-store').innerText;
             const link = this.querySelector('.btn-primary').getAttribute("href");
             console.log(link)
-            kursListe.style.maxHeight="calc(100vh - 245px)";
+            kursListe.style.maxHeight = "calc(100vh - 245px)";
             kursListe.style.overflowY = "scroll";
 
             previewContainer.style.display = "flex";

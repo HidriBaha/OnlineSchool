@@ -7,28 +7,10 @@
     --margin-top: 2vh;
     --margin-left: 2vw;
     --margin-right: 2vw;
-    color: black;
     --max-img-task-height: 40vh;
-    --background-color-page: #E5EEF2;
 }
-
-header {
-    position: fixed;
-    background-color: var(--background-color-page);
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-height);
-    width: 100vw;
-    z-index: 100;
-    /*border-bottom: solid black 0.2vh;*/
-    box-shadow: 0vw 0.2vh 1vh -0.1vh black;
-}
-
 .kursinhalt {
     position: relative;
-    /*margin-top: calc(var(--header-height) + var(--margin-top))*/;
-    /*background-color: white;*/
 }
 
 .kursinhalt > * {
@@ -44,61 +26,6 @@ header {
     border: none;
 }
 
-.submit-tasks {
-    text-align: right;
-}
-
-.save {
-    text-align: right;
-    border: none;
-    margin-bottom: 0.5vh;
-}
-
-
-#edit-button {
-    background-color: darkgrey;
-    border: solid black 0.3vh;
-    border-radius: 0.4vh;
-    padding: 0.5vw;
-}
-
-#submit-button {
-    background-color: #3D7DA0;
-    border: solid black 0.2vh;
-    border-radius: 0.4vh;
-    margin-right: 0.5vw;
-    padding: 0.2vw;
-}
-
-#submit-button:hover {
-    cursor: pointer;
-}
-
-#edit-button:hover {
-    cursor: pointer; /* Change cursor when hovering over save button lul */
-}
-
-#save-button {
-    background-color: lawngreen;
-    border: solid black 0.3vh;
-    border-radius: 0.4vh;
-    margin-right: 1vw;
-}
-
-#save-button:hover {
-    cursor: pointer; /* Change cursor when hovering over save button lul */
-}
-
-#abort-button {
-    background-color: red;
-    border: solid black 0.3vh;
-    border-radius: 0.4vh;
-    margin-right: 2vw;
-}
-
-#abort-button:hover {
-    cursor: pointer; /* Change cursor when hovering over save button lul */
-}
 
 .input-text {
     border: solid black 0.1vh;
@@ -130,18 +57,4 @@ ul {
     max-height: var(--max-img-task-height);
     width: auto;
     border: solid black 0.1vh;
-}
-
-.button-plus {
-    color: green;
-    text-align: center;
-    margin-right: 0.6vw;
-    border: solid green 0.3vh;
-    border-radius: 0.3vh;
-    width: 1.5vw;
-    height: 1.5vh;
-}
-
-.button-plus:hover {
-    cursor: pointer;
 }

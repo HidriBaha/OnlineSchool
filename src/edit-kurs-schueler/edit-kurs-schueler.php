@@ -41,7 +41,7 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
         <div class="container">
             <!-- Schullogo links -->
             <a class="navbar-brand" href="#">
-                <img src="../img/logo.png" class="logo" alt="Schullogo">
+                <img src="img/logo.png" class="logo" alt="Schullogo">
             </a>
 
             <!-- Navbar-Links (Links ausgerichtet) -->
@@ -54,8 +54,7 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
                         <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=zahlenmenge">Zahlenmenge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
-                           href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
+                        <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Wiederholen</a>
@@ -166,12 +165,6 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
             </div>
             <?php echo getNext($kurs,$thema,$kursID,$kapitelID); ?>
         </div>
-
-        <!-- Edit submit buttons
-        <div class="save">
-            <a href='#' class="btn btn-secondary">abbrechen</a>
-            <a href="#" class="btn btn-primary">speichern</a>
-        </div>-->
     </div>
 </main>
 </body>
