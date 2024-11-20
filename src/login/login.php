@@ -2,20 +2,8 @@
 
 <?php
 session_start(); // Session starten
-
-
-// Verbindungsdaten zur SQL-Datenbank
-$servername = "localhost";
-$username = "root";
-$password = "123";
-$dbname = "schuldb"; // Aktualisierter Datenbankname
-
-// Verbindung zur Datenbank herstellen
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
-}
+include "../db-utils/db-setup.php";
+global $conn;
 
 // Benutzereingaben aus dem Formular
 $email = $_POST['email'];

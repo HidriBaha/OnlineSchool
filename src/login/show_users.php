@@ -95,19 +95,8 @@
     </tr>
 
     <?php
-    // Verbindungsdaten zur SQL-Datenbank
-    $servername = "localhost";
-    $username = "root";
-    $password = "123";
-    $dbname = "SchulDB";
-
-    // Verbindung zur Datenbank herstellen
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verbindungsfehler prüfen
-    if ($conn->connect_error) {
-        die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
-    }
+    include "../db-utils/db-setup.php";
+    global $conn;
 
     // Benutzer aus der Tabelle 'users' abrufen, aber ohne die Passwort-Spalte
     $sql = "SELECT id, email, vorname, nachname, rolle, geburtsdatum, adresse FROM users";
