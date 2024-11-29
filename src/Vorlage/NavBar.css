@@ -1,9 +1,11 @@
+
 /* Navbar Customization */
 .navbar {
     margin-bottom: 20px;
 }
 
 .navbar-nav {
+
     margin-left: 0; /* Align navbar items to the left */
 }
 
@@ -14,7 +16,19 @@
 
 .navbar-brand {
     padding-right: 20px; /* Space between logo and navbar links */
-    scale: 60%;
+}
+
+/* Icons in Titles */
+h2 i, h5 i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 1.3rem; /* Slightly larger icons */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 767px) {
+    .navbar-nav {
+        text-align: left; /* Ensure the navbar links stay left-aligned */
+    }
 }
 
 /* Style for the logo */

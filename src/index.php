@@ -23,91 +23,7 @@ $recentMessages = array_slice($messages, 0, 4);
 </head>
 <body>
 <!-- Navbar -->
-<header>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
-    <div class="container">
-        <!-- Schullogo links -->
-        <a class="navbar-brand" href="#">
-            <img src="img/logo.png" class="logo" alt="Schullogo">
-        </a>
-
-        <!-- Navbar-Links (Links ausgerichtet) -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=geometrie">Geometrie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=zahlenmenge">Zahlenmenge</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Wiederholen</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Symbole rechts -->
-        <div class="d-flex">
-            <!-- Kommunikationssymbol mit Dropdown -->
-            <div class="nav-item dropdown me-3">
-                <a href="#" class="nav-link" id="communicationIcon">
-                    <i class="bi bi-chat-dots" style="font-size: 1.5rem;"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end" id="communicationDropdown" style="display: none;">
-                    <a class="dropdown-item" href="#">Nachricht 1</a>
-                    <a class="dropdown-item" href="#">Nachricht 2</a>
-                    <a class="dropdown-item" href="#">Nachricht 3</a>
-                </div>
-            </div>
-
-            <!-- Benutzersymbol mit Dropdown -->
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link" id="profileIcon">
-                    <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end" id="profileDropdown" style="display: none;">
-                    <a class="dropdown-item" href="#">Profil ansehen</a>
-                    <a class="dropdown-item" href="#">Einstellungen</a>
-                    <a class="dropdown-item" href="login/logout.php">Abmelden</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- Modal for Contact Form -->
-<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="contactModalLabel">Kontaktformular</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
-            </div>
-            <div class="modal-body">
-                <form id="contactForm">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Ihr Name</label>
-                        <input type="text" class="form-control" id="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Empfänger</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Nachricht</label>
-                        <textarea class="form-control" id="message" rows="4" required></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
-                <button type="submit" class="btn btn-primary" id="submitForm">Absenden</button>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include 'Vorlage/NavBar.php'; ?>
 <!-- Restlicher Seiteninhalt -->
 </header>
 <main>
@@ -225,7 +141,7 @@ $recentMessages = array_slice($messages, 0, 4);
     // Expose PHP session variable to JavaScript
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <!-- Link to main.js -->
 <script src="main.js"></script>

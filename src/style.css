@@ -34,25 +34,6 @@ h2, h5 {
     text-align: center; /* Center the percentage text */
 }
 
-/* Navbar Customization */
-.navbar {
-
-    margin-bottom: 20px;
-}
-
-.navbar-nav {
-
-    margin-left: 0; /* Align navbar items to the left */
-}
-
-.navbar-nav .nav-link {
-    font-size: 1rem;  /* Smaller navbar font size */
-    font-weight: bold;
-}
-
-.navbar-brand {
-    padding-right: 20px; /* Space between logo and navbar links */
-}
 
 /* Icons in Titles */
 h2 i, h5 i {
@@ -60,12 +41,6 @@ h2 i, h5 i {
     font-size: 1.3rem; /* Slightly larger icons */
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 767px) {
-    .navbar-nav {
-        text-align: left; /* Ensure the navbar links stay left-aligned */
-    }
-}
 /* Custom Card Styling */
 .card {
     margin-bottom: 20px;
@@ -82,12 +57,7 @@ h2 i, h5 i {
     font-size: 1rem;
     margin-bottom: 15px;
 }
-/* Style for the logo */
-.navbar-brand .logo {
-    width: 80px;  /* Smaller width to reduce navbar height */
-    height: auto; /* Maintain the aspect ratio */
-    padding: 2px; /* Slight padding to avoid cramped look */
-}
+
 .btn-primary {
     background-color: #236C93; /* Optional: update button color */
     border-color: #236C93; /* Optional: update button border color */
