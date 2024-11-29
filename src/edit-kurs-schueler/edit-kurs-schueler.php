@@ -3,6 +3,7 @@
 <?php
 session_start();
 include "../kurs.php";
+
 global $kurs;
 global $thema;
 global $kursID;
@@ -36,7 +37,6 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
           rel="stylesheet">
     <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
     <title>Lehrer_Kurs Editieren</title>
-    <script src="../main.js"></script>
 
 </head>
 <body>
@@ -148,18 +148,29 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
                 if(trim($kapitel['erklaerungen'][0]['img-src'])!="")echo "<br><img id='img-help' alt='Hilfsstellung IMG' src='" . $kapitel['erklaerungen'][0]['img-src'] . "'>";
                 ?>
                 <br><br>
+
                 <h3>Übungen</h3>
+
+
                 <ul>
                     <?php
                     $taskCounter = 0;
                     foreach ($kapitel['aufgaben'] as $aufgabe) {
                         echo "<li>" . $aufgabe['aufgabenstellung'] . "</li><br>";
-                        if(trim($aufgabe['img-src'])!="")echo "<img class='img-task' alt='Aufgabe IMG' src='" . $aufgabe['img-src'] . "'><br>";
+                        if(trim($aufgabe['img-src']) != "") echo "<img class='img-task' alt='Aufgabe IMG' src='" . $aufgabe['img-src'] . "'><br>";
+
                         $loesungCounter = 0;
                         foreach ($aufgabe['loesungen'] as $loesung) {
-                            echo "<input name='submitted-'" . $taskCounter . "-" . $loesungCounter . " type='text' placeholder='Bitte Loesung eintragen' class='solution-field'>";
-                            $loesungCounter++;
+                            echo "<input id='input-" . $taskCounter . "-" . $loesungCounter . "' 
+                name='submitted-" . $taskCounter . "-" . $loesungCounter . "' 
+                type='text' 
+                placeholder='Bitte Loesung eintragen' 
+class='form-control form-control-lg my-4 solution-field' 
+                oninput='checkSolution(this)'>";
 
+                            // Extract the hidden correct solution from $aufgabe['loesungen']
+                            echo "<input type='hidden' id='hidden-solution-" . $taskCounter . "-" . $loesungCounter . "' 
+                value='" . htmlspecialchars($loesung, ENT_QUOTES, 'UTF-8') . "'>";                            $loesungCounter++;
                             echo "<br><br>";
                             $taskCounter++;
                         }
@@ -167,6 +178,15 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
                     ?>
 
                 </ul>
+<div>  </div>
+
+
+                <script>
+
+                </script>
+
+
+
             </div>
             <?php echo getNext($kurs,$thema,$kursID,$kapitelID); ?>
         </div>
@@ -176,6 +196,7 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
         // Expose PHP session variable to JavaScript
         const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
     </script>
+    <script src="EKS.js"></script>
     <script src="../main.js"></script>
 
 </main>

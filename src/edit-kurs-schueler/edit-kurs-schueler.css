@@ -34,9 +34,12 @@
 }
 
 .solution-field {
-    border: solid black 0.1vh;
-    margin-top: 1vh;
-    font-size: 1.5vh;
+    border: 2px solid #007bff; /* Blue border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px; /* Extra padding */
+}
+.solution-field:focus {
+    box-shadow: 0 0 5px #007bff; /* Highlighted shadow on focus */
 }
 
 .solution-field + .solution-field {
