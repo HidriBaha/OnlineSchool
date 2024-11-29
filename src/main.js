@@ -30,13 +30,12 @@ window.addEventListener("DOMContentLoaded", function() {
             button.href = "#"; // Link to edit course page (you can replace with actual URL)
         });*/
         const linksArr = document.querySelectorAll('.btn-primary');
-        const linksArrFiltered = Array.from(linksArr).filter((a, key) => key != 0&& key !=4 );
         if (role === "lehrer") {
             // Hide communication table for students
 
-            linksArrFiltered.forEach(a => {
+            linksArr.forEach(a => {
                 console.log(a)
-                a.innerHTML = "Kurs bearbeiten";
+                a.innerHTML = a.innerHTML.replace("Zum Kurs", "Kurs bearbeiten");
                 a.href = a.href.replace("/edit-kurs-schueler/edit-kurs-schueler.php", "/create-edit-kurs/create-edit-kurs.php");
             });
         }
