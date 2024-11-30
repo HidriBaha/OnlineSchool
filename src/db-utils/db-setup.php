@@ -1,12 +1,7 @@
 <?php
 include "db-config.php";
-global $dbHost;
-global $dbUsername;
-global $dbPasswort;
-global $dbName;
-global $conn;
+global $dbHost, $dbUsername, $dbPasswort, $dbName, $conn, $link;
 
-echo "DB ENV:".$dbHost, $dbUsername, $dbPasswort, $dbName;
 // Verbindung zur Datenbank herstellen
 $conn = new mysqli($dbHost, $dbUsername, $dbPasswort, $dbName);
 
