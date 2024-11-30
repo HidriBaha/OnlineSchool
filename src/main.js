@@ -1,52 +1,3 @@
-// JavaScript for Dropdown Toggle
-
-// Toggle communication dropdown
-document.getElementById("communicationIcon").addEventListener("click", function(event) {
-    event.preventDefault();
-
-    // Open the contact form modal
-    const contactModal = new bootstrap.Modal(document.getElementById("contactModal"));
-    contactModal.show();
-});
-
-// Handle form submission
-document.getElementById("submitForm").addEventListener("click", function(event) {
-    event.preventDefault();
-
-    // Get form data
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    if (name && email && message) {
-        // Handle the form submission (for now, just log the values)
-        console.log("Form Submitted:", { name, email, message });
-
-        // Reset the form
-        document.getElementById("contactForm").reset();
-
-        // Close the modal
-        const contactModal = bootstrap.Modal.getInstance(document.getElementById("contactModal"));
-        contactModal.hide();
-    } else {
-        alert("Please fill in all fields!");
-    }
-});
-document.getElementById("profileIcon").addEventListener("click", function(event) {
-    event.preventDefault();
-    const dropdown = document.getElementById("profileDropdown");
-    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-});
-
-// Close dropdowns if clicking outside
-document.addEventListener("click", function(event) {
-    if (!event.target.closest("#communicationIcon") && !event.target.closest("#communicationDropdown")) {
-        document.getElementById("communicationDropdown").style.display = "none";
-    }
-    if (!event.target.closest("#profileIcon") && !event.target.closest("#profileDropdown")) {
-        document.getElementById("profileDropdown").style.display = "none";
-    }
-});
 
 // Role-based visibility handling
 
@@ -79,13 +30,12 @@ window.addEventListener("DOMContentLoaded", function() {
             button.href = "#"; // Link to edit course page (you can replace with actual URL)
         });*/
         const linksArr = document.querySelectorAll('.btn-primary');
-        const linksArrFiltered = Array.from(linksArr).filter((a, key) => key != 0&& key !=4 );
         if (role === "lehrer") {
             // Hide communication table for students
 
-            linksArrFiltered.forEach(a => {
+            linksArr.forEach(a => {
                 console.log(a)
-                a.innerHTML = "Kurs bearbeiten";
+                a.innerHTML = a.innerHTML.replace("Zum Kurs", "Kurs bearbeiten");
                 a.href = a.href.replace("/edit-kurs-schueler/edit-kurs-schueler.php", "/create-edit-kurs/create-edit-kurs.php");
             });
         }
