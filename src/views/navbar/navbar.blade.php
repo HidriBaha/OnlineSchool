@@ -12,13 +12,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview/kurs-overview.php?thema=geometrie">Geometrie</a>
+                    <a class="nav-link" href="/kurs-overview?thema=geometrie">Geometrie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview/kurs-overview.php?thema=zahlenmenge">Zahlenmenge</a>
+                    <a class="nav-link" href="/kurs-overview?thema=zahlenmenge">Zahlenmenge</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview/kurs-overview.php?thema=rechengesetze">Rechengesetze</a>
+                    <a class="nav-link" href="/kurs-overview?thema=rechengesetze">Rechengesetze</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Wiederholen</a>
@@ -53,9 +53,11 @@
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
     console.log("Role from PHPNavbar222222:", role);
 
+/*
     document.getElementById("profileIcons").addEventListener("click", function(event) {
         console.log("Profile icon clicked");
     });
+*/
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

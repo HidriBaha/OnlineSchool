@@ -1,9 +1,4 @@
 @extends("layouts.layout")
-<?php
-session_start(); // Start the session to access session variables
-
-?>
-
 @section("content")
     <section class="container mt-4">
         <!-- Fortschrittsbereich -->
@@ -56,7 +51,7 @@ session_start(); // Start the session to access session variables
                             <!-- Symbol für Geometrie -->
                             <h5 class="card-title mt-3">Geometrie I</h5>
                             <p class="card-text"> {{$kurse["geometrie"][0]["beschreibung"]}}</p>
-                            <a href="edit-kurs-schueler/edit-kurs-schueler.php?thema=geometrie&kursID=0"
+                            <a href="edit-kurs?thema=geometrie&kursID=0"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
@@ -70,7 +65,7 @@ session_start(); // Start the session to access session variables
                             <!-- Symbol für Zahlenmenge -->
                             <h5 class="card-title mt-3">Zahlenmenge</h5>
                             <p class="card-text"> {{$kurse["zahlenmenge"][0]["beschreibung"]}}</p>
-                            <a href="edit-kurs-schueler/edit-kurs-schueler.php?thema=zahlenmenge&kursID=0"
+                            <a href="edit-kurs?thema=zahlenmenge&kursID=0"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
@@ -84,7 +79,7 @@ session_start(); // Start the session to access session variables
                             <!-- Symbol für Rechengesetze -->
                             <h5 class="card-title mt-3">Rechengesetze</h5>
                             <p class="card-text">{{$kurse["rechengesetze"][0]["beschreibung"]}}</p><br>
-                            <a href="edit-kurs-schueler/edit-kurs-schueler.php?thema=rechengesetze&kursID=0"
+                            <a href="edit-kurs?thema=rechengesetze&kursID=0"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
