@@ -2,3 +2,4 @@
 /src/.env
 /src/storage/
 /src/vendor/
+composer.phar
