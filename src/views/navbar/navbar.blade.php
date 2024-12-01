@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/navbar.css" rel="stylesheet">
-    <title>NavBar Vorlage</title>
-</head>
-<body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
     <div class="container">
@@ -67,5 +60,4 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/navbar.js"></script>
-</body>
 </html>
