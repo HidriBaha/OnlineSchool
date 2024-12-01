@@ -49,12 +49,12 @@ function getKurseOverviewByFachIdThemaId($conn, $fachId, $themaId): array
     return $kurse;
 }
 
-function getKapitelByKursId($conn, $kursID, $kapitel): array
+function getKapitelByKursId($conn, $kursID, $kapitelNr): array
 {
     $kurse = [];
-    $sql = "SELECT * FROM KURSE WHERE FAECHER_ID = ? AND THEMA_ID = ?";
+    $sql = "SELECT * FROM KURSE WHERE KURS_ID = ? AND KAPITEL_NR = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii",$fachId,$themaId);
+    $stmt->bind_param("ii",$kursID,$kapitelNr);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc() != null) {
