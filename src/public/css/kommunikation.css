@@ -1,0 +1,116 @@
+#openChatBtn{
+    justify-self: end;
+    margin-bottom: 10px;
+}
+
+#messages-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #236C93;
+    border-radius: 5px;
+    overflow: scroll;
+}
+
+.col{
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Verhindert Zeilenumbrüche */
+    overflow-wrap: break-word; /* Erlaubt das Brechen von Wörtern */
+}
+
+.date{
+    text-align: right;
+}
+
+.date:hover{
+    white-space: normal;
+}
+
+.messages-td, .messages-th {
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #236C93;
+    text-align: left;
+}
+
+/* Optional: Stil für die Kopfzeile */
+.messages-th {
+    background-color: #236C93;
+    color: white;
+}
+
+.messages-td:hover {
+    overflow: visible;
+    white-space: normal;
+}
+
+#chatContainer {
+    display: none;
+    grid-template-rows: 100px auto;
+    position: fixed;
+    top: 75px;
+    border: black 1px solid;
+    border-radius: 5px;
+    background-color: #B1CBD9;
+    width: calc(100% - 200px);
+    max-width: 800px;
+    justify-self: center;
+}
+
+#chatHeader {
+    color: white;
+    background-color: #307599;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+}
+
+#chat-bottom {
+    display: flex;
+    min-height: 400px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#messageInput {
+    min-height: 250px;
+}
+
+.msg-input::placeholder{
+    font-family: Verdana, serif;
+}
+
+.msg-input{
+    padding: 5px;
+    margin: 10px;
+    width: calc(100% - 130px);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#verteiler {
+    height: 40px; /* Erhöhte Höhe für bessere Klickbarkeit */
+    padding: 0 10px; /* Innenabstand links und rechts */
+    font-size: 16px; /* Größere Schriftgröße */
+    color: #333; /* Dunklere Textfarbe */
+    background-color: #ffffff; /* Weißer Hintergrund */
+    border: 1px solid #ccc; /* Subtiler Rahmen */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#verteiler option {
+    padding: 10px;
+}

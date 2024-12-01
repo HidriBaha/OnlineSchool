@@ -1,9 +1,12 @@
 <?php
+require_once "../messages.php";
 
 class KommunikationsController
 {
     public function kommunikation()
     {
-     // return view('demo.dbdata', ['data' => $data]);
+        global $messages, $klassen;
+        $vars = ["klassen" => $klassen, "messages" => $messages];
+        return view('kommunikation.kommunikation', $vars);
     }
 }

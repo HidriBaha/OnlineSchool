@@ -30,7 +30,7 @@
         <div class="d-flex">
             <!-- Kommunikationssymbol -->
             <div class="nav-item me-3" id="ChatButton">
-                <a href="/kommunikation/Kommunikation.php" class="nav-link">
+                <a href="/kommunikation" class="nav-link">
                     <i class="bi bi-chat-dots" style="font-size: 1.5rem;"></i>
                 </a>
             </div>
