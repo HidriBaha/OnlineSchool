@@ -26,7 +26,7 @@
                         </div>
                         <p class='course-description'> {{$kursPerThema["beschreibung"] }} </p>
                         <div hidden class='image-store'> {{$kursPerThema["img"] }} </div>
-                        <a href='/edit-kurs?thema={{$thema}}&kursID={{$key}}' class='btn btn-primary'> Kurs
+                        <a href='/kurs-edit?thema={{$thema}}&kursID={{$key}}' class='btn btn-primary'> Kurs
                             starten </a>
                     </div>
                 @endforeach

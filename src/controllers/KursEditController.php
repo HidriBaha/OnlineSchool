@@ -10,7 +10,6 @@ class KursEditController
         if ($role == "lehrer" || $role == "admin") {
             return $this->kursEditLeher();
         } else {
-            return $this->kursEditLeher();
             return $this->kursEditSchueler();
         }
     }
@@ -22,11 +21,12 @@ class KursEditController
         $kursID = $_GET[KURS_ID] ?? "0";
         $kapitelID = $_GET["kapitel"] ?? 0;
         $kurs = $kurse[$thema][$kursID];
-        if ($kapitelID >= count($kurs["kapitel"])) {
-            $kapitelID = 0;
+        $nextKapitelID = $kapitelID + 1;
+        if ($nextKapitelID >= count($kurs["kapitel"])) {
+            $nextKapitelID = false;
         }
         $kapitel = $kurs["kapitel"][$kapitelID];
-        $vars = ["kapitel" => $kapitel, "kursBeschreibung" => $kurs['beschreibung'], 'kursID' => $kursID, "thema" => $thema];
+        $vars = ["kapitel" => $kapitel, "kursBeschreibung" => $kurs['beschreibung'], 'kursID' => $kursID, "thema" => $thema, "nextKapitelID" => $nextKapitelID];
         return view('kursedit.kursedit-schueler', $vars);
     }
 

@@ -4,15 +4,6 @@
     margin-bottom:20px;
 }
 
-.create-edit-kurs-container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto auto 0;
-    border: none;
-    width: 100%;
-    padding-top: 0;
-}
-
 .kapitel-outer-container {
 }
 

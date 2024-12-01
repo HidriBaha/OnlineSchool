@@ -11,7 +11,7 @@ function checkSolution(inputField) {
     // Find the corresponding hidden solution
     const hiddenSolutionId = inputId.replace('input-', 'hidden-solution-');
     const hiddenSolution = document.getElementById(hiddenSolutionId).value;
-
+    console.log("lösung",hiddenSolution)
     // Compare the input with the correct solution
     if (inputField.value.trim() === hiddenSolution) {
         inputField.style.borderColor = "green"; // Highlight correct input

@@ -20,9 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/kurs-overview?thema=rechengesetze">Rechengesetze</a>
                 </li>
-                <li class="nav-item">
+{{--                <li class="nav-item">
                     <a class="nav-link" href="#">Wiederholen</a>
-                </li>
+                </li>--}}
             </ul>
         </div>
 
@@ -43,7 +43,9 @@
                 <ul class="dropdown-menu dropdown-menu-end" id="profileDropdown2">
                     <li><a class="dropdown-item" href="#">Profil ansehen</a></li>
                     <li><a class="dropdown-item" href="#">Einstellungen</a></li>
-                    <li><a class="dropdown-item" href="/login/logout.php">Abmelden</a></li>
+                    <li><a class="dropdown-item" href="/logout">Abmelden</a></li>
+                    <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
+                    <li><a class="dropdown-item" href="/users">Useransicht</a></li>
                 </ul>
             </div>
         </div>
@@ -52,13 +54,6 @@
 <script>
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
     console.log("Role from PHPNavbar222222:", role);
-
-/*
-    document.getElementById("profileIcons").addEventListener("click", function(event) {
-        console.log("Profile icon clicked");
-    });
-*/
-
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/navbar.js"></script>

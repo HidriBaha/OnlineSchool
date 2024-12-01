@@ -2,7 +2,13 @@
 
 return array(
     '/' => "LandingpageController@landingPage",
+    '/login' => "UserController@login",
+    '/logout' => "UserController@logout",
+    '/reqistrieren' => "UserController@register",
+    '/registerUser' => "UserController@registerUser",
+    '/users' => "UserController@allUser",
+    '/verifyLogin' => "UserController@verifyLogin",
     '/kurs-overview' => "KursOverviewController@kursOverview",
-    '/edit-kurs' => 'KursEditController@kursEdit',
+    '/kurs-edit' => 'KursEditController@kursEdit',
     '/kommunikation' => 'KommunikationsController@kommunikation',
 );

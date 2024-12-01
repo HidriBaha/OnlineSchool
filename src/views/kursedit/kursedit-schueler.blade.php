@@ -15,7 +15,8 @@
                 <div class="definition">
                     <h2>{{$kapitel['definition']}}</h2><br>
                     <h4>Übungserklärung:</h4>
-                    {{$kapitel['erklaerungen'][0]['erklaerung']}};
+                    {{$kapitel['erklaerungen'][0]['erklaerung']}}
+                    <br>
                     @if (trim($kapitel['erklaerungen'][0]['img-src']) != "")
                         <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kapitel["erklaerungen"][0]["img-src"]}}'>
                     @endif
@@ -46,7 +47,11 @@
                     </ul>
                     <div></div>
                 </div>
-                <a href='/kurs-overview?thema={{$thema}}&kursID={{$kursID}}' class='btn btn-primary'>zurück zur &Uuml;bersicht</a>
+                @if(!$nextKapitelID)
+                    <a href='/kurs-overview?thema={{$thema}}&kursID={{$kursID}}' class='btn btn-primary'>zurück zur &Uuml;bersicht</a>
+                @else
+                    <a href='/kurs-edit?thema={{$thema}}&kursID={{$kursID}}&kapitel={{$nextKapitelID}}' class='btn btn-primary'>nächstes Kapitel</a>
+                @endif
             </div>
         </form>
     </div>
@@ -58,7 +63,7 @@
 @endsection
 
 @section("jsextra")
-    <script src="/js/kursedit-schuler.js"></script>
+    <script src="/js/kursedit-schueler.js"></script>
     <script>
         // Expose PHP session variable to JavaScript
         const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
