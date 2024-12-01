@@ -1,7 +1,7 @@
 <?php
 
-use model\Faecher;
-use model\Kurs;
+use models\Faecher;
+use models\Kurs;
 
 include "../db-utils/db-setup.php";
 global $conn;

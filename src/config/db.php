@@ -1,5 +1,5 @@
 <?php
-include 'envloader.php'; // Adjust the path as needed
+include '../db-utils/envloader.php'; // Adjust the path as needed
 loadEnv('../.env');
 
 global $dbHost;

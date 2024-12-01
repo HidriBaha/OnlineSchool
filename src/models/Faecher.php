@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace models;
 class Faecher
 {
     public $id;

@@ -35,7 +35,7 @@ function getNext($kurs,$thema,$kursID,$kapitelID):string
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
           rel="stylesheet">
-    <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
+    <link rel="stylesheet" href="../public/css/style.css"> <!-- Link to style.css -->
     <title>Lehrer_Kurs Editieren</title>
 
 </head>
@@ -114,7 +114,7 @@ class='form-control form-control-lg my-4 solution-field'
         const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
     </script>
     <script src="EKS.js"></script>
-    <script src="../main.js"></script>
+    <script src="../public/js/main.js"></script>
 
 </main>
 </body>

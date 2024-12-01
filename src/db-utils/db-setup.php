@@ -1,5 +1,5 @@
 <?php
-include "db-config.php";
+include "../config/db.php";
 global $dbHost, $dbUsername, $dbPasswort, $dbName, $conn, $link;
 
 // Verbindung zur Datenbank herstellen

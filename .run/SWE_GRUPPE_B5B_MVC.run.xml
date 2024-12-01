@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SWE_GRUPPE_B5B_MVC" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$/src/public">
+    <method v="2" />
+  </configuration>
+</component>

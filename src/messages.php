@@ -1,5 +1,5 @@
 <?php
-
+global $messages;
 $messages = [
     [
         "sender" => "M.Mustermann@HSGG.com",

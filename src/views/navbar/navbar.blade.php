@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/Vorlage/NavBar.css" rel="stylesheet">
+    <link href="/css/navbar.css" rel="stylesheet">
     <title>NavBar Vorlage</title>
 </head>
 <body>
@@ -11,7 +11,7 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
     <div class="container">
         <!-- Schullogo links -->
-        <a class="navbar-brand" href="/index.php">
+        <a class="navbar-brand" href="/">
             <img src="/img/logo.png" class="logo" alt="Schullogo">
         </a>
 
@@ -56,7 +56,6 @@
         </div>
     </div>
 </nav>
-
 <script>
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
     console.log("Role from PHPNavbar222222:", role);
@@ -67,6 +66,6 @@
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../Vorlage/NavBar.js"></script>
+<script src="/js/navbar.js"></script>
 </body>
 </html>

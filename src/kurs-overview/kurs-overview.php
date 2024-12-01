@@ -14,7 +14,7 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
           rel="stylesheet">
-    <link rel="stylesheet" href="../style.css"> <!-- Link to style.css -->
+    <link rel="stylesheet" href="../public/css/style.css"> <!-- Link to style.css -->
     <link rel="stylesheet" href="kurs-overview.css">
     <script>
     // Expose PHP session variable to JavaScript
@@ -65,7 +65,7 @@ session_start();
         </div>
     </div>
 
-    <script src="../main.js"></script>
+    <script src="../public/js/main.js"></script>
 
 </main>
 </body>
