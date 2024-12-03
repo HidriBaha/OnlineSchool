@@ -12,13 +12,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?thema=geometrie">Geometrie</a>
+                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=geometrie">Geometrie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?thema=zahlenmenge">Zahlenmenge</a>
+                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=zahlenmenge">Zahlenmenge</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?thema=rechengesetze">Rechengesetze</a>
+                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=rechengesetze">Rechengesetze</a>
                 </li>
 {{--                <li class="nav-item">
                     <a class="nav-link" href="#">Wiederholen</a>

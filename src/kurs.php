@@ -6,6 +6,8 @@ global $kurseTitle;
 global $thema;
 global $kursID;
 const THEMA = "thema";
+const FACH = "fach";
+
 const KURS_ID = "kursID";
 const KAPITEL = "kapitel";
 
