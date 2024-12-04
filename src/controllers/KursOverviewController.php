@@ -22,7 +22,6 @@ class KursOverviewController
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $fach);
         }
-
         $stmt->execute();
         $results = $stmt->get_result();
         $kurse = $this->getKursFromResult($results);
