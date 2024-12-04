@@ -1,0 +1,36 @@
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table, th, td {
+    border: 1px solid var(--randfarbe);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--kopfzeilenfarbe);
+    color: var(--hauptfarbe);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: var(--zeilenfarbe-hell);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--zeilenfarbe-dunkel);
+}
+
+/* Hover-Effekt für Tabellenzeilen */
+tr:hover {
+    background-color: var(--akzentfarbe);
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
