@@ -37,3 +37,25 @@ h2 i, h5 i {
     height: auto; /* Maintain the aspect ratio */
     padding: 2px; /* Slight padding to avoid cramped look */
 }
+
+.subject{
+    margin-right: 20px;
+}
+
+/* Show dropdown on hover
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+*/
+/* Ensure the dropdown is hidden by default */
+.dropdown-menu {
+    display: none;
+}
+
+/* Adjust margins if necessary */
+.dropdown-menu {
+    margin-top: 0; /* Remove Bootstrap's default margin */
+}
+.nav-item {
+    position: relative; /* Stellt sicher, dass das Dropdown relativ zum nav-item positioniert wird */
+}

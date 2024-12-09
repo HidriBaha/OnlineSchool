@@ -18,15 +18,15 @@ class Faecher
 function get_Faecher(): array {
     global $conn;
 
-    if (!$conn) {
-        throw new Exception("Datenbankverbindung nicht verfügbar");
-    }
+    $result = $conn->query("SELECT name, id FROM faecher");
 
-    $result = $conn->query("SELECT name FROM faecher");
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
-    if (!$result) {
-        throw new Exception("Datenbankabfrage fehlgeschlagen: " . $conn->error);
-    }
+function get_Themen(string $id): array{
+    global $conn;
+
+    $result = $conn->query("SELECT name FROM thema WHERE faecher_id = ". $id. ";");
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
