@@ -1,6 +1,5 @@
 <?php
 
-require_once "../db-utils/db-setup.php";
 require_once '../kurs.php';
 require_once '../messages.php';
 
@@ -63,7 +62,8 @@ class UserController
 
     public function allUser()
     {
-        global $conn;
+
+        $conn = connectdb();
         $sql = "SELECT ID, EMAIL, VORNAME, NACHNAME, ROLLE, GEBURTSDATUM, ADRESSE FROM USERS";
         $result = $conn->query($sql);
         $var = ["userList" => $result];
@@ -73,8 +73,8 @@ class UserController
 
     private function verifyUser($email, $passwort)
     {
-        global $conn;
 
+        $conn = connectdb();
         $sql = "SELECT * FROM USERS WHERE EMAIL = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
@@ -88,7 +88,6 @@ class UserController
             return false;
         }
 
-        session_start();
         $_SESSION['email'] = $row['email'];
         $_SESSION['role'] = $row['rolle'];
         $_SESSION['vorname'] = $row['vorname']; // Vorname für Begrüßung speichern
@@ -97,7 +96,8 @@ class UserController
 
     private function insertUser($email, $password, $role, $vorname, $nachname, $geburtsdatum, $adresse): bool
     {
-        global $conn;
+
+        $conn = connectdb();
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO USERS (EMAIL, PASSWORT, ROLLE, VORNAME, NACHNAME, GEBURTSDATUM, ADRESSE) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);

@@ -1,6 +1,6 @@
 <?php
 
-function loadEnv($path)
+function loadEnv($path): void
 {
     if (!file_exists($path)) {
       return;
@@ -8,7 +8,7 @@ function loadEnv($path)
 
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) {
+        if (str_starts_with(trim($line), '#')) {
             continue;
         }
 

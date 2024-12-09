@@ -2,14 +2,13 @@
 
 use models\Kurs;
 
-require_once "../db-utils/db-setup.php";
 require_once "../models/Kurs.php";
 
 class KursOverviewController
 {
     public function kursOverview()
     {
-        global $conn;
+        $conn = connectdb();
         $fach = $_GET["fach"] ?? "Mathe";
         //TODO error handling falls kein Fach da ist
         if (isset($_GET["thema"])) {
