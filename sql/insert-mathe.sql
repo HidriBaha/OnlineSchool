@@ -103,17 +103,17 @@ VALUES (5, 'Ergebnis: (1, 7)'),
 
 -- Thema 'Zahlenmengen' hinzufügen
 INSERT INTO THEMA (NAME, FAECHER_ID)
-VALUES ('Zahlenmengen', @FAECHER_ID);
+VALUES ('Zahlenmenge', @FAECHER_ID);
 SET @THEMA_ID = LAST_INSERT_ID();
 
 -- Kurse hinzufügen
 INSERT INTO KURSE (ID,KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID)
-VALUES (4,1, 'Zahlenmengen I', 'user', '../img/zahlenmenge.svg',
+VALUES (4,1, 'Zahlenmenge I', 'user', '../img/zahlenmenge.svg',
         'Dieser Kurs behandelt verschiedene Zahlenmengen und ihre Eigenschaften und hilft den Schülern, verschiedene Zahloperationen zu verstehen.',
         @THEMA_ID),
-       (5,2, 'Zahlenmengen II', 'user', '../img/zahlenmenge.svg', 'Ein Kurs über irrationale und reelle Zahlen.',
+       (5,2, 'Zahlenmenge II', 'user', '../img/zahlenmenge.svg', 'Ein Kurs über irrationale und reelle Zahlen.',
         @THEMA_ID),
-       (6,3, 'Zahlenmengen III', 'user', '../img/zahlenmenge.svg', 'Ein Kurs über komplexe und transzendente Zahlen.',
+       (6,3, 'Zahlenmenge III', 'user', '../img/zahlenmenge.svg', 'Ein Kurs über komplexe und transzendente Zahlen.',
         @THEMA_ID);
 
 -- Kapitel für Zahlenmengen I

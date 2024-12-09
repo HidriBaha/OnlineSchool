@@ -13,11 +13,11 @@ class KursOverviewController
         //TODO error handling falls kein Fach da ist
         if (isset($_GET["thema"])) {
             $thema = $_GET["thema"];
-            $sql = "SELECT T.NAME,K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM FAECHER F JOIN THEMA T ON F.ID = T.FAECHER_ID JOIN KURSE K ON T.ID = K.ID WHERE F.NAME LIKE ? AND T.NAME LIKE ?";
+            $sql = "SELECT T.NAME,K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ? and t.NAME like ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $fach, $thema);
         } else {
-            $sql = "SELECT T.NAME, K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM FAECHER F JOIN THEMA T ON F.ID = T.FAECHER_ID JOIN KURSE K ON T.ID = K.ID WHERE F.NAME LIKE ? ";
+            $sql = "SELECT T.NAME, K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $fach);
         }
