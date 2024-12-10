@@ -1,16 +1,14 @@
 @extends("layouts.layout")
 @section("content")
     <div class="container">
-        <h1>
-            {{$kurs->getTitel()}}
-        </h1>
+        <input type="text" class="inpTitle" value="{{$kurs->getTitel()}}">
         <div class="kapitel-outer-container" id="kapitel-outer-container">
 
 
             @foreach ($kurs->getKapitel() as $kapitel)
                 <div class='kapitel-container'>
                     <div class='kapitel-header-row'>
-                        <h2>{{$kapitel->getKapitelNR()}}. {{$kapitel->getDefinition()}} </h2>
+                        <input class="inpHeaderH2" value="{{$kapitel->getKapitelNR()}}. {{$kapitel->getDefinition()}}">
                         <form class='kapitel-button-row-container' method='post'>
                             <input class='btn btn-primary' type='submit' name='newDef' value='+Def'/>
                             {{--<input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>--}}
@@ -18,17 +16,16 @@
                             {{--<input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>--}}
                         </form>
                     </div>
-                    <div class='def-container'><h3>{{$kapitel->getKapitelNR()}}
+                    <div class='def-container'>
+                        <input class="inpHeaderH3" value="{{$kapitel->getKapitelNR()}}
                             .{{$kapitel->getErklaerung()->getErklaerungenNr()}}
-                            . {{$kapitel->getErklaerung()->getHeader()}} </h3></div>
+                            . {{$kapitel->getErklaerung()->getHeader()}}">
+                    </div>
                     <textarea name='erklaerung'
                               class='textarea-def'>{{$kapitel->getErklaerung()->getErklaerung()}}</textarea>
                     @foreach ($kapitel->getAufgaben() as $aufgabe)
                         <div class='kapitel-header-row'>
-                            <div class='def-container'>
-                                <h3>{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung</h3>
-                            </div>
-
+                                <input class="inpHeaderH3" value="{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung">
                             <form class='kapitel-button-row-container' method='post'>
                                 <input class='btn btn-primary'
                                        type='submit'
@@ -52,7 +49,7 @@
                     @endforeach
                 </div>
             @endforeach
-      </div>
+        </div>
         <div class="kapitelButtonContainer">
             <button class='btn btn-primary' id="btn-create-new-kapitel" onclick="newKapitel()">+ Kapitel</button>
         </div>

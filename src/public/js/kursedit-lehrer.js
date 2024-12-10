@@ -11,8 +11,9 @@ function createEmptyKapitel()
     const divKapitelHeaderRow = document.createElement("div");
     divKapitelHeaderRow.classList.add('kapitel-header-row');
 
-    const h2KapitelHeader = document.createElement("h2");
-    h2KapitelHeader.innerText='TODO';
+    const h2KapitelHeader = document.createElement("input");
+    h2KapitelHeader.classList.add("inpHeaderH2");
+    h2KapitelHeader.placeholder='neues Kapitel';
     divKapitelHeaderRow.appendChild(h2KapitelHeader);
 
     const formKapitelButtonRowContainer = document.createElement("form");
@@ -39,8 +40,9 @@ function createEmptyKapitel()
     const defContianer = document.createElement("div");
     defContianer.classList.add('def-container');
 
-    const h3Header = document.createElement("h3");
-    h3Header.innerText='TODO';
+    const h3Header = document.createElement("input");
+    h3Header.classList.add('inpHeaderH3');
+    h3Header.placeholder='neue Erklärung';
     divKapitelContainer.appendChild(defContianer);
     defContianer.appendChild(h3Header);
 
@@ -52,13 +54,10 @@ function createEmptyKapitel()
     const divUebungen = document.createElement('div');
     divUebungen.classList.add('kapitel-header-row');
 
-    const divDefContainer = document.createElement('div');
-    divDefContainer.classList.add('def-container');
-
-    const h3UebungHeader = document.createElement('h3');
-    h3UebungHeader.innerText='TODO $kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung'
-    divDefContainer.appendChild(h3UebungHeader);
-    divUebungen.appendChild(divDefContainer);
+    const h3UebungHeader = document.createElement('input');
+    h3UebungHeader.classList.add('inpHeaderH3');
+    h3UebungHeader.placeholder='neue Uebung';
+    divUebungen.appendChild(h3UebungHeader);
 
     const formUebung = document.createElement("form");
     formUebung.classList.add('kapitel-button-row-container');
