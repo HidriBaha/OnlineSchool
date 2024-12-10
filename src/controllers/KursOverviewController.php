@@ -13,7 +13,7 @@ class KursOverviewController
         //TODO error handling falls kein Fach da ist
         if (isset($_GET["thema"])) {
             $thema = $_GET["thema"];
-            $sql = "SELECT T.NAME,K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ? and t.NAME like ?";
+            $sql = "SELECT T.NAME,K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID, T.NAME as THEMA_NAME, f.NAME as FACH_NAME FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ? and t.NAME like ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $fach, $thema);
         } else {
@@ -36,7 +36,7 @@ class KursOverviewController
             if (!isset($kurse[$thema])) {
                 $kurse[$thema] = [];
             }
-            $kurs = new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID']);
+            $kurs = new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID'],$row["FACH_NAME"],$row["THEMA_NAME"]);
             array_push($kurse[$thema], $kurs);
         }
         return $kurse;

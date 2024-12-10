@@ -6,33 +6,31 @@ use function models\loadKurs;
 
 class KursEditController
 {
-    public function kursEdit()
+    public function kursEdit(RequestData $requestData)
     {
         $role = ($_SESSION['role']) ?? "schüler";
         if ($role == "lehrer" || $role == "admin") {
-            return $this->kursEditLeher();
+            return $this->kursEditLeher($requestData);
         } else {
-            return $this->kursEditSchueler();
+            return $this->kursEditSchueler($requestData);
         }
     }
 
-    public function kursEditSchueler()
+    public function kursEditSchueler(RequestData $requestData)
     {
-        if (!isset($_GET["kursID"])) {
+        if (!isset($requestData->query["kursID"])) {
             //TODO errorhandling
             return view('kursedit.kursedit-schueler', ["kurs" => []]);
         }
-        $kursID = $_GET["kursID"];
-        $kapitelNr = $_GET["kapitelNr"] ?? 1;
+        $kursID = (int)($requestData->query["kursID"]);
+        $kapitelNr = (int)($requestData->query["kapitelNr"] ?? 1);
         $kurs = loadKurs($kursID);
-        $thema = "Geometrie";//TODO
-        $fach="Mathe"; //TODO
-        $vars = ["kurs" => $kurs, "kapitelNr"=>$kapitelNr,"thema"=>$thema,"fach"=>$fach];
+        $vars = ["kurs" => $kurs, "kapitelNr" => $kapitelNr];
         return view('kursedit.kursedit-schueler', $vars);
     }
 
 
-    public function kursEditLeher()
+    public function kursEditLeher(RequestData $requestData)
     {
         global $kurse;
         $thema = $_GET[THEMA] ?? "geometrie";

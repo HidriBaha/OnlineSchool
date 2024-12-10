@@ -4,7 +4,7 @@
         <!-- Get some Parameters and open Form -->
 
 
-       {{--<input name='amount-tasks' type='hidden' value='{{count($kurs->getKapitel()[$kapitelNr]->getAufgaben())}}'>--}}
+       <input name='amount-tasks' type='hidden' value='{{count($kurs->getKapitel()[$kapitelNr]->getAufgaben())}}'>
         <form action='#' method='post'>
             <!-- open and close form if course is being edited -->
 
@@ -49,7 +49,7 @@
                     <div></div>
                 </div>
                 @if(isset($kurs->getKapitel()[$kapitelNr+1]))
-                    <a href='/kurs-edit?thema=kursID={{$kursID}}&kapitel={{$kapitelNr+1}}' class='btn btn-primary'>nächstes Kapitel</a>
+                    <a href='/kurs-edit?kursID={{$kurs->getId()}}&kapitelNr={{$kapitelNr+1}}' class='btn btn-primary'>nächstes Kapitel</a>
                 @else
                     <a href='/kurs-overview?fach={{$fach}}&thema={{$thema}}' class='btn btn-primary'>zurück zur &Uuml;bersicht</a>
                 @endif

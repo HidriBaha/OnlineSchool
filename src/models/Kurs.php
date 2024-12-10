@@ -14,7 +14,7 @@ use models\Loesung;
 function loadKurs(mixed $kursID): Kurs
 {
     $conn = connectdb();
-    $sql = "SELECT * FROM KURSE WHERE ID = ?";
+    $sql = "SELECT k.ID, k.KURS_NR, k.TITEL, k.AUTHOR, k.IMG, k.BESCHREIBUNG, k.THEMA_ID, t.NAME as THEMA_NAME, f.NAME as FEACHER_NAME FROM KURSE k Join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE k.ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $kursID);
     $stmt->execute();
@@ -27,7 +27,7 @@ function loadKurs(mixed $kursID): Kurs
 function getKursFromResult($result): Kurs
 {
     $row = $result->fetch_assoc();
-    return new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID']);
+    return new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID'], $row['FEACHER_NAME'], $row['THEMA_NAME']);
 }
 
 function getKapitelByKursID($kursID): array
@@ -49,19 +49,19 @@ function getKapitelFromResult($result, $kursID): array
     while (($row = $result->fetch_assoc()) != null) {
         $kapitel = new Kapitel($row['KURS_ID'], $row['KAPITEL_NR'], $row['DEFINITION']);
         $kapitel->setErklaerung(new Erklaerung($row['KURS_ID'], $row['KAPITEL_NR'], $row['ERKLAERUNGEN_NR'], $row['HEADER'], $row['ERKLAERUNG'], $row['IMG_SRC']));
-        $aufgaben = loadAufgaben($kursID);
+        $aufgaben = loadAufgaben($kursID,$kapitel->getKapitelNR());
         $kapitel->setAufgaben($aufgaben);
         $kapitelArr[$kapitel->getKapitelNR()] = $kapitel;
     }
     return $kapitelArr;
 }
 
-function loadAufgaben($kursID): array
+function loadAufgaben($kursID,$kapitelNr): array
 {
-    $sql = "SELECT ID, AUFGABEN_NR, KURS_ID, KAPITEL_NR, AUFGABENSTELLUNG, TIPP, IMG_SRC FROM AUFGABEN WHERE KURS_ID = ?";
+    $sql = "SELECT ID, AUFGABEN_NR, KURS_ID, KAPITEL_NR, AUFGABENSTELLUNG, TIPP, IMG_SRC FROM AUFGABEN WHERE KURS_ID = ? AND KAPITEL_NR = ?";
     $conn = connectdb();
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $kursID);
+    $stmt->bind_param("ss", $kursID, $kapitelNr);
     $stmt->execute();
     $results = $stmt->get_result();
     $aufgaben = [];
@@ -74,10 +74,9 @@ function loadAufgaben($kursID): array
 }
 
 
-
 function loadLoesung(int $getId): array
 {
-    $conn =connectdb();
+    $conn = connectdb();
     $sql = "SELECT ID, AUFGABE_ID, LOESUNG FROM LOESUNGEN WHERE AUFGABE_ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $getId);
@@ -99,9 +98,11 @@ class Kurs
     private $img;
     private $beschreibung;
     private $thema_id;
+    private $thema;
+    private $fach;
     private $kapitel = [];
 
-    public function __construct($id, $kurs_nr, $titel, $author, $img, $beschreibung, $thema_id)
+    public function __construct($id, $kurs_nr, $titel, $author, $img, $beschreibung, $thema_id, $fach, $thema)
     {
         $this->id = $id;
         $this->kurs_nr = $kurs_nr;
@@ -110,6 +111,8 @@ class Kurs
         $this->img = $img;
         $this->beschreibung = $beschreibung;
         $this->thema_id = $thema_id;
+        $this->thema = $thema;
+        $this->fach = $fach;
     }
 
     /**
@@ -253,5 +256,38 @@ class Kurs
     {
         array_push($this->kapitel, $kapitel);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getThema()
+    {
+        return $this->thema;
+    }
+
+    /**
+     * @param mixed $thema
+     */
+    public function setThema($thema): void
+    {
+        $this->thema = $thema;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFach()
+    {
+        return $this->fach;
+    }
+
+    /**
+     * @param mixed $fach
+     */
+    public function setFach($fach): void
+    {
+        $this->fach = $fach;
+    }
+
 
 }
