@@ -6,7 +6,6 @@ global $dbHost;
 global $dbUsername;
 global $dbPasswort;
 global $dbName;
-
 const DB_HOST = "DB_HOST";
 const DB_USERNAME = "DB_USERNAME";
 const DB_PASSWORD = "DB_PASSWORD";

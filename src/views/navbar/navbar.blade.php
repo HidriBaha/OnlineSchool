@@ -1,3 +1,7 @@
+@php
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Faecher.php';
+    $faecher = \models\get_Faecher();
+@endphp
 <!DOCTYPE html>
 <html lang="de">
 <!-- Navbar -->
@@ -7,25 +11,33 @@
         <a class="navbar-brand" href="/">
             <img src="/img/logo.png" class="logo" alt="Schullogo">
         </a>
-
         <!-- Navbar-Links (Links ausgerichtet) -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=geometrie">Geometrie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=zahlenmenge">Zahlenmenge</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=rechengesetze">Rechengesetze</a>
-                </li>
-{{--                <li class="nav-item">
-                    <a class="nav-link" href="#">Wiederholen</a>
-                </li>--}}
+                @if(sizeof($faecher) > 0)
+                    @foreach($faecher as $fach)
+                        <li class="nav-item">
+                            <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["name"]}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="{{$fach["name"]}}">
+                                @php
+                                    $themen = \models\get_Themen($fach["id"]);
+                                @endphp
+                                @if(sizeof($themen) > 0)
+                                    @foreach($themen as $thema)
+                                        @php
+                                            $path = "/kurs-overview?fach=". $fach["name"]. "&thema=". $thema["name"];
+                                        @endphp
+                                        <li><a class ="dropdown-item" href="{{$path}}">{{$thema["name"]}}</a></li>
+                                    @endforeach
+                                @else
+                                    <li><span class="dropdown-item">Keine Kurse gefunden.</span></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
-
         <!-- Symbole rechts -->
         <div class="d-flex">
             <!-- Kommunikationssymbol -->
@@ -53,7 +65,7 @@
 </nav>
 <script>
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
-    console.log("Role from PHPNavbar222222:", role);
+    console.log("Role from PHPNavbar:", role);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/navbar.js"></script>
