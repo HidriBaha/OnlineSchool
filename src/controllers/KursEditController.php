@@ -32,10 +32,12 @@ class KursEditController
 
     public function kursEditLeher(RequestData $requestData)
     {
-        global $kurse;
-        $thema = $_GET[THEMA] ?? "geometrie";
-        $kursID = $_GET[KURS_ID] ?? "0";
-        $kurs = $kurse[$thema][$kursID];
+        if (!isset($requestData->query["kursID"])) {
+            //TODO errorhandling
+            return view('kursedit.kursedit-lehrer', ["kurs" => []]);
+        }
+        $kursID = (int)($requestData->query["kursID"]);
+        $kurs = loadKurs($kursID);
         $vars = ["kurs" => $kurs];
         return view('kursedit.kursedit-lehrer', $vars);
     }

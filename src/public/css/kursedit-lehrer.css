@@ -65,3 +65,8 @@
     text-align: center;
     align-content: center;
 }
+
+.kapitelButtonContainer{
+   display: flex;
+    flex-direction: row-reverse;
+}

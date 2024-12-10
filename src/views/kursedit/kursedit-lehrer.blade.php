@@ -2,30 +2,31 @@
 @section("content")
     <div class="container">
         <h1>
-            {{$kurs["titel"]}}
+            {{$kurs->getTitel()}}
         </h1>
-        <div class="kapitel-outer-container">
+        <div class="kapitel-outer-container" id="kapitel-outer-container">
 
-            @foreach ($kurs["kapitel"] as $keyKapitel => $kapitel)
+
+            @foreach ($kurs->getKapitel() as $kapitel)
                 <div class='kapitel-container'>
                     <div class='kapitel-header-row'>
-                        <h2>{{$keyKapitel + 1}}.{{$kapitel["definition"]}} </h2>
+                        <h2>{{$kapitel->getKapitelNR()}}. {{$kapitel->getDefinition()}} </h2>
                         <form class='kapitel-button-row-container' method='post'>
                             <input class='btn btn-primary' type='submit' name='newDef' value='+Def'/>
-                            <input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>
+                            {{--<input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>--}}
                             <input class='btn btn-primary' type='submit' name='newUebung' value='+Übung'/>
-                            <input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>
+                            {{--<input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>--}}
                         </form>
                     </div>
-
-                    @foreach ($kapitel["erklaerungen"] as $keyDef => $def)
-                        <div class='def-container'><h3>{{$keyKapitel + 1}}.{{$keyDef + 1}}.{{$def["header"]}} </h3></div>
-                        <textarea name='erklaerung' class='textarea-def'>{{$def["erklaerung"]}}</textarea>
-                    @endforeach
-                    @foreach ($kapitel["aufgaben"] as $keyAufgabe => $aufgabe)
+                    <div class='def-container'><h3>{{$kapitel->getKapitelNR()}}
+                            .{{$kapitel->getErklaerung()->getErklaerungenNr()}}
+                            . {{$kapitel->getErklaerung()->getHeader()}} </h3></div>
+                    <textarea name='erklaerung'
+                              class='textarea-def'>{{$kapitel->getErklaerung()->getErklaerung()}}</textarea>
+                    @foreach ($kapitel->getAufgaben() as $aufgabe)
                         <div class='kapitel-header-row'>
                             <div class='def-container'>
-                                <h3>{{$keyKapitel + 1}}.{{$keyAufgabe + 1}} Übung</h3>
+                                <h3>{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung</h3>
                             </div>
 
                             <form class='kapitel-button-row-container' method='post'>
@@ -36,22 +37,24 @@
                             </form>
                         </div>
 
-                        <textarea name='aufgaben' class='textarea-def'>{{$aufgabe["aufgabenstellung"]}}</textarea>
+                        <textarea name='aufgaben' class='textarea-def'>{{$aufgabe->getAufgabenstellung()}}</textarea>
                         <div class='loesungen-container'>
-                            @foreach ($aufgabe["loesungen"] as $keyLoesung => $loesung)
+                            @foreach ($aufgabe->getLoesungen() as $loesung)
 
                                 <div class='loesung-container'><label class='loesung-label'
                                                                       for='input-loesung'>Aufgaben</label>
                                     <input id='input-loesung'
-                                           name='{{$keyKapitel}}.{{$keyDef}}.{{$keyAufgabe}}.{{$keyLoesung}}'
-                                           value='{{$loesung}}'/>
+                                           name='loesung-{{$loesung->getID()}}'
+                                           value='{{$loesung->getLoesung()}}'/>
                                 </div>
                             @endforeach
                         </div>
                     @endforeach
                 </div>
             @endforeach
-
+      </div>
+        <div class="kapitelButtonContainer">
+            <button class='btn btn-primary' id="btn-create-new-kapitel" onclick="newKapitel()">+ Kapitel</button>
         </div>
         <form class="action-button-container" method="post">
             <input class="btn btn-primary" type="submit" value="Erstellen" name="create">
@@ -63,6 +66,6 @@
 @section("cssextra")
     <link rel="stylesheet" href="/css/kursedit-lehrer.css">
 @endsection
-
+<script src="/js/kursedit-lehrer.js"></script>
 @section("jsextra")
 @endsection
