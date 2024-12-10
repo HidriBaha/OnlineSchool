@@ -15,22 +15,21 @@ function createEmptyKapitel() {
     h2KapitelHeader.placeholder = 'neues Kapitel';
     divKapitelHeaderRow.appendChild(h2KapitelHeader);
 
-    const formKapitelButtonRowContainer = document.createElement("form");
+    const formKapitelButtonRowContainer = document.createElement("div");
     formKapitelButtonRowContainer.classList.add('kapitel-button-row-container');
 
-    const inputNewDef = document.createElement("input");
-    inputNewDef.classList.add('btn', 'btn-primary');
-    inputNewDef.type = 'submit';
-    inputNewDef.name = 'newDef';
-    inputNewDef.value = '+Def';
+    const buttonNewDef = document.createElement("button");
+    buttonNewDef.classList.add('btn', 'btn-primary');
+    buttonNewDef.innerText = '+Def';
+    buttonNewDef.onclick=createDef;
 
-    const inputNewUebung = document.createElement("input");
-    inputNewUebung.classList.add('btn', 'btn-primary');
-    inputNewUebung.type = 'submit';
-    inputNewUebung.name = 'newDef';
-    inputNewUebung.value = '+Übung';
-    formKapitelButtonRowContainer.appendChild(inputNewDef);
-    formKapitelButtonRowContainer.appendChild(inputNewUebung);
+    const buttonNewUebung = document.createElement("button");
+    buttonNewUebung.classList.add('btn', 'btn-primary');
+    buttonNewUebung.innerText = '+Übung';
+    buttonNewUebung.onclick=createUebungen;
+
+    formKapitelButtonRowContainer.appendChild(buttonNewDef);
+    formKapitelButtonRowContainer.appendChild(buttonNewUebung);
     divKapitelHeaderRow.appendChild(formKapitelButtonRowContainer);
 
 
@@ -50,6 +49,9 @@ function createEmptyKapitel() {
     textareaErklaerung.name = "erklaerung"
     divKapitelContainer.appendChild(textareaErklaerung);
 
+    const divAufgabenContainer = document.createElement("div");
+    divAufgabenContainer.classList.add("aufgaben-container");
+
     const divUebungen = document.createElement('div');
     divUebungen.classList.add('kapitel-header-row');
 
@@ -57,6 +59,7 @@ function createEmptyKapitel() {
     h3UebungHeader.classList.add('inpHeaderH3');
     h3UebungHeader.placeholder = 'neue Uebung';
     divUebungen.appendChild(h3UebungHeader);
+    divAufgabenContainer.appendChild(divUebungen);
 
     const formUebung = document.createElement("div");
     formUebung.classList.add('kapitel-button-row-container');
@@ -66,15 +69,16 @@ function createEmptyKapitel() {
     inputNewLoesung.onclick=createLoesung;
     inputNewLoesung.innerText = '+Lösung';
     formUebung.appendChild(inputNewLoesung);
-    divUebungen.appendChild(formUebung);
-    divKapitelContainer.appendChild(divUebungen);
 
     const textareaUebung = document.createElement("textarea");
     textareaUebung.classList.add('textarea-def');
-    divKapitelContainer.appendChild(textareaUebung);
+    divAufgabenContainer.appendChild(textareaUebung);
 
     const divLoesung = document.createElement("div");
     divLoesung.classList.add("loesungen-container");
+    divAufgabenContainer.appendChild(divLoesung);
+
+    divKapitelContainer.appendChild(divAufgabenContainer);
 
     /* const loesungContainer = document.createElement("div");
      loesungContainer.classList.add('loesung-container');
@@ -91,7 +95,6 @@ function createEmptyKapitel() {
 
      divLoesung.appendChild(loesungContainer);*/
 
-    divKapitelContainer.appendChild(divLoesung);
 
     return divKapitelContainer;
 }
@@ -116,6 +119,45 @@ function createLoesung(event) {
     loesungContainer.appendChild(inputLoesung);
 
     losungenContainer.appendChild(loesungContainer)
+}
 
-    console.log(kapitelContainer);
+
+function createUebungen(event) {
+    const kapitelContainer = event.target.parentNode.parentNode.parentNode;
+    const aufgabenContainer =kapitelContainer.querySelector(".aufgaben-container");
+    console.log(aufgabenContainer);
+
+    const divAufgabe = document.createElement("div");
+    divAufgabe.classList.add("aufgabe");
+    const divUebungen = document.createElement('div');
+    divUebungen.classList.add('kapitel-header-row');
+
+    const h3UebungHeader = document.createElement('input');
+    h3UebungHeader.classList.add('inpHeaderH3');
+    h3UebungHeader.placeholder = 'neue Uebung';
+    divUebungen.appendChild(h3UebungHeader);
+    divAufgabe.appendChild(divUebungen);
+
+    const formUebung = document.createElement("div");
+    formUebung.classList.add('kapitel-button-row-container');
+
+    const inputNewLoesung = document.createElement("button");
+    inputNewLoesung.classList.add('btn', 'btn-primary');
+    inputNewLoesung.onclick=createLoesung;
+    inputNewLoesung.innerText = '+Lösung';
+    formUebung.appendChild(inputNewLoesung);
+
+    const textareaUebung = document.createElement("textarea");
+    textareaUebung.classList.add('textarea-def');
+    divAufgabe.appendChild(textareaUebung);
+
+    const divLoesung = document.createElement("div");
+    divLoesung.classList.add("loesungen-container");
+    divAufgabe.appendChild(divLoesung);
+
+    aufgabenContainer.appendChild(divAufgabe);
+}
+
+function createDef(event){
+    const kapitelContainer = event.target.parentNode.parentNode.parentNode;
 }

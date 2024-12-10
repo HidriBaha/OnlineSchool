@@ -9,12 +9,12 @@
                 <div class='kapitel-container'>
                     <div class='kapitel-header-row'>
                         <input class="inpHeaderH2" value="{{$kapitel->getKapitelNR()}}. {{$kapitel->getDefinition()}}">
-                        <form class='kapitel-button-row-container' method='post'>
-                            <input class='btn btn-primary' type='submit' name='newDef' value='+Def'/>
+                        <div class='kapitel-button-row-container'>
+                            <button class='btn btn-primary' onclick="createDef(event)">+Def</button>
                             {{--<input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>--}}
-                            <input class='btn btn-primary' type='submit' name='newUebung' value='+Übung'/>
+                            <button class='btn btn-primary' onclick="createUebungen(event)">+Übung</button>
                             {{--<input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>--}}
-                        </form>
+                        </div>
                     </div>
                     <div class='def-container'>
                         <input class="inpHeaderH3" value="{{$kapitel->getKapitelNR()}}
@@ -23,27 +23,31 @@
                     </div>
                     <textarea name='erklaerung'
                               class='textarea-def'>{{$kapitel->getErklaerung()->getErklaerung()}}</textarea>
-                    @foreach ($kapitel->getAufgaben() as $aufgabe)
-                        <div class='kapitel-header-row'>
-                                <input class="inpHeaderH3" value="{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung">
-                            <div class='kapitel-button-row-container'>
-                                <button class='btn btn-primary' onclick="createLoesung(event)">+Lösung</button>
-                            </div>
-                        </div>
-
-                        <textarea name='aufgaben' class='textarea-def'>{{$aufgabe->getAufgabenstellung()}}</textarea>
-                        <div class='loesungen-container'>
-                            @foreach ($aufgabe->getLoesungen() as $loesung)
-
-                                <div class='loesung-container'><label class='loesung-label'
-                                                                      for='input-loesung'>Aufgaben</label>
-                                    <input id='input-loesung'
-                                           name='loesung-{{$loesung->getID()}}'
-                                           value='{{$loesung->getLoesung()}}'/>
+                    <div class="aufgaben-container">
+                        @foreach ($kapitel->getAufgaben() as $aufgabe)
+                            <div class='kapitel-header-row'>
+                                <input class="inpHeaderH3"
+                                       value="{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung">
+                                <div class='kapitel-button-row-container'>
+                                    <button class='btn btn-primary' onclick="createLoesung(event)">+Lösung</button>
                                 </div>
-                            @endforeach
-                        </div>
-                    @endforeach
+                            </div>
+
+                            <textarea name='aufgaben'
+                                      class='textarea-def'>{{$aufgabe->getAufgabenstellung()}}</textarea>
+                            <div class='loesungen-container'>
+                                @foreach ($aufgabe->getLoesungen() as $loesung)
+
+                                    <div class='loesung-container'><label class='loesung-label'
+                                                                          for='input-loesung'>Aufgaben</label>
+                                        <input id='input-loesung'
+                                               name='loesung-{{$loesung->getID()}}'
+                                               value='{{$loesung->getLoesung()}}'/>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @endforeach
         </div>
