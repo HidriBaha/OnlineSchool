@@ -1,10 +1,9 @@
-function newKapitel () {
+function newKapitel() {
     const kapitelContainer = document.getElementById("kapitel-outer-container");
     kapitelContainer.appendChild(createEmptyKapitel());
 }
 
-function createEmptyKapitel()
-{
+function createEmptyKapitel() {
     const divKapitelContainer = document.createElement("div");
     divKapitelContainer.classList.add('kapitel-container');
 
@@ -13,7 +12,7 @@ function createEmptyKapitel()
 
     const h2KapitelHeader = document.createElement("input");
     h2KapitelHeader.classList.add("inpHeaderH2");
-    h2KapitelHeader.placeholder='neues Kapitel';
+    h2KapitelHeader.placeholder = 'neues Kapitel';
     divKapitelHeaderRow.appendChild(h2KapitelHeader);
 
     const formKapitelButtonRowContainer = document.createElement("form");
@@ -26,7 +25,7 @@ function createEmptyKapitel()
     inputNewDef.value = '+Def';
 
     const inputNewUebung = document.createElement("input");
-    inputNewUebung.classList.add('btn','btn-primary');
+    inputNewUebung.classList.add('btn', 'btn-primary');
     inputNewUebung.type = 'submit';
     inputNewUebung.name = 'newDef';
     inputNewUebung.value = '+Übung';
@@ -42,13 +41,13 @@ function createEmptyKapitel()
 
     const h3Header = document.createElement("input");
     h3Header.classList.add('inpHeaderH3');
-    h3Header.placeholder='neue Erklärung';
+    h3Header.placeholder = 'neue Erklärung';
     divKapitelContainer.appendChild(defContianer);
     defContianer.appendChild(h3Header);
 
     const textareaErklaerung = document.createElement("textarea");
     textareaErklaerung.classList.add('textarea-def');
-    textareaErklaerung.name="erklaerung"
+    textareaErklaerung.name = "erklaerung"
     divKapitelContainer.appendChild(textareaErklaerung);
 
     const divUebungen = document.createElement('div');
@@ -56,17 +55,16 @@ function createEmptyKapitel()
 
     const h3UebungHeader = document.createElement('input');
     h3UebungHeader.classList.add('inpHeaderH3');
-    h3UebungHeader.placeholder='neue Uebung';
+    h3UebungHeader.placeholder = 'neue Uebung';
     divUebungen.appendChild(h3UebungHeader);
 
-    const formUebung = document.createElement("form");
+    const formUebung = document.createElement("div");
     formUebung.classList.add('kapitel-button-row-container');
 
-    const inputNewLoesung =document.createElement("input");
-    inputNewLoesung.classList.add('btn','btn-primary');
-    inputNewLoesung.type = 'submit';
-    inputNewLoesung.name='newLösung';
-    inputNewLoesung.value='+Lösung';
+    const inputNewLoesung = document.createElement("button");
+    inputNewLoesung.classList.add('btn', 'btn-primary');
+    inputNewLoesung.onclick=createLoesung;
+    inputNewLoesung.innerText = '+Lösung';
     formUebung.appendChild(inputNewLoesung);
     divUebungen.appendChild(formUebung);
     divKapitelContainer.appendChild(divUebungen);
@@ -78,22 +76,46 @@ function createEmptyKapitel()
     const divLoesung = document.createElement("div");
     divLoesung.classList.add("loesungen-container");
 
+    /* const loesungContainer = document.createElement("div");
+     loesungContainer.classList.add('loesung-container');
+
+     const labelLoesungContainer = document.createElement("label");
+     labelLoesungContainer.classList.add('loesung-label');
+     labelLoesungContainer.htmlFor='input-loesung';
+     labelLoesungContainer.innerText='Aufgaben';
+
+     loesungContainer.appendChild(labelLoesungContainer);
+
+     const inputLoesung = document.createElement("input");
+     loesungContainer.appendChild(inputLoesung);
+
+     divLoesung.appendChild(loesungContainer);*/
+
+    divKapitelContainer.appendChild(divLoesung);
+
+    return divKapitelContainer;
+}
+
+
+function createLoesung(event) {
+    const kapitelContainer = event.target.parentNode.parentNode.parentNode;
+    const losungenContainer =kapitelContainer.querySelector(".loesungen-container");
+    console.log(losungenContainer);
+
     const loesungContainer = document.createElement("div");
     loesungContainer.classList.add('loesung-container');
 
     const labelLoesungContainer = document.createElement("label");
     labelLoesungContainer.classList.add('loesung-label');
-    labelLoesungContainer.htmlFor='input-loesung';
-    labelLoesungContainer.innerText='Aufgaben';
+    labelLoesungContainer.htmlFor = 'input-loesung';
+    labelLoesungContainer.innerText = 'Aufgaben';
 
     loesungContainer.appendChild(labelLoesungContainer);
 
     const inputLoesung = document.createElement("input");
     loesungContainer.appendChild(inputLoesung);
 
-    divLoesung.appendChild(loesungContainer);
+    losungenContainer.appendChild(loesungContainer)
 
-    divKapitelContainer.appendChild(divLoesung);
-
-    return divKapitelContainer;
+    console.log(kapitelContainer);
 }

@@ -26,12 +26,9 @@
                     @foreach ($kapitel->getAufgaben() as $aufgabe)
                         <div class='kapitel-header-row'>
                                 <input class="inpHeaderH3" value="{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung">
-                            <form class='kapitel-button-row-container' method='post'>
-                                <input class='btn btn-primary'
-                                       type='submit'
-                                       name='newConstraint'
-                                       value='+Lösung'/>
-                            </form>
+                            <div class='kapitel-button-row-container'>
+                                <button class='btn btn-primary' onclick="createLoesung(event)">+Lösung</button>
+                            </div>
                         </div>
 
                         <textarea name='aufgaben' class='textarea-def'>{{$aufgabe->getAufgabenstellung()}}</textarea>
