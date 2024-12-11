@@ -22,6 +22,8 @@
                         </div>
                     </div>
                     <div class='def-container'>
+                        <input hidden name="erklaerung-new" value="false">
+                        <input hidden name="erklaerung-nr" class="erklaerungNr" value="{{$kapitel->getErklaerung()->getErklaerungenNr()}}">
                         <div class="inp-container">
                             <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$kapitel->getErklaerung()->getErklaerungenNr()}}. </div>
                             <input class="inpHeaderH3" value="{{$kapitel->getErklaerung()->getHeader()}}">

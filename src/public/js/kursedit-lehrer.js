@@ -64,9 +64,27 @@ function createEmptyKapitel() {
     const divInputContainer = document.createElement("div");
     divInputContainer.classList.add("inp-container");
 
+    //<input hidden name="erklaerung-nr" class="erklaerungNr" value="{{$kapitel->getErklaerung()->getErklaerungenNr()}}">
+
+    const inputErklaerungNr = document.createElement("input");
+    inputErklaerungNr.hidden=true;
+    inputErklaerungNr.name="erklaerung-nr";
+    inputErklaerungNr.classList.add("erklaerungNr");
+    inputErklaerungNr.value=1;
+
+    divInputContainer.appendChild(inputErklaerungNr);
+
+    const inputErklaerungNew = document.createElement("input");
+    inputErklaerungNew.hidden=true;
+    inputErklaerungNew.name="erklaerung-new";
+    inputErklaerungNew.value=true;
+
+    divInputContainer.appendChild(inputErklaerungNew);
+
+
     const divErklaerungNr = document.createElement("div");
     divErklaerungNr.classList.add("inpHeaderH3Nr");
-    divErklaerungNr.innerText = kapitelNr + ". ";
+    divErklaerungNr.innerText = kapitelNr + ".1 ";
     divInputContainer.appendChild(divErklaerungNr);
 
     const h3Header = document.createElement("input");
@@ -243,10 +261,11 @@ function getAufgabenNr(element) {
     const aufgabenNr = [];
     const aufgabenNrs = element.querySelectorAll(".aufgabenNr");
     if(aufgabenNrs.length===0){
-        return 1;
+        return 2;
     }
     aufgabenNrs.forEach(aufgabe => aufgabenNr.push(parseInt(aufgabe.value)));
     let aufgabeNr = parseInt(aufgabenNr.sort()[aufgabenNr.length - 1]);
     return aufgabeNr + 1;
 
 }
+
