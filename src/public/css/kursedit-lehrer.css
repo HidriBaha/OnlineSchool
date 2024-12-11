@@ -1,18 +1,38 @@
 .inpTitle{
-    width: fit-content;
+    width: 100%;
     font-size: 2.5rem;
     border: none;
 }
 
 .inpHeaderH2{
-    width: calc( 100% - 38px);
+    width: 100%;
+    font-size: 2rem;
+    border: none;
+    padding: 0;
+}
+.inpHeaderH3{
+    width: 100%;
+    font-size: 1.75rem;
+    border: none;
+    padding: 0;
+}
+
+.inpHeaderH2Nr{
+    width: fit-content;
     font-size: 2rem;
     border: none;
 }
-.inpHeaderH3{
-    width: calc( 100% - 38px);
+
+.inpHeaderH3Nr{
+    width: fit-content;
     font-size: 1.75rem;
     border: none;
+}
+
+.inp-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -33,6 +53,7 @@
 .kapitel-header-row {
     display: flex;
     flex-direction: row;
+    gap: 5px;
     text-align: center;
     padding: 0 0 10px 0;
 }

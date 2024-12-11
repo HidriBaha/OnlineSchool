@@ -8,26 +8,36 @@
             @foreach ($kurs->getKapitel() as $kapitel)
                 <div class='kapitel-container'>
                     <div class='kapitel-header-row'>
-                        <input class="inpHeaderH2" value="{{$kapitel->getKapitelNR()}}. {{$kapitel->getDefinition()}}">
+                            <input hidden name="kapitel-new" value="false">
+                            <input hidden name="kapitel-nr" class="kapitelNr" value="{{$kapitel->getKapitelNR()}}">
+                        <div class="inp-container">
+                            <div class="inpHeaderH2Nr">{{$kapitel->getKapitelNR()}}. </div>
+                            <input class="inpHeaderH2" value="{{$kapitel->getDefinition()}}">
+                        </div>
                         <div class='kapitel-button-row-container'>
-                            <button class='btn btn-primary' onclick="createDef(event)">+Def</button>
+                           {{-- <button class='btn btn-primary' onclick="createDef(event)">+Def</button>--}}
                             {{--<input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>--}}
                             <button class='btn btn-primary' onclick="createUebungen(event)">+Übung</button>
                             {{--<input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>--}}
                         </div>
                     </div>
                     <div class='def-container'>
-                        <input class="inpHeaderH3" value="{{$kapitel->getKapitelNR()}}
-                            .{{$kapitel->getErklaerung()->getErklaerungenNr()}}
-                            . {{$kapitel->getErklaerung()->getHeader()}}">
-                    </div>
+                        <div class="inp-container">
+                            <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$kapitel->getErklaerung()->getErklaerungenNr()}}. </div>
+                            <input class="inpHeaderH3" value="{{$kapitel->getErklaerung()->getHeader()}}">
+                        </div>
+                        </div>
                     <textarea name='erklaerung'
                               class='textarea-def'>{{$kapitel->getErklaerung()->getErklaerung()}}</textarea>
                     <div class="aufgaben-container">
                         @foreach ($kapitel->getAufgaben() as $aufgabe)
                             <div class='kapitel-header-row'>
-                                <input class="inpHeaderH3"
-                                       value="{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. &Uuml;bung">
+                                <div class="inp-container">
+                                    <input hidden name="aufgabenNr"  class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}">
+                                    <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}. </div>
+                                    <input class="inpHeaderH3"
+                                       value="&Uuml;bung">
+                                </div>
                                 <div class='kapitel-button-row-container'>
                                     <button class='btn btn-primary' onclick="createLoesung(event)">+Lösung</button>
                                 </div>
