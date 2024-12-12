@@ -77,7 +77,7 @@
         <div class="popup-content">
             <h2>Suchergebnisse</h2>
             <p>Hier können Sie die Suchergebnisse oder andere relevante Informationen anzeigen.</p>
-            <button id="close-popup">Schließen</button>
+            <button class="btn btn-primary" id="close-popup">Schließen</button>
         </div>
     </div>
 

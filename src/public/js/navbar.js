@@ -1,4 +1,23 @@
+
+
 console.log("NavBar.js aufgerufen!");
+
+document.addEventListener('DOMContentLoaded', function() {
+    var popup = document.getElementById('popup');
+    popup.style.display = "block"; // Pop-up anzeigen
+
+    // Schließen des Pop-ups bei Klick auf den Schließen-Button
+    document.getElementById('close-popup').onclick = function() {
+        popup.style.display = "none";
+    };
+
+    // Schließen des Pop-ups beim Klick außerhalb des Inhalts
+    window.onclick = function(event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+});
 
 // JavaScript for Dropdown Toggle
 document.getElementById("profileIcon").addEventListener("click", function (event) {
@@ -26,19 +45,3 @@ if (role === "lehrer") {
     console.log("NavBar.js sagt Rolle ist NICHT Lehrer");
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var popup = document.getElementById('popup');
-    popup.style.display = "block"; // Pop-up anzeigen
-
-    // Schließen des Pop-ups bei Klick auf den Schließen-Button
-    document.getElementById('close-popup').onclick = function() {
-    popup.style.display = "none";
-};
-
-    // Schließen des Pop-ups beim Klick außerhalb des Inhalts
-    window.onclick = function(event) {
-        if (event.target == popup) {
-            popup.style.display = "none";
-        }
-    };
-});
