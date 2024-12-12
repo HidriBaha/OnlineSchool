@@ -2,6 +2,22 @@
 
 namespace models;
 
+function insertAufgabenAufgabenstellung($kursID,$kapitelNr,$aufgabenNr,$aufgabenstellung){
+    $conn =connectdb();
+    $sql = "INSERT INTO AUFGABEN(KURS_ID, KAPITEL_NR,AUFGABEN_NR, AUFGABENSTELLUNG) VALUE (?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss",$kursID,$kapitelNr,$aufgabenNr,$aufgabenstellung);
+    return $stmt->execute();
+}
+
+function updateAufgabenAufgabenstellung($kursID,$kapitelNr,$aufgabenNr,$aufgabenstellung){
+    $conn =connectdb();
+    $sql = "Update AUFGABEN SET AUFGABENSTELLUNG = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss",$aufgabenstellung,$kursID,$kapitelNr,$aufgabenNr);
+    return $stmt->execute();
+}
+
 class Aufgabe
 {
     private $id;

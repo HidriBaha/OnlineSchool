@@ -2,6 +2,33 @@
 
 namespace models;
 
+function insertErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $header): bool
+{
+    $conn = connectdb();
+    $sql = "INSERT IGNORE INTO ERKLAERUNGEN(KURS_ID, KAPITEL_NR,ERKLAERUNGEN_NR, HEADER) VALUE (?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $kursID, $kapitelNr, $erklaerungNr, $header);
+    return $stmt->execute();
+}
+
+function updateErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $header): bool
+{
+    $conn = connectdb();
+    $sql = "UPDATE ERKLAERUNGEN SET HEADER = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND ERKLAERUNGEN_NR = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $header, $kursID, $kapitelNr, $erklaerungNr);
+    return $stmt->execute();
+}
+
+function updateErklaerung($kursID,$kapitelNr,$erklaerungNr,$erklaerung):bool
+{
+    $conn = connectdb();
+    $sql = "UPDATE ERKLAERUNGEN SET ERKLAERUNG = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND ERKLAERUNGEN_NR = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $erklaerung, $kursID, $kapitelNr, $erklaerungNr);
+    return $stmt->execute();
+}
+
 class Erklaerung
 {
 
@@ -125,7 +152,6 @@ class Erklaerung
     {
         $this->imgSrc = $imgSrc;
     }
-
 
 
 }

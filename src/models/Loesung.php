@@ -2,6 +2,24 @@
 
 namespace models;
 
+function insertLoesung($kursID,$kapitelNr,$aufgabenNr,$loesung)
+{
+    $conn = connectdb();
+    $sql = "INSERT INTO LOESUNGEN(AUFGABE_ID, LOESUNG) VALUE((SELECT ID FROM AUFGABEN WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?),?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss",$kursID,$kapitelNr,$aufgabenNr,$loesung);
+    return $stmt->execute();
+}
+
+function updateLoesung($id, $loesung):bool
+{
+    $conn = connectdb();
+    $sql = "UPDATE Loesungen SET LOESUNG = ? WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$loesung,$id);
+    return $stmt->execute();
+}
+
 class Loesung
 {
     private $id;

@@ -2,6 +2,25 @@
 
 namespace models;
 
+function insertKapitel($kursID,$kapitelNr,$def)
+{
+    $conn = connectdb();
+    $sql = "INSERT IGNORE INTO KAPITEL(KURS_ID, KAPITEL_NR, DEFINITION) VALUE (?,?,?)";
+    $stmt = $conn ->prepare($sql);
+    $stmt->bind_param("sss",$kursID,$kapitelNr,$def);
+    $stmt->execute();
+}
+
+function updateKapitel($kursID,$kapitelNr,$def)
+{
+    $conn = connectdb();
+    $sql = "UPDATE KAPITEL SET DEFINITION = ? WHERE KURS_ID = ? AND KAPITEL_NR = ?";
+    $stmt = $conn ->prepare($sql);
+    $stmt->bind_param("sss",$def,$kursID,$kapitelNr,);
+    $stmt->execute();
+}
+
+
 class Kapitel
 {
     private $kursID;

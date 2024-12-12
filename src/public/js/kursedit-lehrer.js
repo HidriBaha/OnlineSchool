@@ -22,6 +22,7 @@ function createEmptyKapitel() {
     const h2KapitelHeader = document.createElement("input");
     h2KapitelHeader.classList.add("inpHeaderH2");
     h2KapitelHeader.placeholder = 'neues Kapitel';
+    h2KapitelHeader.name="kapitel-definition-"+kapitelNr+"-new";
     divInputKapitelContainer.appendChild(h2KapitelHeader);
     divKapitelHeaderRow.appendChild(divInputKapitelContainer);
 
@@ -35,21 +36,22 @@ function createEmptyKapitel() {
 
     // <input hidden name="kapitel-id" value="{{$kapitel->getKapitelID()}}">
 
-    const inputKapitelNew = document.createElement("input");
+/*    const inputKapitelNew = document.createElement("input");
     inputKapitelNew.hidden = true;
     inputKapitelNew.name = "kapitel-new"
-    formKapitelButtonRowContainer.appendChild(inputKapitelNew);
+    formKapitelButtonRowContainer.appendChild(inputKapitelNew);*/
 
     const inputKapitelNr = document.createElement("input");
     inputKapitelNr.hidden = true;
     inputKapitelNr.classList.add("kapitelNr");
-    inputKapitelNr.value = kapitelNr + ". ";
+    inputKapitelNr.value = kapitelNr;
     formKapitelButtonRowContainer.appendChild(inputKapitelNr);
 
     const buttonNewUebung = document.createElement("button");
     buttonNewUebung.classList.add('btn', 'btn-primary');
     buttonNewUebung.innerText = '+Übung';
     buttonNewUebung.onclick = createUebungen;
+    buttonNewUebung.type="button";
 
 
     formKapitelButtonRowContainer.appendChild(buttonNewUebung);
@@ -66,20 +68,20 @@ function createEmptyKapitel() {
 
     //<input hidden name="erklaerung-nr" class="erklaerungNr" value="{{$kapitel->getErklaerung()->getErklaerungenNr()}}">
 
-    const inputErklaerungNr = document.createElement("input");
+/*    const inputErklaerungNr = document.createElement("input");
     inputErklaerungNr.hidden=true;
     inputErklaerungNr.name="erklaerung-nr";
     inputErklaerungNr.classList.add("erklaerungNr");
     inputErklaerungNr.value=1;
 
-    divInputContainer.appendChild(inputErklaerungNr);
+    divInputContainer.appendChild(inputErklaerungNr);*/
 
-    const inputErklaerungNew = document.createElement("input");
+/*    const inputErklaerungNew = document.createElement("input");
     inputErklaerungNew.hidden=true;
     inputErklaerungNew.name="erklaerung-new";
     inputErklaerungNew.value=true;
 
-    divInputContainer.appendChild(inputErklaerungNew);
+    divInputContainer.appendChild(inputErklaerungNew);*/
 
 
     const divErklaerungNr = document.createElement("div");
@@ -90,6 +92,7 @@ function createEmptyKapitel() {
     const h3Header = document.createElement("input");
     h3Header.classList.add('inpHeaderH3');
     h3Header.placeholder = 'neue Erklärung';
+    h3Header.name="erklaerung-header-"+kapitelNr+"-"+"1"+"-new";
     divKapitelContainer.appendChild(defContianer);
     divInputContainer.appendChild(h3Header);
 
@@ -97,7 +100,7 @@ function createEmptyKapitel() {
 
     const textareaErklaerung = document.createElement("textarea");
     textareaErklaerung.classList.add('textarea-def');
-    textareaErklaerung.name = "erklaerung"
+    textareaErklaerung.name = "erklaerung-"+kapitelNr+"-"+"1"+"-new";
     divKapitelContainer.appendChild(textareaErklaerung);
 
     const divAufgabenContainer = document.createElement("div");
@@ -114,7 +117,7 @@ function createEmptyKapitel() {
 
     const inputAufgabenNr = document.createElement("input");
     inputAufgabenNr.hidden = true;
-    inputAufgabenNr.name = "aufgabenNr";
+    //inputAufgabenNr.name = "aufgabenNr";
     inputAufgabenNr.classList.add("aufgabenNr");
     inputAufgabenNr.value = getAufgabenNr(divKapitelContainer);
 
@@ -122,12 +125,13 @@ function createEmptyKapitel() {
 
     const divKapitelNrUebung = document.createElement("div");
     divKapitelNrUebung.classList.add("inpHeaderH3Nr");
+    divKapitelNrUebung.name = "uebung-header-"+kapitelNr+"-"+"2"+"-new";
     divKapitelNrUebung.innerText = kapitelNr + "."+getAufgabenNr(divKapitelContainer)+". ";
 
     divInputContainerUebung.appendChild(divKapitelNrUebung);
-    const h3UebungHeader = document.createElement('input');
+    const h3UebungHeader = document.createElement('div');
     h3UebungHeader.classList.add('inpHeaderH3');
-    h3UebungHeader.placeholder = 'neue Uebung';
+    h3UebungHeader.innerText = 'Aufgabe';
     divInputContainerUebung.appendChild(h3UebungHeader)
     divUebungen.appendChild(divInputContainerUebung);
 
@@ -138,12 +142,14 @@ function createEmptyKapitel() {
     inputNewLoesung.classList.add('btn', 'btn-primary');
     inputNewLoesung.onclick = createLoesung;
     inputNewLoesung.innerText = '+Lösung';
+    inputNewLoesung.type="button";
     formUebung.appendChild(inputNewLoesung);
     divUebungen.appendChild(formUebung);
     aufgabe.appendChild(divUebungen);
 
 
     const textareaUebung = document.createElement("textarea");
+    textareaUebung.name="aufgaben-"+kapitelNr+"-"+"2"+"-new";
     textareaUebung.classList.add('textarea-def');
     aufgabe.appendChild(textareaUebung);
 
@@ -184,9 +190,10 @@ function createLoesung(event) {
     const kapitelContainer = event.target.parentNode.parentNode.parentNode;
     const losungenContainer = kapitelContainer.querySelector(".loesungen-container");
     console.log(losungenContainer);
-
+    const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ","");
     const loesungContainer = document.createElement("div");
-    loesungContainer.classList.add('loesung-container');
+    const aufgabenNr = event.target.parentNode.parentNode.querySelector(".aufgabenNr").value;
+    loesungContainer.classList.add('aufgabenNr');
 
     const labelLoesungContainer = document.createElement("label");
     labelLoesungContainer.classList.add('loesung-label');
@@ -196,6 +203,7 @@ function createLoesung(event) {
     loesungContainer.appendChild(labelLoesungContainer);
 
     const inputLoesung = document.createElement("input");
+    inputLoesung.name="loesung-"+kapitelNr+"-"+aufgabenNr+"-new"
     loesungContainer.appendChild(inputLoesung);
     inputLoesung.required = true;
     losungenContainer.appendChild(loesungContainer)
@@ -216,13 +224,13 @@ function createUebungen(event) {
     const divInputContainerUebung = document.createElement("div");
     divInputContainerUebung.classList.add("inp-container");
 
-    const inputKapitelNr = document.createElement("input");
+/*    const inputKapitelNr = document.createElement("input");
     inputKapitelNr.hidden = true;
-    inputKapitelNr.name = "aufgabenNr";
+    inputKapitelNr.name = "uebung-header-"+kapitelNr+"-"+aufgabenNr;
     inputKapitelNr.classList.add("aufgabenNr");
     inputKapitelNr.value = aufgabenNr;
 
-    divInputContainerUebung.appendChild(inputKapitelNr);
+    divInputContainerUebung.appendChild(inputKapitelNr);*/
 
     const divKapitelNrUebung = document.createElement("div");
     divKapitelNrUebung.classList.add("inpHeaderH3Nr");
@@ -231,6 +239,7 @@ function createUebungen(event) {
     divInputContainerUebung.appendChild(divKapitelNrUebung);
     const h3UebungHeader = document.createElement('input');
     h3UebungHeader.classList.add('inpHeaderH3');
+    h3UebungHeader.name="uebung-header-"+kapitelNr+"-"+aufgabenNr;
     h3UebungHeader.placeholder = 'neue Uebung';
     divInputContainerUebung.appendChild(h3UebungHeader)
     divUebungen.appendChild(divInputContainerUebung);
@@ -243,10 +252,12 @@ function createUebungen(event) {
     inputNewLoesung.classList.add('btn', 'btn-primary');
     inputNewLoesung.onclick = createLoesung;
     inputNewLoesung.innerText = '+Lösung';
+    inputNewLoesung.type="button";
     formUebung.appendChild(inputNewLoesung);
     divUebungen.appendChild(formUebung);
 
     const textareaUebung = document.createElement("textarea");
+    textareaUebung.name="aufgaben-"+kapitelNr+"-"+aufgabenNr+"-new";
     textareaUebung.classList.add('textarea-def');
     divAufgabe.appendChild(textareaUebung);
 
@@ -266,6 +277,5 @@ function getAufgabenNr(element) {
     aufgabenNrs.forEach(aufgabe => aufgabenNr.push(parseInt(aufgabe.value)));
     let aufgabeNr = parseInt(aufgabenNr.sort()[aufgabenNr.length - 1]);
     return aufgabeNr + 1;
-
 }
 
