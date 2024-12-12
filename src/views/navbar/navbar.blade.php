@@ -1,5 +1,6 @@
 @php
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Faecher.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Themen.php';
     $faecher = \models\get_Faecher();
 @endphp
 <!DOCTYPE html>
@@ -40,6 +41,14 @@
         </div>
         <!-- Symbole rechts -->
         <div class="d-flex">
+            <!-- Suchleiste -->
+            <form method="get" id="searchBar" class="nav-item">
+                <div class="form-group mb-2">
+                    <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
+                </div>
+                <!-- Der Button ist versteckt, aber das Formular kann trotzdem mit Enter abgesendet werden -->
+                <input type="submit" style="display:none;">
+            </form>
             <!-- Kommunikationssymbol -->
             <div class="nav-item me-3" id="ChatButton">
                 <a href="/kommunikation" class="nav-link">
@@ -63,6 +72,39 @@
         </div>
     </div>
 </nav>
+@if(isset($_GET["search"]))
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2>Suchergebnisse</h2>
+            <p>Hier können Sie die Suchergebnisse oder andere relevante Informationen anzeigen.</p>
+            <button id="close-popup">Schließen</button>
+        </div>
+    </div>
+
+    <style>
+        .popup {
+            display: none; /* Standardmäßig nicht sichtbar */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+    </style>
+
+@endif
+
+
 <script>
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
     console.log("Role from PHPNavbar:", role);
