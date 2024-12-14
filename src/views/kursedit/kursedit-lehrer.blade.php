@@ -28,8 +28,7 @@
                         <input hidden {{--name="erklaerung-nr"--}} class="erklaerungNr"
                                value="{{$kapitel->getErklaerung()->getErklaerungenNr()}}">
                         <div class="inp-container">
-                            <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}
-                                .{{$kapitel->getErklaerung()->getErklaerungenNr()}}.
+                            <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$kapitel->getErklaerung()->getErklaerungenNr()}}.
                             </div>
                             <input class="inpHeaderH3"
                                    name="erklaerung-header-{{$kapitel->getKapitelNR()}}-{{$kapitel->getErklaerung()->getErklaerungenNr()}}"
@@ -42,10 +41,9 @@
                     <div class="aufgaben-container">
                         @foreach ($kapitel->getAufgaben() as $aufgabe)
                             <div class='kapitel-header-row'>
-                                <div class="inp-container">
                                     <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}">
-                                    <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}
-                                        .{{$aufgabe->getAufgabenNr()}}.</div>
+                                <div class="inp-container">
+                                    <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}.</div>
                                     <div class="inpHeaderH3" {{--name="uebung-header-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}"--}}>
                                         Aufgabe
                                     </div>
@@ -87,8 +85,8 @@
 @endsection
 
 @section("cssextra")
-    <link rel="stylesheet" href="/css/kursedit-lehrer.css">
+    <link rel="stylesheet" href="css/kursedit-lehrer.css">
 @endsection
-<script src="/js/kursedit-lehrer.js"></script>
+<script src="js/kursedit-lehrer.js"></script>
 @section("jsextra")
 @endsection

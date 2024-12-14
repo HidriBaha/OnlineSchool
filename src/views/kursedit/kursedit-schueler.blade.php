@@ -29,7 +29,7 @@
                         @foreach ($kurs->getKapitel()[$kapitelNr]->getAufgaben() as $keyAufgaben => $aufgabe)
                             <li>{{ $aufgabe->getAufgabenstellung() }}</li><br>
                             @if (trim($aufgabe->getImgSrc()) != "")
-                                <img class='img-task' alt='Aufgabe IMG' src='{{ $aufgabe->getImgSrc() }}'><br>
+                                <img class='img-task' alt='Aufgabe IMG' src='{{$aufgabe->getImgSrc()}}'><br>
                             @endif
                             @foreach ($aufgabe->getLoesungen() as $keyLoesungen => $loesung)
                                 <input id="input-{{$keyAufgaben}}-{{$keyLoesungen}}"
@@ -47,17 +47,23 @@
                         @endforeach
                     </ul>
                 </div>
+                @if(isset($kurs->getKapitel()[$kapitelNr+1]))
+                    <a href='/kurs-edit?kursID={{$kurs->getId()}}&kapitelNr={{$kapitelNr+1}}' class='btn btn-primary'>nächstes Kapitel</a>
+                @else
+                    <a href='/kurs-overview?fach={{$kurs->getFach()}}&thema={{$kurs->getThema()}}' class='btn btn-primary'>zurück zur &Uuml;bersicht</a>
+                @endif
             </div>
         </form>
     </div>
+
 @endsection
 
 @section("cssextra")
-    <link rel="stylesheet" href="/css/kursedit-schueler.css">
+    <link rel="stylesheet" href="css/kursedit-schueler.css">
 @endsection
 
 @section("jsextra")
-    <script src="/js/kursedit-schueler.js"></script>
+    <script src="js/kursedit-schueler.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             initializeProgressBar();

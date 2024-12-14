@@ -24,13 +24,13 @@
 }
 
 .inpHeaderH3Nr{
-    width: fit-content;
     font-size: 1.75rem;
+    width: fit-content;
     border: none;
 }
 
 .inp-container{
-    width: 100%;
+    width: calc(100% - 86px);
     display: flex;
     flex-direction: row;
 }

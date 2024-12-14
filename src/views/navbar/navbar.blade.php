@@ -20,9 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=rechengesetze">Rechengesetze</a>
                 </li>
-{{--                <li class="nav-item">
-                    <a class="nav-link" href="#">Wiederholen</a>
-                </li>--}}
+                {{--                <li class="nav-item">
+                                    <a class="nav-link" href="#">Wiederholen</a>
+                                </li>--}}
             </ul>
         </div>
 
@@ -44,8 +44,10 @@
                     <li><a class="dropdown-item" href="#">Profil ansehen</a></li>
                     <li><a class="dropdown-item" href="#">Einstellungen</a></li>
                     <li><a class="dropdown-item" href="/logout">Abmelden</a></li>
-                    <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
-                    <li><a class="dropdown-item" href="/users">Useransicht</a></li>
+                    @if(($_SESSION["role"]??null)=="admin")
+                        <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
+                        <li><a class="dropdown-item" href="/users">Useransicht</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
