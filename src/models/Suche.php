@@ -5,16 +5,26 @@ require_once '../db-utils/db-setup.php';
 
 function get_SearchResult($suchbegriff): array{
     global $conn;
-    $suchbegriff = "%{". strtolower($suchbegriff). "}%";
+    $suchbegriff = "%". strtolower($suchbegriff). "%";
 
 
     $queries = [
-        'faecher' => "SELECT name FROM faecher WHERE lower(name) LIKE ?",
-        'thema' => "SELECT * FROM thema WHERE lower(name) LIKE ?",
-        'kurse' => "SELECT * FROM kurse WHERE lower(titel) LIKE ? OR lower(author) LIKE ? OR lower(beschreibung) LIKE ?",
-        'kapitel' => "SELECT * FROM kapitel WHERE lower(definition) LIKE ?",
-        'erklaerungen' => "SELECT * FROM erklaerungen WHERE lower(header) LIKE ? OR lower(erklaerung) LIKE ?"
+        'faecher' => "SELECT DISTINCT name AS fach FROM faecher WHERE lower(name) LIKE ?",
+        'thema' => "SELECT DISTINCT t.name AS thema, f.name AS fach FROM thema t LEFT JOIN faecher f on t.faecher_id = f.id WHERE lower(t.name) LIKE ?",
+
+        'kurse' => "SELECT DISTINCT k.beschreibung, k.titel AS kurs, k.kurs_nr, t.name AS thema FROM kurse k
+                                    LEFT JOIN thema t ON t.id = k.thema_id
+                                        WHERE lower(k.titel) LIKE ? OR lower(k.author) LIKE ? OR lower(k.beschreibung) LIKE ?",
+
+        'kapitel' => "SELECT DISTINCT kurs.kurs_nr, kap.kapitel_nr, t.name as thema, e.header, e.erklaerung, kurs.titel as kurs FROM erklaerungen e 
+                                        LEFT JOIN kurse kurs ON e.KURS_ID = kurs.id
+                                            LEFT JOIN kapitel kap ON e.KAPITEL_NR = kap.KAPITEL_NR
+                                                LEFT JOIN thema t ON kurs.THEMA_ID = t.ID
+                                                    LEFT JOIN aufgaben a ON a.KURS_ID = kurs.id AND a.KAPITEL_NR = kap.KAPITEL_NR
+                                                        WHERE lower(header) LIKE ? OR lower(erklaerung) LIKE ? OR lower(kap.definition) LIKE ? OR a.AUFGABENSTELLUNG LIKE ? OR a.TIPP LIKE ?"
     ];
+
+    $results = [];
 
     foreach ($queries as $table => $query) {
         $stmt = $conn->prepare($query);
@@ -26,17 +36,12 @@ function get_SearchResult($suchbegriff): array{
 
         $stmt->bind_param($types, ...$params);
 
-        if ($table === 'kurse') {
-            $stmt->bind_param("sss", $searchTerm, $searchTerm, $searchTerm);
-        } elseif ($table === 'erklaerungen') {
-            $stmt->bind_param("ss", $searchTerm, $searchTerm);
-        } else {
-            $stmt->bind_param("s", $searchTerm);
-        }
-
         $stmt->execute();
         $result = $stmt->get_result();
-        $results[$table] = $result->fetch_all(MYSQLI_ASSOC);
+
+        if ($result->num_rows > 0) {
+            $results[$table] = $result->fetch_all(MYSQLI_ASSOC);
+        }
         $stmt->close();
     }
 

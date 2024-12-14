@@ -26,14 +26,6 @@ body{
     overflow: scroll;
 }
 
-.col{
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Verhindert Zeilenumbrüche */
-    overflow-wrap: break-word; /* Erlaubt das Brechen von Wörtern */
-}
-
 .date{
     text-align: right;
 }

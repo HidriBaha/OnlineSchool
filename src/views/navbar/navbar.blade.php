@@ -1,6 +1,7 @@
 @php
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Faecher.php';
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Themen.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Suche.php';
     $faecher = \models\get_Faecher();
 @endphp
 <!DOCTYPE html>
@@ -76,31 +77,67 @@
     <div id="popup" class="popup">
         <div class="popup-content">
             <h2>Suchergebnisse</h2>
-            <p>Hier können Sie die Suchergebnisse oder andere relevante Informationen anzeigen.</p>
+            @php
+                $results = \models\get_SearchResult($_GET["search"]);
+            @endphp
+            @if(count($results) > 0)
+                @foreach($results as $table => $result)
+                    @foreach($result as $row)
+                        @php
+                            $path = "";
+                            $description = "";
+                        @endphp
+                        @switch($table)
+                            @case("faecher")
+                                @php
+                                    $title = $row["fach"];
+                                    $path = "/kurs-overview?fach=". strtolower($row["fach"]);
+                                @endphp
+                                @break
+                            @case("thema")
+                                @php
+                                    $title = $row["thema"];
+                                    $path = "/kurs-overview?fach=". $row["fach"]. "&thema=". $row["thema"];
+                                @endphp
+                                @break
+                            @case("kurse")
+                                @php
+                                    $title = "Kurs ". $row["kurs"];
+                                    $description = $row["beschreibung"];
+                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=".  strval(intval($row["kurs_nr"]) - 1);
+                                @endphp
+                                @break
+                            @case("kapitel")
+                                @php
+                                    $title = "Kurs ". $row["kurs"];
+                                    $description = "<b>". "Kapitel ". $row["kapitel_nr"]. "<br>". $row["header"]. "</b>". "<br><br>". $row["erklaerung"];
+                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=". strval(intval($row["kurs_nr"]) - 1). "&kapitel=". strval(intval($row["kapitel_nr"]) - 1);
+                                @endphp
+                                @break
+                        @endswitch
+                            <div class="container mt-4">
+                                <div class="row row-cols-1 g-4">
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">{{$title}}</h5>
+                                            </div>
+                                            <p id="searchResultDescription">{!! $description !!}</p>
+                                            <div class="card-body" id="searchResultCards">
+                                                <a href="{{$path}}">{{$path}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    @endforeach
+                @endforeach
+            @else
+                <p>Keine Ergebnisse gefunden.</p>
+            @endif
             <button class="btn btn-primary" id="close-popup">Schließen</button>
         </div>
     </div>
-
-    <style>
-        .popup {
-            display: none; /* Standardmäßig nicht sichtbar */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .popup-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-        }
-    </style>
 
 @endif
 

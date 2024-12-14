@@ -17,8 +17,6 @@ class Faecher
 
 function get_Faecher(): array {
     global $conn;
-
     $result = $conn->query("SELECT name, id FROM faecher");
-
     return $result->fetch_all(MYSQLI_ASSOC);
 }

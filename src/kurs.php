@@ -162,7 +162,7 @@ $kurse = [
             ]
         ]
     ],
-    "zahlenmenge" => [
+    "zahlenmengen" => [
         [
             "titel" => "Zahlenmengen I",
             "author" => "user",
