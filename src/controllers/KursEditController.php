@@ -53,18 +53,21 @@ class KursEditController
 
     public function kursUpdate(RequestData $requestData)
     {
-        $post = $requestData->getPostData();
-        $kursID = (int)$post["kursID"];
-        $keys = array_keys($post);
+        $target_dir = "../public/img/aufgaben/";
+        $allowedImgType = ["png", "jpeg"];
+
+        $body = $requestData->query;
+        $kursID = (int)$body["kursID"];
+        $keys = array_keys($body);
         foreach ($keys as $key) {
             if (str_starts_with($key, "kapitel-definition-")) {
                 $args = str_replace("kapitel-definition-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 if (str_ends_with($key, "-new")) {
-                    insertKapitel($kursID, $kapitelNr, $post[$key]);
+                    insertKapitel($kursID, $kapitelNr, $body[$key]);
                 } else {
-                    updateKapitel($kursID, $kapitelNr, $post[$key]);
+                    updateKapitel($kursID, $kapitelNr, $body[$key]);
                 }
                 //echo $key . $post[$key];
             } else if (str_starts_with($key, "erklaerung-header-")) {
@@ -73,39 +76,76 @@ class KursEditController
                 $kapitelNr = $args[0];
                 $erklaerungNr = $args[1];
                 if (str_ends_with($key, "-new")) {
-                    insertErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $post[$key]);
+                    insertErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
                 } else {
-                    updateErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $post[$key]);
+                    updateErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
                 }
             } else if (str_starts_with($key, "erklaerung-")) {
                 $args = str_replace("erklaerung-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 $erklaerungNr = $args[1];
-                updateErklaerung($kursID, $kapitelNr, $erklaerungNr, $post[$key]);
+                updateErklaerung($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
             } else if (str_starts_with($key, "aufgaben-")) {
                 $args = str_replace("aufgaben-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 $aufgabenNr = $args[1];
                 if (str_ends_with($key, "-new")) {
-                    insertAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $post[$key]);
+                    insertAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
                 } else {
-                    updateAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $post[$key]);
+                    updateAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
                 }
-            }else if(str_starts_with($key,"loesung-")){
-                $args = str_replace("loesung-","",$key);
-                $args = explode("-",$args);
+            } else if (str_starts_with($key, "loesung-")) {
+                $args = str_replace("loesung-", "", $key);
+                $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 $aufgabenNr = $args[1];
-                if(str_ends_with($key,"-new")){
-                    insertLoesung($kursID,$kapitelNr,$aufgabenNr,$post[$key]);
-                }else{
+                if (str_ends_with($key, "-new")) {
+                    insertLoesung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
+                } else {
                     $loesungsID = $args[2];
-                    updateLoesung($loesungsID,$post[$key]);
+                    updateLoesung($loesungsID, $body[$key]);
                 }
+            } else if (count(($fileKeys = array_keys($_FILES))) > 0) {
+                foreach ($fileKeys as $fileKey) {
+                    $args = str_replace("aufgabenImg-", "", $fileKey);
+                    $args = explode("-", $args);
+                    echo $fileKey;
+                    $kapitelNr = $args[0];
+                    $aufgabenNr = $args[1];
+                    var_dump($_FILES[$fileKey]);
+                    $path = $target_dir . "/kurs-" . $kursID . "/kapitel-" . $kapitelNr . "/aufgabe-" . $aufgabenNr . "/";
+                    $target_file = $path . htmlspecialchars(basename($_FILES[$fileKey]["name"]));
+                    echo $target_file;
+                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    if (array_search($imageFileType, $allowedImgType)===false) {
+                        return;
+                    }
+                    $check = getimagesize($_FILES[$fileKey]["tmp_name"]);
+                    if ($check === false) {
+                        return;
+                    }
+                    if(file_exists($target_file)){
+                        return;
+                    }
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    if (!move_uploaded_file($_FILES[$fileKey]["tmp_name"], $target_file)) {
+                       echo "the Upload didnt work";
+                    }
+                    echo "File is an image - " . $check["mime"] . ".";
+                    //$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                    // echo $_FILES["fileToUpload"][$key];
+                }
+            } else {
+                var_dump($_FILES);
+
+                echo $key;
             }
-            echo $key . "    -    ";
+
+            //echo $key . "    -    ";
         }
     }
 }

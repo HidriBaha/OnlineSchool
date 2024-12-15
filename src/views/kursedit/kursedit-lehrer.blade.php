@@ -1,6 +1,6 @@
 @extends("layouts.layout")
 @section("content")
-    <form class="container" action="/kurs-update" method="post">
+    <form class="container" action="/kurs-update" method="post" enctype="multipart/form-data">
         <input type="text" class="inpTitle" name="title" value="{{$kurs->getTitel()}}">
         <div class="kapitel-outer-container" id="kapitel-outer-container">
             <input hidden name="kursID" value="{{$kurs->getID()}}">
@@ -42,7 +42,7 @@
                         @foreach ($kapitel->getAufgaben() as $aufgabe)
                             <div class="aufgabe" >
                                 <div class='kapitel-header-row'>
-                                        <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}">
+                                        <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}" >
                                     <div class="inp-container">
                                         <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}.</div>
                                         <div class="inpHeaderH3" {{--name="uebung-header-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}"--}}>
@@ -53,7 +53,7 @@
                                         <button class='btn btn-primary' type="button" onclick="createLoesung(event)">
                                             +Lösung
                                         </button>
-                                        <input type="file" class="upload" name="avatar" accept="image/png, image/jpeg" />
+                                        <input type="file" class="upload" name="aufgabenImg-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}" accept="image/png, image/jpeg" />
                                         <button class='btn btn-secondary' type="button" onclick="deleteAufgabe(event)">
                                             Entfernen
                                         </button>

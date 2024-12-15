@@ -11,9 +11,28 @@
     justify-content: center;
 }
 
-.upload #file-upload-button {
-    background: var(--primary-btn-color);
+.upload{
+    text-align: center;
+}
+
+.upload::file-selector-button {
+    background-color: var(--primary-btn-color);
     border-color: var(--primary-btn-color);
+    color:white;
+    border: none;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
 }
 
 .inpTitle {
