@@ -7,7 +7,7 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    border: 2px solid #236C93;
+    border: 2px solid var(--primary-btn-color);
     border-radius: 5px;
     overflow: scroll;
 }
@@ -31,13 +31,13 @@
 .messages-td, .messages-th {
     padding: 10px;
     border: none;
-    border-bottom: 2px solid #236C93;
+    border-bottom: 2px solid var(--primary-btn-color);
     text-align: left;
 }
 
 /* Optional: Stil für die Kopfzeile */
 .messages-th {
-    background-color: #236C93;
+    background-color: var(--primary-btn-color);
     color: white;
 }
 

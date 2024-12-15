@@ -1,4 +1,8 @@
 /* Custom Styles */
+:root{
+    --primary-btn-color:#236C93;
+}
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -59,6 +63,6 @@ h2 i, h5 i {
 }
 
 .btn-primary {
-    background-color: #236C93; /* Optional: update button color */
-    border-color: #236C93; /* Optional: update button border color */
+    background-color: var(--primary-btn-color); /* Optional: update button color */
+    border-color: var(--primary-btn-color); /* Optional: update button border color */
 }

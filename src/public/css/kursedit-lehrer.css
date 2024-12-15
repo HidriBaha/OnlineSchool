@@ -1,8 +1,8 @@
-.btn-cancel{
+.btn-cancel {
     font-size: 2rem;
     text-align: center;
     font-weight: bold;
-    color:#5c636a;
+    color: #5c636a;
     border: none;
     width: 25px;
     height: 25px;
@@ -11,19 +11,25 @@
     justify-content: center;
 }
 
-.inpTitle{
+.upload #file-upload-button {
+    background: var(--primary-btn-color);
+    border-color: var(--primary-btn-color);
+}
+
+.inpTitle {
     width: 100%;
     font-size: 2.5rem;
     border: none;
 }
 
-.inpHeaderH2{
+.inpHeaderH2 {
     width: 100%;
     font-size: 2rem;
     border: none;
     padding: 0;
 }
-.inpHeaderH3{
+
+.inpHeaderH3 {
     text-align: left;
     width: 100%;
     font-size: 1.75rem;
@@ -31,19 +37,19 @@
     padding: 0;
 }
 
-.inpHeaderH2Nr{
+.inpHeaderH2Nr {
     width: fit-content;
     font-size: 2rem;
     border: none;
 }
 
-.inpHeaderH3Nr{
+.inpHeaderH3Nr {
     font-size: 1.75rem;
     width: fit-content;
     border: none;
 }
 
-.inp-container{
+.inp-container {
     width: calc(100% - 86px);
     display: flex;
     flex-direction: row;
@@ -53,7 +59,7 @@
 .textarea-def {
     width: 100%;
     height: 100px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .kapitel-outer-container {
@@ -114,17 +120,17 @@
     margin: 0;
 }
 
-.loesung-label{
+.loesung-label {
     text-align: center;
     align-content: center;
 }
 
-.kapitelButtonContainer{
-   display: flex;
+.kapitelButtonContainer {
+    display: flex;
     flex-direction: row-reverse;
 }
 
-.aufgaben-container{
+.aufgaben-container {
     display: flex;
     flex-direction: column;
 }

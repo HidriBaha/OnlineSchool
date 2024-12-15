@@ -6,7 +6,7 @@
 
 .progress-bar{
     width: 60%;
-    background-color: #236C93;
+    background-color: var(--primary-btn-color);
 }
 
 .list{

@@ -53,6 +53,7 @@
                                         <button class='btn btn-primary' type="button" onclick="createLoesung(event)">
                                             +Lösung
                                         </button>
+                                        <input type="file" class="upload" name="avatar" accept="image/png, image/jpeg" />
                                         <button class='btn btn-secondary' type="button" onclick="deleteAufgabe(event)">
                                             Entfernen
                                         </button>

@@ -10,7 +10,7 @@
                 <div class="progress-container mb-4">
                     <h5>Geometrie I</h5>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 60%; background-color: #236C93;"
+                        <div class="progress-bar" role="progressbar" style="width: 60%; background-color: var(--primary-btn-color);"
                              aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                             60%
                         </div>
@@ -21,7 +21,7 @@
                 <div class="progress-container mb-4">
                     <h5>Geometrie II</h5>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 0; background-color: #236C93;"
+                        <div class="progress-bar" role="progressbar" style="width: 0; background-color: var(--primary-btn-color);"
                              aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                             0%
                         </div>
@@ -32,7 +32,7 @@
                 <div class="progress-container mb-4">
                     <h5>Geometrie III</h5>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 100%; background-color: #236C93;"
+                        <div class="progress-bar" role="progressbar" style="width: 100%; background-color: var(--primary-btn-color);"
                              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                             100%
                         </div>
@@ -47,7 +47,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="bi bi-rulers" style="font-size: 3rem; color: #236C93;"></i>
+                            <i class="bi bi-rulers" style="font-size: 3rem; color: var(--primary-btn-color);"></i>
                             <!-- Symbol für Geometrie -->
                             <h5 class="card-title mt-3">Geometrie I</h5>
                             <p class="card-text"> {{$kurse["geometrie"][0]["beschreibung"]}}</p>
@@ -61,7 +61,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="bi bi-calculator" style="font-size: 3rem; color: #236C93;"></i>
+                            <i class="bi bi-calculator" style="font-size: 3rem; color: var(--primary-btn-color);"></i>
                             <!-- Symbol für Zahlenmenge -->
                             <h5 class="card-title mt-3">Zahlenmenge</h5>
                             <p class="card-text"> {{$kurse["zahlenmenge"][0]["beschreibung"]}}</p>
@@ -75,7 +75,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="bi bi-journal-text" style="font-size: 3rem; color: #236C93;"></i>
+                            <i class="bi bi-journal-text" style="font-size: 3rem; color: var(--primary-btn-color);"></i>
                             <!-- Symbol für Rechengesetze -->
                             <h5 class="card-title mt-3">Rechengesetze</h5>
                             <p class="card-text">{{$kurse["rechengesetze"][0]["beschreibung"]}}</p><br>

@@ -7,7 +7,7 @@
                     <div class="course-title">{{$thema}}</div>
                     <div class="progress-container mb-4">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 60%; background-color: #236C93;"
+                            <div class="progress-bar" role="progressbar" style="width: 60%; background-color: var(--primary-btn-color);"
                                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                                 60%
                             </div>
