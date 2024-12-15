@@ -199,9 +199,10 @@ function createLoesung(event) {
     const kapitelContainer = findContainer(event.target,"kapitel-container");
     const losungenContainer = kapitelContainer.querySelector(".loesungen-container");
     const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ", "");
-    const loesungContainer = document.createElement("div");
     const aufgabenNr = findContainer(event.target,"kapitel-header-row").querySelector(".aufgabenNr").value;
-    loesungContainer.classList.add('aufgabenNr');
+
+    const loesungContainer = document.createElement("div");
+    loesungContainer.classList.add('loesung-container');
 
     const labelLoesungContainer = document.createElement("label");
     labelLoesungContainer.classList.add('loesung-label');
@@ -300,7 +301,7 @@ function deleteAufgabe(event) {
 
 function deleteLoesung(event) {
 
-    const loesungContainer = findContainer(event.target, "aufgabenNr");
+    const loesungContainer = findContainer(event.target, "loesung-container");
     loesungContainer.remove();
 }
 
