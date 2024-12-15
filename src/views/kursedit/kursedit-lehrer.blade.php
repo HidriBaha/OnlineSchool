@@ -40,33 +40,39 @@
                             class='textarea-def'>{{$kapitel->getErklaerung()->getErklaerung()}}</textarea>
                     <div class="aufgaben-container">
                         @foreach ($kapitel->getAufgaben() as $aufgabe)
-                            <div class='kapitel-header-row'>
-                                    <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}">
-                                <div class="inp-container">
-                                    <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}.</div>
-                                    <div class="inpHeaderH3" {{--name="uebung-header-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}"--}}>
-                                        Aufgabe
+                            <div class="aufgabe" >
+                                <div class='kapitel-header-row'>
+                                        <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}">
+                                    <div class="inp-container">
+                                        <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}.</div>
+                                        <div class="inpHeaderH3" {{--name="uebung-header-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}"--}}>
+                                            Aufgabe
+                                        </div>
+                                    </div>
+                                    <div class='kapitel-button-row-container'>
+                                        <button class='btn btn-primary' type="button" onclick="createLoesung(event)">
+                                            +Lösung
+                                        </button>
+                                        <button class='btn btn-secondary' type="button" onclick="deleteAufgabe(event)">
+                                            Entfernen
+                                        </button>
                                     </div>
                                 </div>
-                                <div class='kapitel-button-row-container'>
-                                    <button class='btn btn-primary' type="button" onclick="createLoesung(event)">
-                                        +Lösung
-                                    </button>
+
+                                <textarea name='aufgaben-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}'
+                                          class='textarea-def'>{{$aufgabe->getAufgabenstellung()}}</textarea>
+                                <div class='loesungen-container'>
+                                    @foreach ($aufgabe->getLoesungen() as $loesung)
+
+                                        <div class='loesung-container'>
+                                            <label class='loesung-label' for='input-loesung'>Aufgaben</label>
+                                            <input id='input-loesung'
+                                                   name='loesung-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}-{{$loesung->getID()}}'
+                                                   value='{{$loesung->getLoesung()}}'/>
+                                            <button type="button" onclick="deleteLoesung(event)" class="btn btn-cancel">x</button>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div>
-
-                            <textarea name='aufgaben-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}'
-                                      class='textarea-def'>{{$aufgabe->getAufgabenstellung()}}</textarea>
-                            <div class='loesungen-container'>
-                                @foreach ($aufgabe->getLoesungen() as $loesung)
-
-                                    <div class='loesung-container'><label class='loesung-label'
-                                                                          for='input-loesung'>Aufgaben</label>
-                                        <input id='input-loesung'
-                                               name='loesung-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}-{{$loesung->getID()}}'
-                                               value='{{$loesung->getLoesung()}}'/>
-                                    </div>
-                                @endforeach
                             </div>
                         @endforeach
                     </div>

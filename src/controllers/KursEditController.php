@@ -99,7 +99,7 @@ class KursEditController
                 $kapitelNr = $args[0];
                 $aufgabenNr = $args[1];
                 if(str_ends_with($key,"-new")){
-                    insertLoesung();
+                    insertLoesung($kursID,$kapitelNr,$aufgabenNr,$post[$key]);
                 }else{
                     $loesungsID = $args[2];
                     updateLoesung($loesungsID,$post[$key]);

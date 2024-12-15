@@ -1,3 +1,16 @@
+.btn-cancel{
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color:#5c636a;
+    border: none;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .inpTitle{
     width: 100%;
     font-size: 2.5rem;
@@ -11,6 +24,7 @@
     padding: 0;
 }
 .inpHeaderH3{
+    text-align: left;
     width: 100%;
     font-size: 1.75rem;
     border: none;
