@@ -196,11 +196,11 @@ function getKapitelNr() {
 }
 
 function createLoesung(event) {
-    const kapitelContainer = event.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+    const kapitelContainer = findContainer(event.target,"kapitel-container");
     const losungenContainer = kapitelContainer.querySelector(".loesungen-container");
     const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ", "");
     const loesungContainer = document.createElement("div");
-    const aufgabenNr = event.target.parentNode.parentNode.querySelector(".aufgabenNr").value;
+    const aufgabenNr = findContainer(event.target,"kapitel-header-row").querySelector(".aufgabenNr").value;
     loesungContainer.classList.add('aufgabenNr');
 
     const labelLoesungContainer = document.createElement("label");
@@ -215,11 +215,11 @@ function createLoesung(event) {
     loesungContainer.appendChild(inputLoesung);
     inputLoesung.required = true;
 
-    const deleteLoesungButton =document.createElement("button");
-    deleteLoesungButton.classList.add("btn" ,"btn-cancel");
-    deleteLoesungButton.innerText="x";
-    deleteLoesungButton.type="button";
-    deleteLoesungButton.onclick=deleteLoesung;
+    const deleteLoesungButton = document.createElement("button");
+    deleteLoesungButton.classList.add("btn", "btn-cancel");
+    deleteLoesungButton.innerText = "x";
+    deleteLoesungButton.type = "button";
+    deleteLoesungButton.onclick = deleteLoesung;
 
     loesungContainer.appendChild(deleteLoesungButton);
     losungenContainer.appendChild(loesungContainer);
@@ -227,10 +227,10 @@ function createLoesung(event) {
 
 
 function createUebungen(event) {
-    const kapitelContainer = event.target.parentNode.parentNode.parentNode;
-    console.log(kapitelContainer)
+
+    const kapitelContainer = findContainer(event.target, "kapitel-container")
     const aufgabenContainer = kapitelContainer.querySelector(".aufgaben-container");
-    const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ","");
+    const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ", "");
     const aufgabenNr = getAufgabenNr(kapitelContainer);
 
     const divAufgabe = document.createElement("div");
@@ -255,7 +255,7 @@ function createUebungen(event) {
     divInputContainerUebung.appendChild(divKapitelNrUebung);
     const h3UebungHeader = document.createElement('input');
     h3UebungHeader.classList.add('inpHeaderH3');
-    h3UebungHeader.name="uebung-header-"+kapitelNr+"-"+aufgabenNr;
+    h3UebungHeader.name = "uebung-header-" + kapitelNr + "-" + aufgabenNr;
     h3UebungHeader.placeholder = 'Aufgabe';
     divInputContainerUebung.appendChild(h3UebungHeader)
     divUebungen.appendChild(divInputContainerUebung);
@@ -268,7 +268,7 @@ function createUebungen(event) {
     inputNewLoesung.classList.add('btn', 'btn-primary');
     inputNewLoesung.onclick = createLoesung;
     inputNewLoesung.innerText = '+Lösung';
-    inputNewLoesung.type="button";
+    inputNewLoesung.type = "button";
     formUebung.appendChild(inputNewLoesung);
 
     const inputDeleteAufgabe = document.createElement("button");
@@ -281,7 +281,7 @@ function createUebungen(event) {
     divUebungen.appendChild(formUebung);
 
     const textareaUebung = document.createElement("textarea");
-    textareaUebung.name="aufgaben-"+kapitelNr+"-"+aufgabenNr+"-new";
+    textareaUebung.name = "aufgaben-" + kapitelNr + "-" + aufgabenNr + "-new";
     textareaUebung.classList.add('textarea-def');
     divAufgabe.appendChild(textareaUebung);
 
@@ -291,29 +291,36 @@ function createUebungen(event) {
 
     aufgabenContainer.appendChild(divAufgabe);
 }
-function deleteAufgabe(event){
 
-    const aufgabe = event.target.parentNode.parentNode.parentNode;
+function deleteAufgabe(event) {
+
+    const aufgabe = findContainer(event.target, "aufgabe")
     aufgabe.remove()
 }
 
-function deleteLoesung (event){
+function deleteLoesung(event) {
 
-    const loesungContainer = event.target.parentNode;
-    console.log(loesungContainer);
-   loesungContainer.remove();
+    const loesungContainer = findContainer(event.target, "aufgabenNr");
+    loesungContainer.remove();
 }
 
 function getAufgabenNr(element) {
     const aufgabenNr = [];
     const aufgabenNrs = element.querySelectorAll(".aufgabenNr");
-    console.log(aufgabenNrs)
-    if(aufgabenNrs.length===0){
+    if (aufgabenNrs.length === 0) {
         return 2;
     }
     aufgabenNrs.forEach(aufgabe => aufgabenNr.push(parseInt(aufgabe.value)));
     let aufgabeNr = parseInt(aufgabenNr.sort()[aufgabenNr.length - 1]);
     return aufgabeNr + 1;
+}
+
+function findContainer(node, className) {
+    //not class name
+    while (node.className !== className) {
+        node = node.parentNode;
+    }
+    return node;
 }
 
 
