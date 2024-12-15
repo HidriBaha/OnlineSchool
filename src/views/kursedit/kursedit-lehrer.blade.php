@@ -18,7 +18,7 @@
                         <div class='kapitel-button-row-container'>
                             {{-- <button class='btn btn-primary' onclick="createDef(event)">+Def</button>--}}
                             {{--<input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>--}}
-                            <button class='btn btn-primary' type="button" onclick="createUebungen(event)">+Übung
+                            <button class='btn btn-primary' type="button" onclick="createAufgabe(event)">+Übung
                             </button>
                             {{--<input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>--}}
                         </div>
