@@ -75,11 +75,7 @@ function createEmptyKapitel() {
     divAufgabenContainer.classList.add("aufgaben-container");
     divKapitelContainer.appendChild(divAufgabenContainer);
 
-    const aufgabe = createAufgabe({target:divKapitelContainer});
-
-    const divLoesung = document.createElement("div");
-    divLoesung.classList.add("loesungen-container");
-    aufgabe.appendChild(divLoesung);
+    createAufgabe({target:divKapitelContainer});
 
     return divKapitelContainer;
 }
@@ -187,7 +183,6 @@ function createAufgabe(event) {
     divAufgabe.appendChild(divLoesung);
 
     aufgabenContainer.appendChild(divAufgabe);
-    return aufgabenContainer;
 }
 
 function deleteAufgabe(event) {
