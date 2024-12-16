@@ -2,6 +2,7 @@
 /* Navbar Customization */
 .navbar {
     margin-bottom: 20px;
+    background-color: #F2F6F9;
 }
 
 .navbar-nav {
@@ -94,3 +95,27 @@ h2 i, h5 i {
 #searchResultCards{
     margin-bottom: -20px;
 }
+
+#navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#navbar-search-input {
+    display: none;
+}
+
+#FlexSearch{
+    width: 100%;
+    justify-content: center;
+}
+
+#searchForm {
+    justify-self: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+

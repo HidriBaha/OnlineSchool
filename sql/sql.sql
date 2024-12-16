@@ -44,7 +44,14 @@ CREATE TABLE aufgaben (
         ON UPDATE CASCADE -- Wenn sich die 'übungs_id' einer Übung ändert, wird die entsprechende 'übungs_id' in 'Aufgaben' ebenfalls aktualisiert
 );
 
-
+CREATE TABLE nachrichten(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    topic varchar(80),
+    sender varchar(50) NOT NULL,
+    recipient varchar(50) NOT NULL,
+    date DATETIME NOT NULL,
+    message TEXT
+);
 /*
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON SchulDB.users TO 'username'@'localhost' IDENTIFIED BY 'user_password';

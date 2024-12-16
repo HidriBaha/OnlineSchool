@@ -7,14 +7,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container" id="navbar-container">
         <!-- Schullogo links -->
         <a class="navbar-brand" href="/">
             <img src="/img/logo.png" class="logo" alt="Schullogo">
         </a>
         <!-- Navbar-Links (Links ausgerichtet) -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 @if(sizeof($faecher) > 0)
                     @foreach($faecher as $fach)
@@ -40,16 +40,17 @@
                 @endif
             </ul>
         </div>
+
+        <!-- Suchleiste -->
+        <div id="FlexSearch">
+            <form method="GET" id="searchForm" class="nav-item">
+                <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
+                <input type="submit" id="navbar-search-input">
+            </form>
+        </div>
+
         <!-- Symbole rechts -->
         <div class="d-flex">
-            <!-- Suchleiste -->
-            <form method="get" id="searchBar" class="nav-item">
-                <div class="form-group mb-2">
-                    <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
-                </div>
-                <!-- Der Button ist versteckt, aber das Formular kann trotzdem mit Enter abgesendet werden -->
-                <input type="submit" style="display:none;">
-            </form>
             <!-- Kommunikationssymbol -->
             <div class="nav-item me-3" id="ChatButton">
                 <a href="/kommunikation" class="nav-link">
@@ -124,7 +125,7 @@
                                             </div>
                                             <p id="searchResultDescription">{!! $description !!}</p>
                                             <div class="card-body" id="searchResultCards">
-                                                <a href="{{$path}}">{{$path}}</a>
+                                                <a class="btn btn-primary" href="{{$path}}">Zum Ergebnis</a>
                                             </div>
                                         </div>
                                     </div>

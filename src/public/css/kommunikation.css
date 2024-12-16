@@ -178,6 +178,10 @@ body{
     background: #D8E5EC;
 }
 
+.messageContent{
+    padding: 10px;
+}
+
 .clickable {
     cursor: pointer;
 }

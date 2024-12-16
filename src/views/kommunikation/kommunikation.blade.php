@@ -27,7 +27,7 @@
                     <td class='messages-td date'>{{$message['date']}}</td>
                 </tr>
                 <tr class="hidden" id="message-{{$index}}">
-                    <td colspan="4">{!! nl2br($message['message']) !!}</td>
+                    <td class="messageContent" colspan="4">{!! nl2br($message['message']) !!}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -40,7 +40,7 @@
             <button id="closeChatBtn" class="btn close"></button>
         </div>
         <div id="chat-bottom">
-            <form action="" method="post">
+            <form action="/kommunikation/senden" method="post">
                 <div>
                     <input type="text" class="msg-input" id="recipient" name="recipient" placeholder="Empfänger eingeben..." required>
                     <select name="verteiler" id="verteiler" class="dropdown" onchange="updateRecipients()">
