@@ -11,5 +11,4 @@ return array(
     '/kurs-overview' => "KursOverviewController@kursOverview",
     '/kurs-edit' => 'KursEditController@kursEdit',
     '/kommunikation' => 'KommunikationsController@kommunikation',
-    '/kommunikation/senden' => 'KommunikationsController@senden',
 );

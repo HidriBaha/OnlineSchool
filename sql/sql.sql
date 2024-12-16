@@ -46,7 +46,7 @@ CREATE TABLE aufgaben (
 
 CREATE TABLE nachrichten(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    topic varchar(80),
+    topic TEXT,
     sender varchar(50) NOT NULL,
     recipient varchar(50) NOT NULL,
     date DATETIME NOT NULL,
