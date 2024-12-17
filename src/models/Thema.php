@@ -15,7 +15,6 @@ function get_Themen(string $id): array
 function loadThemen(): array
 {
     $conn = connectdb();
-    var_dump($conn);
     $sql = "SELECT ID, NAME, FAECHER_ID FROM THEMA";
     $stmt = $conn->query($sql);
     $themen = [];

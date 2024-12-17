@@ -43,7 +43,7 @@
         <!-- Symbole rechts -->
         <div class="d-flex">
             <!-- Suchleiste -->
-            <form method="get" id="searchBar" class="nav-item">
+            <form method="post" id="searchBar" action="" class="nav-item">
                 <div class="form-group mb-2">
                     <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
                 </div>
@@ -75,12 +75,12 @@
         </div>
     </div>
 </nav>
-@if(isset($_GET["search"]))
+@if(isset($_POST["search"]))
     <div id="popup" class="popup">
         <div class="popup-content">
             <h2>Suchergebnisse</h2>
             @php
-                $results = \models\get_SearchResult($_GET["search"]);
+                $results = \models\get_SearchResult($_POST["search"]);
             @endphp
             @if(count($results) > 0)
                 @foreach($results as $table => $result)
