@@ -18,6 +18,15 @@ function updateAufgabenAufgabenstellung($kursID,$kapitelNr,$aufgabenNr,$aufgaben
     return $stmt->execute();
 }
 
+function updateAufgabeImgSrc($kursID,$kapitelNr,$aufgabenNr,$imgSrc)
+{
+    $conn =connectdb();
+    $sql = "Update AUFGABEN SET IMG_SRC = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss",$imgSrc,$kursID,$kapitelNr,$aufgabenNr);
+    return $stmt->execute();
+}
+
 class Aufgabe
 {
     private $id;

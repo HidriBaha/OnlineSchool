@@ -1,114 +1,62 @@
 <?php
 
+include_once "../models/User.php";
+
+use function models\getAllUserAccounts;
+use function models\insertUser;
+use function models\verifyUser;
+
 require_once '../kurs.php';
 require_once '../messages.php';
 
 class UserController
 {
 
-    public function login()
+    public function login(RequestData $requestData)
     {
         return view("login.login", []);
     }
 
-    public function verifyLogin()
+    public function verifyLogin(RequestData $requestData)
     {
-        $email = $_POST['email'];
-        $passwort = $_POST['password'];
-
-        if ($this->verifyUser($email, $passwort)) {
-            global $kurse, $messages;
-            // Sort the messages array by date in descending order to get the most recent messages first
-            usort($messages, function ($a, $b) {
-                return strtotime($b['date']) - strtotime($a['date']);
-            });
-
-            $recentMessages = array_slice($messages, 0, 4);
-            $vars = [
-                'kurse' => $kurse, 'recentMessages' => $recentMessages
-            ];
-            return view('landingpage.landingpage', $vars);
+        $body = $requestData->getPostData();
+        $email = $body['email'];
+        $passwort = $body['password'];
+        if (verifyUser($email, $passwort)) {
+            header('Location: ' . "/");
         } else {
-            return view("login.login", []);
+            header('Location: ' . "login");
         }
     }
 
-    public function logout()
+    public function logout(RequestData $requestData)
     {
-        $_SESSION = [];
-        return view("login.login", []);
+        session_destroy();
+        session_regenerate_id();
+        header('Location: ' . "login");
     }
 
-    public function register()
+    public function register(RequestData $requestData)
     {
+        $body = $requestData->getPostData();
+        $email = $body['email'];
+        $password = $body['password'];
+        $role = $body['role'];
+        $vorname = $body['vorname'];
+        $nachname = $body['nachname'];
+        $geburtsdatum = $body['geburtsdatum'];
+        $adresse = $body['adresse'];
+
+        insertUser($email, $password, $role, $vorname, $nachname, $geburtsdatum, $adresse);
+
         return view("login.register", []);
-    }
-
-    public function registerUser()
-    {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $role = $_POST['role'];
-        $vorname = $_POST['vorname'];
-        $nachname = $_POST['nachname'];
-        $geburtsdatum = $_POST['geburtsdatum'];
-        $adresse = $_POST['adresse'];
-
-        if ($this->insertUser($email, $password, $role, $vorname, $nachname, $geburtsdatum, $adresse)) {
-            //TODO errorHandeling
-        }
-        return $this->register();
     }
 
     public function allUser()
     {
-
-        $conn = connectdb();
-        $sql = "SELECT ID, EMAIL, VORNAME, NACHNAME, ROLLE, GEBURTSDATUM, ADRESSE FROM USERS";
-        $result = $conn->query($sql);
+        $result = getAllUserAccounts();
         $var = ["userList" => $result];
         return view("login.alluser", $var);
-    }
-
-
-    private function verifyUser($email, $passwort)
-    {
-
-        $conn = connectdb();
-        $sql = "SELECT * FROM USERS WHERE EMAIL = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows != 1) {
-            return false;
-        }
-        $row = $result->fetch_assoc();
-        if (!password_verify($passwort, $row['passwort'])) {
-            return false;
-        }
-
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['role'] = $row['rolle'];
-        $_SESSION['vorname'] = $row['vorname']; // Vorname für Begrüßung speichern
-        return true;
-    }
-
-    private function insertUser($email, $password, $role, $vorname, $nachname, $geburtsdatum, $adresse): bool
-    {
-
-        $conn = connectdb();
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO USERS (EMAIL, PASSWORT, ROLLE, VORNAME, NACHNAME, GEBURTSDATUM, ADRESSE) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssssss", $email, $hashed_password, $role, $vorname, $nachname, $geburtsdatum, $adresse);
-
-        try {
-            return $stmt->execute();
-        } catch (Exception $e) {
-            return false;
-        }
-
     }
 
 }

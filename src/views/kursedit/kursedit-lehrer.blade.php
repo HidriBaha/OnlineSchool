@@ -1,10 +1,38 @@
 @extends("layouts.layout")
 @section("content")
     <form class="container" action="/kurs-update" method="post" enctype="multipart/form-data">
+        <div>
+            <input hidden name="fach" id="fachHolder" value="{{$kurs->getFach()}}">
+            <input hidden name="thema" id="themaHolder" value="{{$kurs->getThema()}}">
+            <div>
+                <label class="inpHeaderH3Nr" for="selectedFach">Fach:</label>
+                <select class="dropDown" id="selectedFach" onchange="selectFach(event)">
+                    @foreach($faecher as $fach)
+                        <option class="dropDownOption"
+                                @if($kurs->getFachId()==$fach->getId())
+                                    selected="selected"
+                                @endif
+                                value="{{$fach->getId()}}">{{$fach->getName()}}</option>
+                        <option class="dropDownOption" value="2">Deutsch</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label class="inpHeaderH3Nr" for="selectedThema">Thema:</label>
+                <select class="dropDown" name="selectedThema" id="selectedThema" required>
+                    @foreach($themen as $thema)
+                        <option class="dropDownOption" data="{{$thema->getFaecherId()}}"
+                                @if($kurs->getThemaId()==$thema->getId())
+                                    selected="selected"
+                                @endif
+                                value="{{$thema->getId()}}">{{$thema->getName()}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <input type="text" class="inpTitle" name="title" value="{{$kurs->getTitel()}}">
         <div class="kapitel-outer-container" id="kapitel-outer-container">
             <input hidden name="kursID" value="{{$kurs->getID()}}">
-
             @foreach ($kurs->getKapitel() as $kapitel)
                 <div class='kapitel-container'>
                     <div class='kapitel-header-row'>
@@ -20,6 +48,9 @@
                             {{--<input class='btn btn-primary' type='submit' name='newErklaerung' value='+Erklärung'/>--}}
                             <button class='btn btn-primary' type="button" onclick="createAufgabe(event)">+Übung
                             </button>
+                            <input type="file" class="upload"
+                                   name="erklaerungImg  -{{$kapitel->getKapitelNR()}}"
+                                   accept="image/png, image/jpeg"/>
                             {{--<input class='btn btn-primary' type='submit' name='newConstraint' value='+Einschränkung'/>--}}
                         </div>
                     </div>
@@ -40,9 +71,9 @@
                             class='textarea-def'>{{$kapitel->getErklaerung()->getErklaerung()}}</textarea>
                     <div class="aufgaben-container">
                         @foreach ($kapitel->getAufgaben() as $aufgabe)
-                            <div class="aufgabe" >
+                            <div class="aufgabe">
                                 <div class='kapitel-header-row'>
-                                        <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}" >
+                                    <input hidden class="aufgabenNr" value="{{$aufgabe->getAufgabenNr()}}">
                                     <div class="inp-container">
                                         <div class="inpHeaderH3Nr">{{$kapitel->getKapitelNR()}}.{{$aufgabe->getAufgabenNr()}}.</div>
                                         <div class="inpHeaderH3" {{--name="uebung-header-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}"--}}>
@@ -53,7 +84,9 @@
                                         <button class='btn btn-primary' type="button" onclick="createLoesung(event)">
                                             +Lösung
                                         </button>
-                                        <input type="file" class="upload" name="aufgabenImg-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}" accept="image/png, image/jpeg" />
+                                        <input type="file" class="upload"
+                                               name="aufgabenImg-{{$kapitel->getKapitelNR()}}-{{$aufgabe->getAufgabenNr()}}"
+                                               accept="image/png, image/jpeg"/>
                                         <button class='btn btn-secondary' type="button" onclick="deleteAufgabe(event)">
                                             Entfernen
                                         </button>
@@ -85,8 +118,8 @@
             </button>
         </div>
         <div class="action-button-container">
-            <input class="btn btn-primary" type="submit" value="Erstellen">
-            <input class="btn btn-secondary" type="submit" value="Verwerfen">
+            <input class="btn btn-primary" type="submit" name="create" value="Erstellen">
+            <button class="btn btn-secondary" type="button" onclick="cancelKurs(event)">Verwerfen</button>
         </div>
     </form>
 @endsection

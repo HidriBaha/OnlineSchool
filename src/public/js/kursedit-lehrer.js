@@ -40,8 +40,15 @@ function createEmptyKapitel() {
     buttonNewUebung.innerText = '+Übung';
     buttonNewUebung.onclick = createAufgabe;
     buttonNewUebung.type = "button";
-
     formKapitelButtonRowContainer.appendChild(buttonNewUebung);
+
+    const inputFileErklaerung = document.createElement("input");
+    inputFileErklaerung.classList.add("upload");
+    inputFileErklaerung.type="file";
+    inputFileErklaerung.accept="image/png, image/jpeg";
+    inputFileErklaerung.name="erklaerungImg-"+kapitelNr;
+    formKapitelButtonRowContainer.appendChild(inputFileErklaerung);
+
     divKapitelHeaderRow.appendChild(formKapitelButtonRowContainer);
 
     divKapitelContainer.appendChild(divKapitelHeaderRow);
@@ -52,7 +59,7 @@ function createEmptyKapitel() {
     const divInputContainer = document.createElement("div");
     divInputContainer.classList.add("inp-container");
 
-     const divErklaerungNr = document.createElement("div");
+    const divErklaerungNr = document.createElement("div");
     divErklaerungNr.classList.add("inpHeaderH3Nr");
     divErklaerungNr.innerText = kapitelNr + ".1 ";
     divInputContainer.appendChild(divErklaerungNr);
@@ -75,7 +82,7 @@ function createEmptyKapitel() {
     divAufgabenContainer.classList.add("aufgaben-container");
     divKapitelContainer.appendChild(divAufgabenContainer);
 
-    createAufgabe({target:divKapitelContainer});
+    createAufgabe({target: divKapitelContainer});
 
     return divKapitelContainer;
 }
@@ -88,10 +95,10 @@ function getKapitelNr() {
 }
 
 function createLoesung(event) {
-    const kapitelContainer = findContainer(event.target,"kapitel-container");
+    const kapitelContainer = findContainer(event.target, "kapitel-container");
     const losungenContainer = kapitelContainer.querySelector(".loesungen-container");
     const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ", "");
-    const aufgabenNr = findContainer(event.target,"kapitel-header-row").querySelector(".aufgabenNr").value;
+    const aufgabenNr = findContainer(event.target, "kapitel-header-row").querySelector(".aufgabenNr").value;
 
     const loesungContainer = document.createElement("div");
     loesungContainer.classList.add('loesung-container');
@@ -164,6 +171,13 @@ function createAufgabe(event) {
     inputNewLoesung.type = "button";
     formUebung.appendChild(inputNewLoesung);
 
+    const inputFile = document.createElement("input");
+    inputFile.classList.add("upload");
+    inputFile.type="file";
+    inputFile.accept="image/png, image/jpeg";
+    inputFile.name="aufgabenImg-"+kapitelNr+"-"+aufgabenNr;
+    formUebung.appendChild(inputFile);
+
     const inputDeleteAufgabe = document.createElement("button");
     inputDeleteAufgabe.classList.add('btn', 'btn-secondary');
     inputDeleteAufgabe.onclick = deleteAufgabe;
@@ -209,12 +223,21 @@ function getAufgabenNr(element) {
 }
 
 function findContainer(node, className) {
-    console.log(node)
-    //not class name
     while (node.className !== className) {
         node = node.parentNode;
     }
     return node;
 }
 
+function selectFach(event) {
+    const selectedFachID = event.target.selectedOptions[0].value;
+    const themaSelect = document.getElementById("selectedThema")
+    for (let i = 0; i < themaSelect.length; i++) {
+        themaSelect[i].hidden = themaSelect[i].getAttribute("data") !== selectedFachID;
+    }
+    themaSelect.selectedIndex=-1;
+}
 
+function cancelKurs(event){
+    history.back()
+}

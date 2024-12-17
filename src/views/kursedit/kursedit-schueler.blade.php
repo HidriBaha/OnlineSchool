@@ -19,8 +19,8 @@
                     <h4>Übungserklärung:</h4>
                     {{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getErklaerung()}}
                     <br>
-                    @if (trim($kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()) != "")
-                        <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kapitel["erklaerungen"][0]["img-src"]}}'>
+                    @if ($kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()!= NULL)
+                        <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()}}'>
                     @endif
                     <br><br>
 
@@ -28,7 +28,7 @@
                     <ul>
                         @foreach ($kurs->getKapitel()[$kapitelNr]->getAufgaben() as $keyAufgaben => $aufgabe)
                             <li>{{ $aufgabe->getAufgabenstellung() }}</li><br>
-                            @if (trim($aufgabe->getImgSrc()) != "")
+                            @if ($aufgabe->getImgSrc() != NULL)
                                 <img class='img-task' alt='Aufgabe IMG' src='{{$aufgabe->getImgSrc()}}'><br>
                             @endif
                             @foreach ($aufgabe->getLoesungen() as $keyLoesungen => $loesung)
