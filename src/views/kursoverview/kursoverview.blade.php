@@ -7,7 +7,7 @@
                     <div class="course-title">{{$thema}}</div>
                     <div class="progress-container mb-4">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 60%; background-color: #236C93;"
+                            <div class="progress-bar" role="progressbar" style="width: 60%; background-color: var(--primary-btn-color);"
                                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                                 60%
                             </div>
@@ -17,7 +17,7 @@
                 <div class="kurs-liste">
                     @foreach($kurse[$thema] as $key => $kurs)
                         <div class='course-container'>
-                            <div class='course-title'> {{$kurs->titel}}  </div>
+                            <div class='course-title'> {{$kurs->getTitel()}}  </div>
                             <div class='progress-container mb - 4'>
                                 <div class='progress'>
                                     <div class='progress-bar' role='progressbar'>
@@ -25,9 +25,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class='course-description'> {{$kurs->beschreibung }} </p>
-                            <div hidden class='image-store'> {{$kurs->img }} </div>
-                            <a href='/kurs-edit?kursID={{$kurs->id}}' class='btn btn-primary'> Kurs
+                            <p class='course-description'> {{$kurs->getBeschreibung() }} </p>
+                            <div hidden class='image-store'> {{$kurs->getImg() }} </div>
+                            <a href='/kurs-edit?kursID={{$kurs->getId()}}' class='btn btn-primary'> Kurs
                                 starten </a>
                         </div>
                     @endforeach

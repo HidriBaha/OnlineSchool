@@ -67,8 +67,10 @@
                     <li><a class="dropdown-item" href="#">Profil ansehen</a></li>
                     <li><a class="dropdown-item" href="#">Einstellungen</a></li>
                     <li><a class="dropdown-item" href="/logout">Abmelden</a></li>
-                    <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
-                    <li><a class="dropdown-item" href="/users">Useransicht</a></li>
+                    @if(($_SESSION["role"]??null)=="admin")
+                        <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
+                        <li><a class="dropdown-item" href="/users">Useransicht</a></li>
+                    @endif
                 </ul>
             </div>
         </div>

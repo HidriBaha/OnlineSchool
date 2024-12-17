@@ -2,27 +2,25 @@
 
 use models\Kurs;
 
-require_once "../db-utils/db-setup.php";
 require_once "../models/Kurs.php";
 
 class KursOverviewController
 {
     public function kursOverview()
     {
-        global $conn;
+        $conn = connectdb();
         $fach = $_GET["fach"] ?? "Mathe";
         //TODO error handling falls kein Fach da ist
         if (isset($_GET["thema"])) {
             $thema = $_GET["thema"];
-            $sql = "SELECT T.NAME,K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM FAECHER F JOIN THEMA T ON F.ID = T.FAECHER_ID JOIN KURSE K ON T.ID = K.ID WHERE F.NAME LIKE ? AND T.NAME LIKE ?";
+            $sql = "SELECT T.NAME,K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID,T.FAECHER_ID, T.NAME as THEMA_NAME, f.NAME as FACH_NAME FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ? and t.NAME like ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $fach, $thema);
         } else {
-            $sql = "SELECT T.NAME, K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM FAECHER F JOIN THEMA T ON F.ID = T.FAECHER_ID JOIN KURSE K ON T.ID = K.ID WHERE F.NAME LIKE ? ";
+            $sql = "SELECT T.NAME, K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID,T.FAECHER_ID,f.NAME as FACH_NAME, T.NAME as THEMA_NAME FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $fach);
         }
-
         $stmt->execute();
         $results = $stmt->get_result();
         $kurse = $this->getKursFromResult($results);
@@ -38,7 +36,7 @@ class KursOverviewController
             if (!isset($kurse[$thema])) {
                 $kurse[$thema] = [];
             }
-            $kurs = new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID']);
+            $kurs = new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID'],$row["FAECHER_ID"],$row["FACH_NAME"],$row["THEMA_NAME"]);
             array_push($kurse[$thema], $kurs);
         }
         return $kurse;

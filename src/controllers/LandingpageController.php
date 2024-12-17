@@ -7,7 +7,6 @@ class LandingpageController
 
     public function landingPage()
     {
-        session_start();
         global $kurse, $messages;
         // Sort the messages array by date in descending order to get the most recent messages first
         usort($messages, function ($a, $b) {

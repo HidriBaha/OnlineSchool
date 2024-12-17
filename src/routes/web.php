@@ -10,5 +10,6 @@ return array(
     '/verifyLogin' => "UserController@verifyLogin",
     '/kurs-overview' => "KursOverviewController@kursOverview",
     '/kurs-edit' => 'KursEditController@kursEdit',
+    '/kurs-update' => 'KursEditController@kursUpdate',
     '/kommunikation' => 'KommunikationsController@kommunikation',
 );
