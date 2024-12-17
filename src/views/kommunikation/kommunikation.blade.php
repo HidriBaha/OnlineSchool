@@ -44,7 +44,7 @@
                 <div>
                     <input type="text" class="msg-input" id="recipient" name="recipient" placeholder="Empfänger eingeben..." required>
                     <select name="verteiler" id="verteiler" class="dropdown" onchange="updateRecipients()">
-                        <option value="Klassen" selected>Klassen</option>
+                        <option value="Kurse" selected>Kurse</option>
                     </select>
                 </div>
                 <input type="text" class="msg-input" id="topic" name="topic" placeholder="Betreff eingeben..." required>

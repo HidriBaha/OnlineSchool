@@ -1,8 +1,10 @@
 <?php
 
 require_once '../models/Nachrichten.php';
+require_once '../models/Kursmitglieder.php';
 use function \models\getMessages;
-use function models\sendMessage;
+use function \models\sendMessage;
+use function \models\getKursmitglieder;
 
 class KommunikationsController
 {

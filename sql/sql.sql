@@ -52,6 +52,15 @@ CREATE TABLE nachrichten(
     date DATETIME NOT NULL,
     message TEXT
 );
+
+CREATE TABLE kursmitglieder(
+    kurs_id INT,
+    user_email varchar(50),
+    FOREIGN KEY (user_email) REFERENCES users(email)
+                           ON DELETE CASCADE
+                           ON UPDATE CASCADE
+);
+
 /*
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON SchulDB.users TO 'username'@'localhost' IDENTIFIED BY 'user_password';

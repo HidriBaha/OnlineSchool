@@ -22,5 +22,4 @@ class Kurs
         $this->beschreibung = $beschreibung;
         $this->thema_id = $thema_id;
     }
-
 }
