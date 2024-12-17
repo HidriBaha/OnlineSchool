@@ -64,7 +64,7 @@
                             <i class="bi bi-calculator" style="font-size: 3rem; color: #236C93;"></i>
                             <!-- Symbol für Zahlenmenge -->
                             <h5 class="card-title mt-3">Zahlenmenge</h5>
-                            <p class="card-text"> {{$kurse["zahlenmenge"][0]["beschreibung"]}}</p>
+                            <p class="card-text"> {{$kurse["zahlenmengen"][0]["beschreibung"]}}</p>
                             <a href="/kurs-edit?thema=zahlenmenge&kursID=0"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>

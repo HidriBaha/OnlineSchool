@@ -1,6 +1,6 @@
 @extends("layouts.layout")
 @section("content")
-
+<section class="container mt-4">
     <div id="container">
         <button id="openChatBtn" class="btn btn-primary">+ Neue Nachricht</button>
         <table id="messages-table">
@@ -20,14 +20,14 @@
             </thead>
             <tbody>
             @foreach ($messages as $index => $message)
-                <tr class="messages-td clickable" onclick="toggleRow(message-{{$index}})">
+                <tr class="messages-td clickable" onclick="toggleRow('message-{{$index}}')">
                     <td class='messages-td topic'>{{$message['topic']}}</td>
                     <td class='messages-td sender'>{{$message['sender']}}</td>
                     <td class='messages-td recipient'>{{$message['recipient']}}</td>
                     <td class='messages-td date'>{{$message['date']}}</td>
                 </tr>
-                <tr hidden id="message-{{$index}}">
-                    <td colspan="4">{{nl2br($message['message'])}}</td>
+                <tr class="hidden" id="message-{{$index}}">
+                    <td colspan="4">{!! nl2br($message['message']) !!}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -56,6 +56,7 @@
             </form>
         </div>
     </div>
+</section>
 @endsection
 
 @section("cssextra")
@@ -65,7 +66,5 @@
 @section("jsextra")
     <script src="/js/kommunikation.js">
         const klassenData = <?php echo json_encode($klassen); ?>;
-
     </script>
-    <link rel="stylesheet" href="/css/kommunikation.css">
 @endsection

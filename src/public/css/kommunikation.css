@@ -1,3 +1,17 @@
+body{
+    display: grid;
+    font-family: Arial, sans-serif;
+}
+
+#main{
+    font-family: Verdana, serif;
+    font-size: 10pt;
+    display: grid;
+    justify-self: center;
+    justify-items: center;
+    width: 100%;
+}
+
 #openChatBtn{
     justify-self: end;
     margin-bottom: 10px;
@@ -12,14 +26,6 @@
     overflow: scroll;
 }
 
-.col{
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Verhindert Zeilenumbrüche */
-    overflow-wrap: break-word; /* Erlaubt das Brechen von Wörtern */
-}
-
 .date{
     text-align: right;
 }
@@ -31,7 +37,7 @@
 .messages-td, .messages-th {
     padding: 10px;
     border: none;
-    border-bottom: 2px solid #236C93;
+    border-top: 2px solid #236C93;
     text-align: left;
 }
 
@@ -51,12 +57,13 @@
     grid-template-rows: 100px auto;
     position: fixed;
     top: 75px;
+    left: 50%; /* Add this line */
+    transform: translateX(-50%); /* Add this line */
     border: black 1px solid;
     border-radius: 5px;
     background-color: #B1CBD9;
     width: calc(100% - 200px);
     max-width: 800px;
-    justify-self: center;
 }
 
 #chatHeader {
@@ -95,6 +102,82 @@
     width: calc(100% - 130px);
 }
 
+#sendMessageBtn {
+    height: 40px; /* Erhöhte Höhe für mehr Klickfläche */
+    width: 100px; /* Breitere Schaltfläche */
+    margin: 10px;
+    background-color: #307599; /* Primärfarbe (Blau) */
+    color: white; /* Textfarbe */
+    border: none; /* Kein Rahmen */
+    border-radius: 5px; /* Abgerundete Ecken */
+    font-size: 16px; /* Größere Schriftgröße */
+    font-weight: bold; /* Fettdruck für den Text */
+    cursor: pointer; /* Zeiger-Cursor beim Hover */
+    transition: background-color 0.3s, transform 0.2s; /* Übergangseffekte */
+}
+
+#sendMessageBtn:hover {
+    background-color: #0056b3; /* Dunklere Farbe beim Hover */
+    transform: translateY(-2px); /* Leichtes Anheben beim Hover */
+}
+
+#sendMessageBtn:active {
+    transform: translateY(0); /* Zurücksetzen beim Klicken */
+}
+
+#closeChatBtn {
+    height: 30px; /* Höhe des Buttons */
+    width: 30px; /* Breite des Buttons */
+    border: 2px solid rgba(255, 255, 255, 0.8); /* Leicht transparenter weißer Rahmen */
+    background: rgba(0, 0, 0, 0.1); /* Leicht dunkler Hintergrund */
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    border-radius: 6px; /* Abgerundete Ecken */
+    transition: all 0.3s ease; /* Sanfter Übergang für alle Änderungen */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtiler Schatten */
+}
+
+#closeChatBtn::after {
+    content: '—'; /* Längerer Strich statt Unterstrich */
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px; /* Angepasste Größe */
+    line-height: 1;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+#closeChatBtn:hover {
+    background: rgba(255, 255, 255, 0.1); /* Leicht heller beim Hover */
+    border-color: white; /* Rahmenfarbe beim Hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Verstärkter Schatten beim Hover */
+}
+
+#closeChatBtn:hover::after {
+    color: #fff; /* Weiß beim Hover */
+}
+
+#closeChatBtn:active {
+    transform: scale(0.95); /* Leichte Verkleinerung beim Klicken */
+}
+#openChatBtn {
+    padding: 10px 15px; /* Innenabstand für den Button */
+    background-color: #236C93; /* Hintergrundfarbe */
+    color: white;   /* Textfarbe */
+    border: none;   /* Keine Rahmen */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer; /* Zeiger-Cursor beim Hover */
+}
+
+.hidden {
+    display: none;
+    background: #D8E5EC;
+}
+
 .clickable {
     cursor: pointer;
 }
@@ -109,6 +192,16 @@
     border-radius: 5px; /* Abgerundete Ecken */
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#verteiler:hover {
+    border-color: #888;
+}
+
+#verteiler:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 #verteiler option {
