@@ -20,8 +20,6 @@
                     {{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getErklaerung()}}
                     <br>
                     @if ($kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()!= NULL)
-
-                        {{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()}}
                         <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()}}'>
                     @endif
                     <br><br>
