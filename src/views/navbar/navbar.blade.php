@@ -1,6 +1,6 @@
 @php
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Faecher.php';
-    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Themen.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Thema.php';
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Suche.php';
     $faecher = \models\get_Faecher();
 @endphp
@@ -16,7 +16,7 @@
         <!-- Navbar-Links (Links ausgerichtet) -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                @if(sizeof($faecher) > 0)
+            {{--    @if(sizeof($faecher) > 0)--}}
                     @foreach($faecher as $fach)
                         <li class="nav-item">
                             <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["name"]}}</a>
@@ -37,7 +37,7 @@
                             </ul>
                         </li>
                     @endforeach
-                @endif
+         {{--       @endif--}}
             </ul>
         </div>
         <!-- Symbole rechts -->
@@ -66,8 +66,10 @@
                     <li><a class="dropdown-item" href="#">Profil ansehen</a></li>
                     <li><a class="dropdown-item" href="#">Einstellungen</a></li>
                     <li><a class="dropdown-item" href="/logout">Abmelden</a></li>
-                    <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
-                    <li><a class="dropdown-item" href="/users">Useransicht</a></li>
+                    @if(($_SESSION["role"]??null)=="admin")
+                        <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
+                        <li><a class="dropdown-item" href="/users">Useransicht</a></li>
+                    @endif
                 </ul>
             </div>
         </div>

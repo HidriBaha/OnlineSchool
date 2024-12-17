@@ -1,7 +1,7 @@
 <?php
+session_start();
 
 use eftec\bladeone\BladeOne;
-
 const VERBOSITY = 0;
 const PUBLIC_DIRNAME = "public";
 const CONFIG_WEBROUTES = "/../routes/web.php";
@@ -183,7 +183,6 @@ class FrontController
             require_once $controllerDirectory . $ctrlFile;
 
             // instantiate the controller
-
 
             $controller = new $ctrlClass();
             $rd = new RequestData($method, $args, $query);

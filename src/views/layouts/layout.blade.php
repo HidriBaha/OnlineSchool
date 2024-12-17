@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/navbar.css">
     @yield("cssextra")
-    <!-- good developers check the markup ;) -->
 </head>
 <body>
 <header>
@@ -21,5 +20,4 @@
 </main>
 @yield("jsextra")
 </body>
-
 </html>

@@ -1,10 +1,9 @@
 <?php
 
 namespace models;
-require_once '../db-utils/db-setup.php';
 
 function get_SearchResult($suchbegriff): array{
-    global $conn;
+    $conn = connectdb();
     $suchbegriff = "%". strtolower($suchbegriff). "%";
 
 

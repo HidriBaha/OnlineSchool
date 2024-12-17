@@ -29,7 +29,7 @@ body {
 }
 h2 {
     margin-bottom: 20px;
-    color: #236C93; /* Main color */
+    color: var(--primary-btn-color); /* Main color */
 }
 label {
     font-size: 14px;
@@ -48,7 +48,7 @@ input[type="password"] {
 input[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #236C93; /* Main button color */
+    background-color: var(--primary-btn-color); /* Main button color */
     color: white;
     border: none;
     border-radius: 4px;
@@ -65,7 +65,7 @@ p {
     color: #307599;
 }
 p a {
-    color: #236C93; /* Link color */
+    color: var(--primary-btn-color); /* Link color */
     text-decoration: none;
     transition: color 0.3s ease;
 }

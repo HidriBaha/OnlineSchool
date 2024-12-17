@@ -1,3 +1,6 @@
 /.idea/
 /src/.env
 /src/storage/cache/*
+/src/vendor/
+composer.phar
+

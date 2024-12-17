@@ -1,7 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+    >
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <header>
@@ -18,7 +23,7 @@
 
         <label for="password">Passwort:</label>
         <input type="password" id="password" name="password" required>
-        <input type="submit" value="Einloggen">
+        <input type="submit" value="Einloggen" class="btn btn-primary">
     </form>
 </div>
 </body>

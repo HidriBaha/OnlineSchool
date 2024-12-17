@@ -21,7 +21,7 @@ body{
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    border: 2px solid #236C93;
+    border: 2px solid var(--primary-btn-color);
     border-radius: 5px;
     overflow: scroll;
 }
@@ -37,13 +37,13 @@ body{
 .messages-td, .messages-th {
     padding: 10px;
     border: none;
-    border-top: 2px solid #236C93;
+    border-top: 2px solid var(--primary-btn-color);
     text-align: left;
 }
 
 /* Optional: Stil für die Kopfzeile */
 .messages-th {
-    background-color: #236C93;
+    background-color: var(--primary-btn-color);
     color: white;
 }
 
@@ -68,7 +68,7 @@ body{
 
 #chatHeader {
     color: white;
-    background-color: #307599;
+    background-color: var(--primary-btn-color);
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -106,7 +106,7 @@ body{
     height: 40px; /* Erhöhte Höhe für mehr Klickfläche */
     width: 100px; /* Breitere Schaltfläche */
     margin: 10px;
-    background-color: #307599; /* Primärfarbe (Blau) */
+    background-color: var(--primary-btn-color); /* Primärfarbe (Blau) */
     color: white; /* Textfarbe */
     border: none; /* Kein Rahmen */
     border-radius: 5px; /* Abgerundete Ecken */
