@@ -11,11 +11,11 @@ function get_SearchResult($suchbegriff): array{
         'faecher' => "SELECT DISTINCT name AS fach FROM faecher WHERE lower(name) LIKE ?",
         'thema' => "SELECT DISTINCT t.name AS thema, f.name AS fach FROM thema t LEFT JOIN faecher f on t.faecher_id = f.id WHERE lower(t.name) LIKE ?",
 
-        'kurse' => "SELECT DISTINCT k.beschreibung, k.titel AS kurs, k.kurs_nr, t.name AS thema FROM kurse k
+        'kurse' => "SELECT DISTINCT k.beschreibung, k.titel AS kurs, k.id, t.name AS thema FROM kurse k
                                     LEFT JOIN thema t ON t.id = k.thema_id
                                         WHERE lower(k.titel) LIKE ? OR lower(k.author) LIKE ? OR lower(k.beschreibung) LIKE ?",
 
-        'kapitel' => "SELECT DISTINCT kurs.kurs_nr, kap.kapitel_nr, t.name as thema, e.header, e.erklaerung, kurs.titel as kurs FROM erklaerungen e 
+        'kapitel' => "SELECT DISTINCT kurs.id, kap.kapitel_nr, t.name as thema, e.header, e.erklaerung, kurs.titel as kurs FROM erklaerungen e 
                                         LEFT JOIN kurse kurs ON e.KURS_ID = kurs.id
                                             LEFT JOIN kapitel kap ON e.KAPITEL_NR = kap.KAPITEL_NR
                                                 LEFT JOIN thema t ON kurs.THEMA_ID = t.ID

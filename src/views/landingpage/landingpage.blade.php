@@ -51,7 +51,7 @@
                             <!-- Symbol für Geometrie -->
                             <h5 class="card-title mt-3">Geometrie I</h5>
                             <p class="card-text"> {{$kurse["geometrie"][0]["beschreibung"]}}</p>
-                            <a href="/kurs-edit?thema=geometrie&kursID=0"
+                            <a href="/kurs-edit?thema=geometrie&kursID=1"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             <!-- Symbol für Zahlenmenge -->
                             <h5 class="card-title mt-3">Zahlenmenge</h5>
                             <p class="card-text"> {{$kurse["zahlenmengen"][0]["beschreibung"]}}</p>
-                            <a href="/kurs-edit?thema=zahlenmenge&kursID=0"
+                            <a href="/kurs-edit?thema=zahlenmenge&kursID=1"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             <!-- Symbol für Rechengesetze -->
                             <h5 class="card-title mt-3">Rechengesetze</h5>
                             <p class="card-text">{{$kurse["rechengesetze"][0]["beschreibung"]}}</p><br>
-                            <a href="/kurs-edit?thema=rechengesetze&kursID=0"
+                            <a href="/kurs-edit?thema=rechengesetze&kursID=1"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
