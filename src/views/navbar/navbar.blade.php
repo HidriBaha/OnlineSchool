@@ -1,3 +1,9 @@
+@php
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Faecher.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Thema.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Suche.php';
+    $faecher = \models\get_Faecher();
+@endphp
 <!DOCTYPE html>
 <html lang="de">
 <!-- Navbar -->
@@ -7,27 +13,43 @@
         <a class="navbar-brand" href="/">
             <img src="/img/logo.png" class="logo" alt="Schullogo">
         </a>
-
         <!-- Navbar-Links (Links ausgerichtet) -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=geometrie">Geometrie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=zahlenmenge">Zahlenmenge</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/kurs-overview?fach=Mathe&thema=rechengesetze">Rechengesetze</a>
-                </li>
-                {{--                <li class="nav-item">
-                                    <a class="nav-link" href="#">Wiederholen</a>
-                                </li>--}}
+            {{--    @if(sizeof($faecher) > 0)--}}
+                    @foreach($faecher as $fach)
+                        <li class="nav-item">
+                            <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["name"]}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="{{$fach["name"]}}">
+                                @php
+                                    $themen = \models\get_Themen($fach["id"]);
+                                @endphp
+                                @if(sizeof($themen) > 0)
+                                    @foreach($themen as $thema)
+                                        @php
+                                            $path = "/kurs-overview?fach=". $fach["name"]. "&thema=". $thema["name"];
+                                        @endphp
+                                        <li><a class ="dropdown-item" href="{{$path}}">{{$thema["name"]}}</a></li>
+                                    @endforeach
+                                @else
+                                    <li><span class="dropdown-item">Keine Kurse gefunden.</span></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endforeach
+         {{--       @endif--}}
             </ul>
         </div>
-
         <!-- Symbole rechts -->
         <div class="d-flex">
+            <!-- Suchleiste -->
+            <form method="get" id="searchBar" class="nav-item">
+                <div class="form-group mb-2">
+                    <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
+                </div>
+                <!-- Der Button ist versteckt, aber das Formular kann trotzdem mit Enter abgesendet werden -->
+                <input type="submit" style="display:none;">
+            </form>
             <!-- Kommunikationssymbol -->
             <div class="nav-item me-3" id="ChatButton">
                 <a href="/kommunikation" class="nav-link">
@@ -53,9 +75,78 @@
         </div>
     </div>
 </nav>
+@if(isset($_GET["search"]))
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2>Suchergebnisse</h2>
+            @php
+                $results = \models\get_SearchResult($_GET["search"]);
+            @endphp
+            @if(count($results) > 0)
+                @foreach($results as $table => $result)
+                    @foreach($result as $row)
+                        @php
+                            $path = "";
+                            $description = "";
+                        @endphp
+                        @switch($table)
+                            @case("faecher")
+                                @php
+                                    $title = $row["fach"];
+                                    $path = "/kurs-overview?fach=". strtolower($row["fach"]);
+                                @endphp
+                                @break
+                            @case("thema")
+                                @php
+                                    $title = $row["thema"];
+                                    $path = "/kurs-overview?fach=". $row["fach"]. "&thema=". $row["thema"];
+                                @endphp
+                                @break
+                            @case("kurse")
+                                @php
+                                    $title = "Kurs ". $row["kurs"];
+                                    $description = $row["beschreibung"];
+                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=".  strval(intval($row["kurs_nr"]) - 1);
+                                @endphp
+                                @break
+                            @case("kapitel")
+                                @php
+                                    $title = "Kurs ". $row["kurs"];
+                                    $description = "<b>". "Kapitel ". $row["kapitel_nr"]. "<br>". $row["header"]. "</b>". "<br><br>". $row["erklaerung"];
+                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=". strval(intval($row["kurs_nr"]) - 1). "&kapitel=". strval(intval($row["kapitel_nr"]) - 1);
+                                @endphp
+                                @break
+                        @endswitch
+                            <div class="container mt-4">
+                                <div class="row row-cols-1 g-4">
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">{{$title}}</h5>
+                                            </div>
+                                            <p id="searchResultDescription">{!! $description !!}</p>
+                                            <div class="card-body" id="searchResultCards">
+                                                <a href="{{$path}}">{{$path}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    @endforeach
+                @endforeach
+            @else
+                <p>Keine Ergebnisse gefunden.</p>
+            @endif
+            <button class="btn btn-primary" id="close-popup">Schließen</button>
+        </div>
+    </div>
+
+@endif
+
+
 <script>
     const role = <?php echo isset($_SESSION['role']) ? json_encode($_SESSION['role']) : 'null'; ?>;
-    console.log("Role from PHPNavbar222222:", role);
+    console.log("Role from PHPNavbar:", role);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/navbar.js"></script>

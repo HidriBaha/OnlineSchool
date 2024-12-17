@@ -14,6 +14,13 @@ function loadFacher () :array{
 }
 
 
+function get_Faecher(): array {
+    $conn = connectdb();
+    $sql = "SELECT name, id FROM faecher";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 
 class Faecher
 {

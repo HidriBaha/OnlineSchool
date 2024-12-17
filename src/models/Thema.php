@@ -2,22 +2,35 @@
 
 namespace models;
 
-function loadThemen():array{
+function get_Themen(string $id): array
+{
     $conn = connectdb();
-    $sql = "Select ID, NAME, FAECHER_ID FROM THEMA";
+    $sql="SELECT name FROM thema WHERE faecher_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s",$id);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+function loadThemen(): array
+{
+    $conn = connectdb();
+    var_dump($conn);
+    $sql = "SELECT ID, NAME, FAECHER_ID FROM THEMA";
     $stmt = $conn->query($sql);
     $themen = [];
-    while(($row = $stmt->fetch_assoc())!==null){
-        array_push($themen,new Thema($row["ID"],$row["NAME"],$row["FAECHER_ID"]));
+    while (($row = $stmt->fetch_assoc()) !== null) {
+        array_push($themen, new Thema($row["ID"], $row["NAME"], $row["FAECHER_ID"]));
     }
     return $themen;
 }
 
-function updateKursThemaId($kursId,$themaId) :bool{
+function updateKursThemaId($kursId, $themaId): bool
+{
     $conn = connectdb();
     $sql = "UPDATE KURSE SET THEMA_ID = ? WHERE ID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss",$themaId,$kursId);
+    $stmt->bind_param("ss", $themaId, $kursId);
     return $stmt->execute();
 }
 
@@ -86,7 +99,6 @@ class Thema
     {
         $this->faecherId = $faecherId;
     }
-
 
 
 }
