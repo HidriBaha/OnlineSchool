@@ -6,7 +6,6 @@ use function models\getAllUserAccounts;
 use function models\insertUser;
 use function models\verifyUser;
 
-require_once '../kurs.php';
 require_once '../messages.php';
 
 class UserController
@@ -36,7 +35,7 @@ class UserController
         header('Location: ' . "login");
     }
 
-    public function register(RequestData $requestData)
+    public function registerUser(RequestData $requestData)
     {
         $body = $requestData->getPostData();
         $email = $body['email'];
@@ -49,6 +48,11 @@ class UserController
 
         insertUser($email, $password, $role, $vorname, $nachname, $geburtsdatum, $adresse);
 
+        return view("login.register", []);
+    }
+
+    public function register(RequestData $requestData)
+    {
         return view("login.register", []);
     }
 
