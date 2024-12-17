@@ -34,6 +34,7 @@ class KursEditController
         $kursID = (int)($requestData->query["kursID"]);
         $kapitelNr = (int)($requestData->query["kapitelNr"] ?? 1);
         $kurs = loadKurs($kursID);
+        $userID=$_SESSION["userID"];
         $vars = ["kurs" => $kurs, "kapitelNr" => $kapitelNr];
         return view('kursedit.kursedit-schueler', $vars);
     }

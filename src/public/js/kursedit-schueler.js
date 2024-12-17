@@ -41,7 +41,9 @@ function checkSolution(inputField) {
     if (userInput === hiddenSolution || normalizeString(userInput) === normalizeString(hiddenSolution)) {
         inputField.style.borderColor = "green"; // Highlight correct input
         inputField.style.backgroundColor = "#e0ffe0"; // Light green background
-        console.log("Richtig");
+        inputField.setAttribute('readonly', true); // Prevent further changes
+        console.log("Richtig,field readonly");
+
     } else {
         inputField.style.borderColor = "red"; // Highlight incorrect input
         inputField.style.backgroundColor = "#ffe0e0"; // Light red background

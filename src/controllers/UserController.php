@@ -87,7 +87,7 @@ class UserController
         if (!password_verify($passwort, $row['passwort'])) {
             return false;
         }
-
+        $_SESSION['userID'] = $row['id'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['role'] = $row['rolle'];
         $_SESSION['vorname'] = $row['vorname']; // Vorname für Begrüßung speichern

@@ -74,6 +74,7 @@ function loadAufgaben($kursID,$kapitelNr): array
 }
 
 
+
 function loadLoesung(int $getId): array
 {
     $conn = connectdb();
