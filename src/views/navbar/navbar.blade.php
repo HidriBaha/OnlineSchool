@@ -107,14 +107,14 @@
                                 @php
                                     $title = "Kurs ". $row["kurs"];
                                     $description = $row["beschreibung"];
-                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=".  strval(intval($row["kurs_nr"]) - 1);
+                                    $path = "/kurs-edit?kursID=".  strval(intval($row["id"]));
                                 @endphp
                                 @break
                             @case("kapitel")
                                 @php
                                     $title = "Kurs ". $row["kurs"];
                                     $description = "<b>". "Kapitel ". $row["kapitel_nr"]. "<br>". $row["header"]. "</b>". "<br><br>". $row["erklaerung"];
-                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=". strval(intval($row["kurs_nr"]) - 1). "&kapitel=". strval(intval($row["kapitel_nr"]) - 1);
+                                    $path = "/kurs-edit?kursID=". strval(intval($row["id"])). "&kapitelNr=". strval(intval($row["kapitel_nr"]));
                                 @endphp
                                 @break
                         @endswitch
