@@ -153,10 +153,9 @@ function createAufgabe(event) {
     divKapitelNrUebung.innerText = kapitelNr + "." + aufgabenNr + ". ";
 
     divInputContainerUebung.appendChild(divKapitelNrUebung);
-    const h3UebungHeader = document.createElement('input');
+    const h3UebungHeader = document.createElement('div');
     h3UebungHeader.classList.add('inpHeaderH3');
-    h3UebungHeader.name = "uebung-header-" + kapitelNr + "-" + aufgabenNr;
-    h3UebungHeader.placeholder = 'Aufgabe';
+    h3UebungHeader.innerText = 'Aufgabe';
     divInputContainerUebung.appendChild(h3UebungHeader)
     divUebungen.appendChild(divInputContainerUebung);
     divAufgabe.appendChild(divUebungen);

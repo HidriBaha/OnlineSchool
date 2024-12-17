@@ -23,10 +23,10 @@
 
     CREATE TABLE KURSE
     (
-        ID      INT PRIMARY KEY,
-        KURS_NR      INT          NOT NULL,
-        TITEL        VARCHAR(255) NOT NULL,
-        AUTHOR       VARCHAR(255) NOT NULL,
+        ID      INT PRIMARY KEY AUTO_INCREMENT,
+        KURS_NR      INT          ,
+        TITEL        VARCHAR(255) ,
+        AUTHOR       VARCHAR(255) ,
         IMG          VARCHAR(255),
         BESCHREIBUNG VARCHAR(255),
         THEMA_ID     INT,

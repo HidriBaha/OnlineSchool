@@ -1,22 +1,34 @@
 <?php
 
 namespace models;
-
-function loadFacher () :array{
+function loadFachByName($name)
+{
     $conn = connectdb();
-    $sql="SELECT ID, NAME FROM FAECHER";
+    $sql = "SELECT ID,NAME FROM FAECHER WHERE NAME = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    return new Faecher($row["ID"], $row["NAME"]);
+}
+
+function loadFacher(): array
+{
+    $conn = connectdb();
+    $sql = "SELECT ID, NAME FROM FAECHER";
     $stmt = $conn->query($sql);
-    $faecher=[];
-    while(($row=$stmt->fetch_assoc())!==null){
-        array_push($faecher,new Faecher($row["ID"],$row["NAME"]));
+    $faecher = [];
+    while (($row = $stmt->fetch_assoc()) !== null) {
+        array_push($faecher, new Faecher($row["ID"], $row["NAME"]));
     }
     return $faecher;
 }
 
 
-function get_Faecher(): array {
+function get_Faecher(): array
+{
     $conn = connectdb();
-    $sql = "SELECT name, id FROM faecher";
+    $sql = "SELECT NAME, ID FROM FAECHER";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
@@ -27,7 +39,8 @@ class Faecher
     private $id;
     private $name;
 
-    public function __construct($id, $name) {
+    public function __construct($id, $name)
+    {
         $this->id = $id;
         $this->name = $name;
 

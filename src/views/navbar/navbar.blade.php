@@ -3,7 +3,7 @@
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Thema.php';
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Suche.php';
     $faecher = \models\get_Faecher();
-@endphp
+    @endphp
 <!DOCTYPE html>
 <html lang="de">
 <!-- Navbar -->
@@ -16,18 +16,19 @@
         <!-- Navbar-Links (Links ausgerichtet) -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-            {{--    @if(sizeof($faecher) > 0)--}}
+                @if(sizeof($faecher) > 0)
+
                     @foreach($faecher as $fach)
                         <li class="nav-item">
-                            <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["name"]}}</a>
-                            <ul class="dropdown-menu" aria-labelledby="{{$fach["name"]}}">
+                            <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["NAME"]}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="{{$fach["NAME"]}}">
                                 @php
-                                    $themen = \models\get_Themen($fach["id"]);
+                                    $themen = \models\get_Themen($fach["ID"]);
                                 @endphp
                                 @if(sizeof($themen) > 0)
                                     @foreach($themen as $thema)
                                         @php
-                                            $path = "/kurs-overview?fach=". $fach["name"]. "&thema=". $thema["name"];
+                                            $path = "/kurs-overview?fach=". $fach["NAME"]. "&thema=". $thema["name"];
                                         @endphp
                                         <li><a class ="dropdown-item" href="{{$path}}">{{$thema["name"]}}</a></li>
                                     @endforeach
@@ -37,7 +38,7 @@
                             </ul>
                         </li>
                     @endforeach
-         {{--       @endif--}}
+                @endif
             </ul>
         </div>
         <!-- Symbole rechts -->

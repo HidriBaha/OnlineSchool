@@ -4,12 +4,15 @@ require_once "../models/Faecher.php";
 require_once "../models/Thema.php";
 
 use models\Kurs;
+use function models\createKurs;
 use function models\insertAufgabenAufgabenstellung;
 use function models\insertErklaerungHeader;
 use function models\insertKapitel;
 use function models\insertLoesung;
+use function models\loadFachByName;
 use function models\loadFacher;
 use function models\loadKurs;
+use function models\loadThemaByName;
 use function models\loadThemen;
 use function models\updateAufgabeImgSrc;
 use function models\updateAufgabenAufgabenstellung;
@@ -19,6 +22,8 @@ use function models\updateErklaerungImgSrc;
 use function models\updateKapitel;
 use function models\updateKursThemaId;
 use function models\updateLoesung;
+use function models\updateThema;
+use function models\updateTitle;
 
 class KursEditController
 {
@@ -52,11 +57,22 @@ class KursEditController
             //TODO errorhandling
             return view('kursedit.kursedit-lehrer', ["kurs" => []]);
         }
-        $kursID = (int)($requestData->query["kursID"]);
-        $kurs = loadKurs($kursID);
+
+        $vars = "";
         $faecher = loadFacher();
         $themen = loadThemen();
-        $vars = ["kurs" => $kurs, "faecher" => $faecher, "themen" => $themen];
+
+        if (isset($requestData->query["kursID"]) && is_numeric($requestData->query["kursID"])) {
+            $kursID = (int)($requestData->query["kursID"]);
+            $kurs = loadKurs($kursID);
+            $vars = ["kurs" => $kurs, "faecher" => $faecher, "themen" => $themen];
+        } else if (isset($requestData->query["kursID"]) && $requestData->query["kursID"] == "new") {
+            $fachName = $requestData->query["fach"];
+            $themaName = $requestData->query["thema"];
+            $fach = loadFachByName($fachName);
+            $thema = loadThemaByName($themaName);
+            $vars = ["fach" => $fach, "thema" => $thema, "faecher" => $faecher, "themen" => $themen];
+        }
         return view('kursedit.kursedit-lehrer', $vars);
     }
 
@@ -65,15 +81,25 @@ class KursEditController
         $target_dir = "../public/img/";
 
         $body = $requestData->query;
-        $kursID = (int)$body["kursID"];
+
+        $kursID = 0;
+        if ($body["kursID"] == "new"){
+            $userId = $_SESSION["userId"];
+            $kursID = createKurs($userId);
+        }else {
+            $kursID = (int)$body["kursID"];
+        }
         $keys = array_keys($body);
         $fach = "";
         $thema = "";
         foreach ($keys as $key) {
-            if ($key === "fach") {
+            if ($key == "fach") {
                 $fach = $body[$key];
-            } else if ($key === "thema") {
+            } else if ($key == "thema") {
                 $thema = $body[$key];
+                updateThema($kursID,$thema);
+            }else if($key == "title"){
+                updateTitle($kursID,$body[$key]);
             } else if (str_starts_with($key, "kapitel-definition-")) {
                 $args = str_replace("kapitel-definition-", "", $key);
                 $args = explode("-", $args);
@@ -132,25 +158,25 @@ class KursEditController
                     if ($check === false) {
                         return;
                     }
-                    if(str_starts_with($fileKey,"aufgabenImg-")){
-                        $args=str_replace("aufgabenImg-", "", $fileKey);
+                    if (str_starts_with($fileKey, "aufgabenImg-")) {
+                        $args = str_replace("aufgabenImg-", "", $fileKey);
                         $args = explode("-", $args);
                         $kapitelNr = $args[0];
                         $aufgabenNr = $args[1];
                         $path = $target_dir . "aufgaben/kurs-" . $kursID . "/kapitel-" . $kapitelNr . "/aufgabe-" . $aufgabenNr . "/";
                         $dbPath = "/img/aufgaben/kurs-" . $kursID . "/kapitel-" . $kapitelNr . "/aufgabe-" . $aufgabenNr . "/";
                         $imgSrc = $dbPath . htmlspecialchars(basename($_FILES[$fileKey]["name"]));
-                        $this->checkAndCreateFile($fileKey,$path);
+                        $this->checkAndCreateFile($fileKey, $path);
                         updateAufgabeImgSrc($kursID, $kapitelNr, $aufgabenNr, $imgSrc);
-                    }else if(str_starts_with($fileKey,"erklaerungImg-")){
-                        $args=str_replace("erklaerungImg-", "", $fileKey);
+                    } else if (str_starts_with($fileKey, "erklaerungImg-")) {
+                        $args = str_replace("erklaerungImg-", "", $fileKey);
                         $args = explode("-", $args);
                         $kapitelNr = $args[0];
                         $path = $target_dir . "erklaerung/kurs-" . $kursID . "/kapitel-" . $kapitelNr . "/";
                         $dbPath = "/img/erklaerung/kurs-" . $kursID . "/kapitel-" . $kapitelNr . "/";
-                        $this->checkAndCreateFile($fileKey,$path);
+                        $this->checkAndCreateFile($fileKey, $path);
                         $imgSrc = $dbPath . htmlspecialchars(basename($_FILES[$fileKey]["name"]));
-                        updateErklaerungImgSrc($kursID, $kapitelNr,1, $imgSrc);
+                        updateErklaerungImgSrc($kursID, $kapitelNr, 1, $imgSrc);
                     }
                 }
             }
@@ -158,7 +184,7 @@ class KursEditController
         header('Location: ' . "/kurs-overview?fach=" . $fach . "&thema=" . $thema);
     }
 
-    private function checkAndCreateFile($fileKey,$path)
+    private function checkAndCreateFile($fileKey, $path)
     {
         $allowedImgType = ["png", "jpeg"];
         $target_file = $path . htmlspecialchars(basename($_FILES[$fileKey]["name"]));

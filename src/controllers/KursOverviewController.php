@@ -17,7 +17,7 @@ class KursOverviewController
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $fach, $thema);
         } else {
-            $sql = "SELECT T.NAME, K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ?";
+            $sql = "SELECT T.NAME, K.ID, KURS_NR, TITEL, AUTHOR, IMG, BESCHREIBUNG, THEMA_ID,T.FAECHER_ID,f.NAME as FACH_NAME, T.NAME as THEMA_NAME FROM KURSE k join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE f.NAME like ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $fach);
         }
