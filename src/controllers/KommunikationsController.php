@@ -10,7 +10,6 @@ class KommunikationsController
 {
     public function kommunikation()
     {
-        session_start();
         $messages = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
             $this->senden();

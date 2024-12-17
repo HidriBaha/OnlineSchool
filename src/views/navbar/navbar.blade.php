@@ -1,6 +1,6 @@
 @php
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Faecher.php';
-    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Themen.php';
+    require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Thema.php';
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Suche.php';
     $faecher = \models\get_Faecher();
 @endphp
@@ -68,7 +68,7 @@
                     <li><a class="dropdown-item" href="#">Einstellungen</a></li>
                     <li><a class="dropdown-item" href="/logout">Abmelden</a></li>
                     @if(($_SESSION["role"]??null)=="admin")
-                        <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
+                        <li><a class="dropdown-item" href="/registrieren">Registrieren</a></li>
                         <li><a class="dropdown-item" href="/users">Useransicht</a></li>
                     @endif
                 </ul>

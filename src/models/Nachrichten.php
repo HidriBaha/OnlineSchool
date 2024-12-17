@@ -1,10 +1,9 @@
 <?php
 
 namespace models;
-require_once '../db-utils/db-setup.php';
 
 function getMessages(string $email): array {
-    global $conn;
+    $conn = connectdb();
 
     $stmt = $conn->prepare("
         SELECT 
@@ -27,7 +26,7 @@ function getMessages(string $email): array {
 
 
 function sendMessage(string $topic, string $recipient, string $sender, string $message) {
-    global $conn;
+    $conn = connectdb();
 
     $sql = "INSERT INTO nachrichten (topic, sender, recipient, message, date) VALUES(?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($sql);

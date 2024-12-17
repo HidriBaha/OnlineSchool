@@ -4,7 +4,7 @@ return array(
     '/' => "LandingpageController@landingPage",
     '/login' => "UserController@login",
     '/logout' => "UserController@logout",
-    '/reqistrieren' => "UserController@register",
+    '/registrieren' => "UserController@register",
     '/registerUser' => "UserController@registerUser",
     '/users' => "UserController@allUser",
     '/verifyLogin' => "UserController@verifyLogin",
