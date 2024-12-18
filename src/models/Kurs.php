@@ -17,9 +17,18 @@ function createKurs($userId): int
     $conn = connectdb();
     $sql = "INSERT INTO KURSE(AUTHOR) VALUE(?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $userID);
+    $stmt->bind_param("s", $userId);
     $stmt->execute();
     return $stmt->insert_id;
+}
+
+function deleteKurs($kursId)
+{
+    $conn = connectdb();
+    $sql = "DELETE FROM KURSE WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s",$kursId);
+    return $stmt->execute();
 }
 
 function updateTitle($kursId, $title)
@@ -28,6 +37,15 @@ function updateTitle($kursId, $title)
     $sql = "UPDATE KURSE SET TITEL = ? WHERE ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss",$title,$kursId);
+    return $stmt->execute();
+}
+
+function updateBeschreibung($kursId, $beschreibung)
+{
+    $conn = connectdb();
+    $sql = "UPDATE KURSE SET BESCHREIBUNG = ? WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$beschreibung,$kursId);
     return $stmt->execute();
 }
 

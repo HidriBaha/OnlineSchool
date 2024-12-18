@@ -5,6 +5,7 @@ require_once "../models/Thema.php";
 
 use models\Kurs;
 use function models\createKurs;
+use function models\deleteKurs;
 use function models\insertAufgabenAufgabenstellung;
 use function models\insertErklaerungHeader;
 use function models\insertKapitel;
@@ -16,6 +17,7 @@ use function models\loadThemaByName;
 use function models\loadThemen;
 use function models\updateAufgabeImgSrc;
 use function models\updateAufgabenAufgabenstellung;
+use function models\updateBeschreibung;
 use function models\updateErklaerung;
 use function models\updateErklaerungHeader;
 use function models\updateErklaerungImgSrc;
@@ -35,6 +37,18 @@ class KursEditController
         } else {
             return $this->kursEditSchueler($requestData);
         }
+    }
+
+    public function deleteKurs(RequestData $requestData)
+    {
+        if(empty($_SESSION["role"])||$_SESSION["role"]!="admin"){
+            return;
+        }
+        $kursId = $requestData->query["kursID"];
+        $fach = $requestData->query["fach"];
+        $thema = $requestData->query["thema"];
+        deleteKurs($kursId);
+        header("Location: /kurs-overview?fach=".$fach."&thema=".$thema);
     }
 
     public function kursEditSchueler(RequestData $requestData)
@@ -83,75 +97,100 @@ class KursEditController
         $body = $requestData->query;
 
         $kursID = 0;
-        if ($body["kursID"] == "new"){
+        if ($body["kursID"] == "new") {
             $userId = $_SESSION["userId"];
             $kursID = createKurs($userId);
-        }else {
+        } else {
             $kursID = (int)$body["kursID"];
         }
         $keys = array_keys($body);
         $fach = "";
         $thema = "";
+        $kapitelInsert = array_filter($keys, function ($e) {
+            return str_starts_with($e, "kapitel-definition-") && str_ends_with($e, "-new");
+        });
+        $erklaerungInsert = array_filter($keys, function ($e) {
+            return str_starts_with($e, "erklaerung-header-") && str_ends_with($e, "-new");
+        });
+        $aufgabenInsert = array_filter($keys, function ($e) {
+            return str_starts_with($e, "aufgaben-") && str_ends_with($e, "-new");
+        });
+        $leosungInsert = array_filter($keys, function ($e) {
+            return str_starts_with($e, "loesung-") && str_ends_with($e, "-new");
+        });
+
+        foreach ($kapitelInsert as $key) {
+            $args = str_replace("kapitel-definition-", "", $key);
+            $args = explode("-", $args);
+            $kapitelNr = $args[0];
+            insertKapitel($kursID, $kapitelNr, $body[$key]);
+        }
+        foreach ($erklaerungInsert as $key) {
+            $args = str_replace("erklaerung-header-", "", $key);
+            $args = explode("-", $args);
+            $kapitelNr = $args[0];
+            $erklaerungNr = $args[1];
+            insertErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
+        }
+        foreach ($aufgabenInsert as $key) {
+            $args = str_replace("aufgaben-", "", $key);
+            $args = explode("-", $args);
+            $kapitelNr = $args[0];
+            $aufgabenNr = $args[1];
+            insertAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
+        }
+        foreach ($leosungInsert as $key) {
+            $args = str_replace("loesung-", "", $key);
+            $args = explode("-", $args);
+            $kapitelNr = $args[0];
+            $aufgabenNr = $args[1];
+            insertLoesung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
+        }
+
         foreach ($keys as $key) {
             if ($key == "fach") {
                 $fach = $body[$key];
             } else if ($key == "thema") {
                 $thema = $body[$key];
-                updateThema($kursID,$thema);
-            }else if($key == "title"){
-                updateTitle($kursID,$body[$key]);
-            } else if (str_starts_with($key, "kapitel-definition-")) {
+                updateThema($kursID, $thema);
+            } else if ($key == "title") {
+                updateTitle($kursID, $body[$key]);
+            } else if(str_starts_with($key,"beschreibung")){
+                updateBeschreibung($kursID,$body[$key]);
+            }else if (str_starts_with($key, "kapitel-definition-") && !str_ends_with($key, "-new")) {
                 $args = str_replace("kapitel-definition-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
-                if (str_ends_with($key, "-new")) {
-                    insertKapitel($kursID, $kapitelNr, $body[$key]);
-                } else {
-                    updateKapitel($kursID, $kapitelNr, $body[$key]);
-                }
-            } else if (str_starts_with($key, "erklaerung-header-")) {
+                updateKapitel($kursID, $kapitelNr, $body[$key]);
+            } else if (str_starts_with($key, "erklaerung-header-") && !str_ends_with($key, "-new")) {
                 $args = str_replace("erklaerung-header-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 $erklaerungNr = $args[1];
-                if (str_ends_with($key, "-new")) {
-                    insertErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
-                } else {
-                    updateErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
-                }
+                updateErklaerungHeader($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
             } else if (str_starts_with($key, "erklaerung-")) {
                 $args = str_replace("erklaerung-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 $erklaerungNr = $args[1];
                 updateErklaerung($kursID, $kapitelNr, $erklaerungNr, $body[$key]);
-            } else if (str_starts_with($key, "aufgaben-")) {
+            } else if (str_starts_with($key, "aufgaben-") && !str_ends_with($key, "-new")) {
                 $args = str_replace("aufgaben-", "", $key);
                 $args = explode("-", $args);
                 $kapitelNr = $args[0];
                 $aufgabenNr = $args[1];
-                if (str_ends_with($key, "-new")) {
-                    insertAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
-                } else {
-                    updateAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
-                }
-            } else if (str_starts_with($key, "loesung-")) {
+                updateAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
+            } else if (str_starts_with($key, "loesung-") && !str_ends_with($key, "-new")) {
                 $args = str_replace("loesung-", "", $key);
                 $args = explode("-", $args);
-                $kapitelNr = $args[0];
-                $aufgabenNr = $args[1];
-                if (str_ends_with($key, "-new")) {
-                    insertLoesung($kursID, $kapitelNr, $aufgabenNr, $body[$key]);
-                } else {
-                    $loesungsID = $args[2];
-                    updateLoesung($loesungsID, $body[$key]);
-                }
+                $loesungsID = $args[2];
+                updateLoesung($loesungsID, $body[$key]);
             } else if (str_starts_with($key, "selectedThema")) {
                 $themaId = $body[$key];
                 updateKursThemaId($kursID, $themaId);
             } else if (count(($fileKeys = array_keys($_FILES))) > 0) {
                 foreach ($fileKeys as $fileKey) {
-                    if (empty($_FILES[$fileKey]["tmp_name"])) {
+                    if (empty($_FILES[$fileKey]["tmp_name"]) || !file_exists($_FILES[$fileKey]["tmp_name"])) {
                         continue;
                     }
                     $check = getimagesize($_FILES[$fileKey]["tmp_name"]);

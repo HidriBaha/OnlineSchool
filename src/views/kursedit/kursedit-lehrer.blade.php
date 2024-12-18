@@ -19,7 +19,7 @@
             </div>
             <div>
                 <label class="inpHeaderH3Nr" for="selectedThema">Thema:</label>
-                <select class="dropDown" name="selectedThema" id="selectedThema" required>
+                <select class="dropDown" name="selectedThema" id="selectedThema" onchange="selectedThema(event)" required>
                     @foreach($themen as $t)
                         <option class="dropDownOption" data="{{$t->getFaecherId()}}"
                                 @if((!empty($kurs)&&$kurs->getThemaId()==$t->getId())||(!empty($thema)&&$thema->getId()==$t->getId()))
@@ -30,7 +30,8 @@
                 </select>
             </div>
         </div>
-        <input type="text" class="inpTitle" name="title" placeholder="Title" value="{{!empty($kurs)?$kurs->getTitel():"Title"}}" required>
+        <input type="text" class="inpTitle" name="title" placeholder="Title" value="{{!empty($kurs)?$kurs->getTitel():""}}" required>
+        <input type="text" class="inpHeaderH2" name="beschreibung" placeholder="Beschreibung" value="{{!empty($kurs)?$kurs->getBeschreibung():""}}" required>
         <div class="kapitel-outer-container" id="kapitel-outer-container">
             <input hidden name="kursID" value="{{!empty($kurs)?$kurs->getID():"new"}}">
             @if(!empty($kurs))
@@ -120,14 +121,14 @@
                         <input hidden {{--name="kapitel-nr"--}} class="kapitelNr" value="1">
                         <div class="inp-container">
                             <div class="inpHeaderH2Nr">1.</div>
-                            <input class="inpHeaderH2" name="kapitel-definition-1"
+                            <input class="inpHeaderH2" name="kapitel-definition-1-new"
                                    placeholder="neues Kapitel">
                         </div>
                         <div class='kapitel-button-row-container'>
                             <button class='btn btn-primary' type="button" onclick="createAufgabe(event)">+Übung
                             </button>
                             <input type="file" class="upload"
-                                   name="erklaerungImg-1"
+                                   name="erklaerungImg-1-new"
                                    accept="image/png, image/jpeg"
                             />
                         </div>
@@ -138,12 +139,12 @@
                         <div class="inp-container">
                             <div class="inpHeaderH3Nr">1.1.</div>
                             <input class="inpHeaderH3"
-                                   name="erklaerung-header-1-1"
+                                   name="erklaerung-header-1-1-new"
                                    placeholder="neue Erklärung">
                         </div>
                     </div>
                     <textarea
-                            name='erklaerung-1-11'
+                            name='erklaerung-1-1-new'
                             class='textarea-def'></textarea>
                     <div class="aufgaben-container">
                         <div class="aufgabe">
@@ -168,7 +169,7 @@
                                 </div>
                             </div>
 
-                            <textarea name='aufgaben-1-2'
+                            <textarea name='aufgaben-1-2-new'
                                       class='textarea-def'></textarea>
                             <div class='loesungen-container'>
                             </div>
@@ -184,6 +185,9 @@
         <div class="action-button-container">
             <input class="btn btn-primary" type="submit" name="create" value="Erstellen">
             <button class="btn btn-secondary" type="button" onclick="cancelKurs(event)">Verwerfen</button>
+            @if(!empty($kurs)&&$_SESSION["role"]=="admin")
+                <a class="btn btn-danger" type="button" href="/deleteKurs?kursID={{$kurs->getID()}}&fach={{$kurs->getFach()}}&thema={{$kurs->getThema()}}">Löschen</a>
+            @endif
         </div>
     </form>
 @endsection
