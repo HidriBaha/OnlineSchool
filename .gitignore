@@ -1,5 +1,6 @@
 /.idea/
 /src/.env
-/src/storage/
+/src/storage/cache/*
 /src/vendor/
 composer.phar
+

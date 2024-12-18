@@ -40,8 +40,15 @@ function createEmptyKapitel() {
     buttonNewUebung.innerText = '+Übung';
     buttonNewUebung.onclick = createAufgabe;
     buttonNewUebung.type = "button";
-
     formKapitelButtonRowContainer.appendChild(buttonNewUebung);
+
+    const inputFileErklaerung = document.createElement("input");
+    inputFileErklaerung.classList.add("upload");
+    inputFileErklaerung.type="file";
+    inputFileErklaerung.accept="image/png, image/jpeg";
+    inputFileErklaerung.name="erklaerungImg-"+kapitelNr;
+    formKapitelButtonRowContainer.appendChild(inputFileErklaerung);
+
     divKapitelHeaderRow.appendChild(formKapitelButtonRowContainer);
 
     divKapitelContainer.appendChild(divKapitelHeaderRow);
@@ -52,7 +59,7 @@ function createEmptyKapitel() {
     const divInputContainer = document.createElement("div");
     divInputContainer.classList.add("inp-container");
 
-     const divErklaerungNr = document.createElement("div");
+    const divErklaerungNr = document.createElement("div");
     divErklaerungNr.classList.add("inpHeaderH3Nr");
     divErklaerungNr.innerText = kapitelNr + ".1 ";
     divInputContainer.appendChild(divErklaerungNr);
@@ -75,7 +82,7 @@ function createEmptyKapitel() {
     divAufgabenContainer.classList.add("aufgaben-container");
     divKapitelContainer.appendChild(divAufgabenContainer);
 
-    createAufgabe({target:divKapitelContainer});
+    createAufgabe({target: divKapitelContainer});
 
     return divKapitelContainer;
 }
@@ -88,10 +95,11 @@ function getKapitelNr() {
 }
 
 function createLoesung(event) {
-    const kapitelContainer = findContainer(event.target,"kapitel-container");
-    const losungenContainer = kapitelContainer.querySelector(".loesungen-container");
+    const kapitelContainer = findContainer(event.target, "kapitel-container");
+    const aufgabeContainer = findContainer(event.target, "aufgabe");
+    const losungenContainer = aufgabeContainer.querySelector(".loesungen-container");
     const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ", "");
-    const aufgabenNr = findContainer(event.target,"kapitel-header-row").querySelector(".aufgabenNr").value;
+    const aufgabenNr = findContainer(event.target, "kapitel-header-row").querySelector(".aufgabenNr").value;
 
     const loesungContainer = document.createElement("div");
     loesungContainer.classList.add('loesung-container');
@@ -146,10 +154,9 @@ function createAufgabe(event) {
     divKapitelNrUebung.innerText = kapitelNr + "." + aufgabenNr + ". ";
 
     divInputContainerUebung.appendChild(divKapitelNrUebung);
-    const h3UebungHeader = document.createElement('input');
+    const h3UebungHeader = document.createElement('div');
     h3UebungHeader.classList.add('inpHeaderH3');
-    h3UebungHeader.name = "uebung-header-" + kapitelNr + "-" + aufgabenNr;
-    h3UebungHeader.placeholder = 'Aufgabe';
+    h3UebungHeader.innerText = 'Aufgabe';
     divInputContainerUebung.appendChild(h3UebungHeader)
     divUebungen.appendChild(divInputContainerUebung);
     divAufgabe.appendChild(divUebungen);
@@ -163,6 +170,13 @@ function createAufgabe(event) {
     inputNewLoesung.innerText = '+Lösung';
     inputNewLoesung.type = "button";
     formUebung.appendChild(inputNewLoesung);
+
+    const inputFile = document.createElement("input");
+    inputFile.classList.add("upload");
+    inputFile.type="file";
+    inputFile.accept="image/png, image/jpeg";
+    inputFile.name="aufgabenImg-"+kapitelNr+"-"+aufgabenNr;
+    formUebung.appendChild(inputFile);
 
     const inputDeleteAufgabe = document.createElement("button");
     inputDeleteAufgabe.classList.add('btn', 'btn-secondary');
@@ -209,12 +223,28 @@ function getAufgabenNr(element) {
 }
 
 function findContainer(node, className) {
-    console.log(node)
-    //not class name
     while (node.className !== className) {
         node = node.parentNode;
     }
     return node;
 }
 
+function selectFach(event) {
+    const fachHolder = document.getElementById("fachHolder");
+    const selectedFachID = event.target.selectedOptions[0].value;
+    const themaSelect = document.getElementById("selectedThema")
+    for (let i = 0; i < themaSelect.length; i++) {
+        themaSelect[i].hidden = themaSelect[i].getAttribute("data") !== selectedFachID;
+    }
+    fachHolder.value=event.target.selectedOptions[0].innerText;
+    themaSelect.selectedIndex=-1;
+}
+function selectedThema(event){
+    const themaHolder = document.getElementById("themaHolder");
+    themaHolder.value=event.target.selectedOptions[0].innerText;
+}
+
+function cancelKurs(_event){
+    history.back()
+}
 

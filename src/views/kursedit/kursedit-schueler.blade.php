@@ -7,6 +7,7 @@
         <!-- Course Contents -->
         <input name='amount-tasks' type='hidden' value='{{ count($kurs->getKapitel()[$kapitelNr]->getAufgaben()) }}'>
         <form action='#' method='post'>
+            <h1>{{$kurs->getTitel()}}</h1>
             <h3> {{$kurs->getBeschreibung()}}</h3>
             <div class="chapters">
                 <div class="definition">
@@ -21,12 +22,12 @@
                     <h4>Übungserklärung:</h4>
                     {{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getErklaerung()}}
                     <br>
-                    @if (trim($kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()) != "")
-                        <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kapitel["erklaerungen"][0]["img-src"]}}'>
+                    @if ($kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()!= NULL)
+                        <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getImgSrc()}}'>
                     @endif
                     <br><br>
                     <?php
-                    $userId = $_SESSION['userID']; // Assuming you store the logged-in user's ID in the session
+                    $userId = $_SESSION['userId']; // Assuming you store the logged-in user's ID in the session
                     ?>
                     <h3>Übungen</h3>
                     <ul>
@@ -43,8 +44,8 @@
                             @endphp
 
                             <li>{{ $aufgabe->getAufgabenstellung() }}</li><br>
-                            @if (trim($aufgabe->getImgSrc()) != "")
-                                <img class="img-task" alt="Aufgabe IMG" src="{{ $aufgabe->getImgSrc() }}"><br>
+                            @if ($aufgabe->getImgSrc() != NULL)
+                                <img class='img-task' alt='Aufgabe IMG' src='{{$aufgabe->getImgSrc()}}'><br>
                             @endif
                             @foreach ($aufgabe->getLoesungen() as $keyLoesungen => $loesung)
                                 <input
@@ -71,6 +72,9 @@
                         @endforeach
                     </ul>
                 </div>
+                @if(isset($kurs->getKapitel()[$kapitelNr-1]))
+                <a href='/kurs-edit?kursID={{$kurs->getId()}}&kapitelNr={{$kapitelNr-1}}' class='btn btn-secondary'>vorheriges Kapitel</a>
+                @endif
                 @if(isset($kurs->getKapitel()[$kapitelNr+1]))
                     <a href='/kurs-edit?kursID={{$kurs->getId()}}&kapitelNr={{$kapitelNr+1}}' class='btn btn-primary'>nächstes Kapitel</a>
                 @else

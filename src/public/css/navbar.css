@@ -2,10 +2,10 @@
 /* Navbar Customization */
 .navbar {
     margin-bottom: 20px;
+    background-color: #F2F6F9;
 }
 
 .navbar-nav {
-
     margin-left: 0; /* Align navbar items to the left */
 }
 
@@ -37,3 +37,85 @@ h2 i, h5 i {
     height: auto; /* Maintain the aspect ratio */
     padding: 2px; /* Slight padding to avoid cramped look */
 }
+
+.subject{
+    margin-right: 20px;
+}
+
+/* Ensure the dropdown is hidden by default */
+.dropdown-menu {
+    display: none;
+}
+
+/* Adjust margins if necessary */
+.dropdown-menu {
+    margin-top: 0; /* Remove Bootstrap's default margin */
+}
+.nav-item {
+    position: relative; /* Stellt sicher, dass das Dropdown relativ zum nav-item positioniert wird */
+}
+
+#searchBar{
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow-y: auto;
+}
+
+.popup-content {
+    vertical-align: center;
+    background-color: #fefefe;
+    margin: 10vh auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 1000px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#close-popup{
+    margin-top: 20px;
+}
+
+#searchResultDescription{
+    margin: 10px 20px;
+}
+
+#searchResultCards{
+    margin-bottom: -20px;
+}
+
+#navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#navbar-search-input {
+    display: none;
+}
+
+#FlexSearch{
+    width: 100%;
+    justify-content: center;
+}
+
+#searchForm {
+    justify-self: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+

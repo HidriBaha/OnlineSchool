@@ -29,6 +29,15 @@ function updateErklaerung($kursID,$kapitelNr,$erklaerungNr,$erklaerung):bool
     return $stmt->execute();
 }
 
+function updateErklaerungImgSrc($kursID, $kapitelNr,$erklaerungNr, $imgSrc):bool
+{
+    $conn = connectdb();
+    $sql = "UPDATE ERKLAERUNGEN SET IMG_SRC = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND ERKLAERUNGEN_NR = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $imgSrc, $kursID, $kapitelNr, $erklaerungNr);
+    return $stmt->execute();
+}
+
 class Erklaerung
 {
 

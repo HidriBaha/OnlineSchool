@@ -11,14 +11,14 @@
     justify-content: center;
 }
 
-.upload{
+.upload {
     text-align: center;
 }
 
 .upload::file-selector-button {
     background-color: var(--primary-btn-color);
     border-color: var(--primary-btn-color);
-    color:white;
+    color: white;
     border: none;
     display: inline-block;
     font-weight: 400;
@@ -33,6 +33,15 @@
     padding: .375rem .75rem;
     font-size: 1rem;
     border-radius: .25rem;
+}
+
+.dropDown {
+    border: none;
+    font-size: 1.75rem;
+}
+
+.dropDownOption {
+    font-size: 1rem;
 }
 
 .inpTitle {

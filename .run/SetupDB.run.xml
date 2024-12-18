@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SetupDB" type="DatabaseScript">
+    <script-file value="$PROJECT_DIR$/sql/sql.sql" />
+    <script-file value="$PROJECT_DIR$/sql/create-kurs.sql" />
+    <script-file value="$PROJECT_DIR$/sql/insert-mathe.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source namespace="schema/&quot;schuldb&quot;" />
+    <method v="2" />
+  </configuration>
+</component>
