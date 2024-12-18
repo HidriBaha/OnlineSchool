@@ -84,13 +84,13 @@ class KursEditController
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Validate the incoming data
-        if (!isset($data['aufgabe_id']) || !isset($_SESSION['userID'])) {
+        if (!isset($data['aufgabe_id']) || !isset($_SESSION['userId'])) {
             echo json_encode(['success' => false, 'error' => 'Invalid request']);
             return;
         }
 
         $aufgabeId = (int)$data['aufgabe_id'];
-        $userId = (int)$_SESSION['userID']; // Assume user ID is stored in session
+        $userId = (int)$_SESSION['userId']; // Assume user ID is stored in session
 
         // Insert task completion into the database
         $query = "INSERT IGNORE INTO user_completed_tasks (user_id, aufgabe_id) VALUES ($userId, $aufgabeId)";
