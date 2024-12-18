@@ -12,6 +12,7 @@
         <!-- Course Contents -->
         <input name='amount-tasks' type='hidden' value='{{ count($kurs->getKapitel()[$kapitelNr]->getAufgaben()) }}'>
         <form action='#' method='post'>
+            <h1>{{$kurs->getTitel()}}</h1>
             <h3> {{$kurs->getBeschreibung()}}</h3>
             <div class="chapters">
                 <div class="definition">
