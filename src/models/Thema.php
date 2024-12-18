@@ -2,6 +2,26 @@
 
 namespace models;
 
+function updateThema($kursId, $thema)
+{
+    $conn =connectdb();
+    $sql = "UPDATE KURSE SET THEMA_ID = (SELECT ID FROM THEMA WHERE NAME = ?)  WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$thema,$kursId);
+    return $stmt->execute();
+}
+
+function loadThemaByName($name)
+{
+    $conn = connectdb();
+    $sql = "SELECT ID, NAME, FAECHER_ID FROM THEMA WHERE NAME = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s",$name);
+    $stmt->execute();
+    $row=$stmt->get_result()->fetch_assoc();
+    return new Thema($row["ID"],$row["NAME"],$row["FAECHER_ID"]);
+}
+
 function get_Themen(string $id): array
 {
     $conn = connectdb();

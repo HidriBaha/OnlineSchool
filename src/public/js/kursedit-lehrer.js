@@ -96,7 +96,8 @@ function getKapitelNr() {
 
 function createLoesung(event) {
     const kapitelContainer = findContainer(event.target, "kapitel-container");
-    const losungenContainer = kapitelContainer.querySelector(".loesungen-container");
+    const aufgabeContainer = findContainer(event.target, "aufgabe");
+    const losungenContainer = aufgabeContainer.querySelector(".loesungen-container");
     const kapitelNr = kapitelContainer.querySelector(".kapitelNr").value.replace(". ", "");
     const aufgabenNr = findContainer(event.target, "kapitel-header-row").querySelector(".aufgabenNr").value;
 
@@ -153,10 +154,9 @@ function createAufgabe(event) {
     divKapitelNrUebung.innerText = kapitelNr + "." + aufgabenNr + ". ";
 
     divInputContainerUebung.appendChild(divKapitelNrUebung);
-    const h3UebungHeader = document.createElement('input');
+    const h3UebungHeader = document.createElement('div');
     h3UebungHeader.classList.add('inpHeaderH3');
-    h3UebungHeader.name = "uebung-header-" + kapitelNr + "-" + aufgabenNr;
-    h3UebungHeader.placeholder = 'Aufgabe';
+    h3UebungHeader.innerText = 'Aufgabe';
     divInputContainerUebung.appendChild(h3UebungHeader)
     divUebungen.appendChild(divInputContainerUebung);
     divAufgabe.appendChild(divUebungen);
@@ -230,14 +230,21 @@ function findContainer(node, className) {
 }
 
 function selectFach(event) {
+    const fachHolder = document.getElementById("fachHolder");
     const selectedFachID = event.target.selectedOptions[0].value;
     const themaSelect = document.getElementById("selectedThema")
     for (let i = 0; i < themaSelect.length; i++) {
         themaSelect[i].hidden = themaSelect[i].getAttribute("data") !== selectedFachID;
     }
+    fachHolder.value=event.target.selectedOptions[0].innerText;
     themaSelect.selectedIndex=-1;
 }
+function selectedThema(event){
+    const themaHolder = document.getElementById("themaHolder");
+    themaHolder.value=event.target.selectedOptions[0].innerText;
+}
 
-function cancelKurs(event){
+function cancelKurs(_event){
     history.back()
 }
+

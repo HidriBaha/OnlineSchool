@@ -2,28 +2,31 @@
 
 namespace models;
 
-function insertAufgabenAufgabenstellung($kursID,$kapitelNr,$aufgabenNr,$aufgabenstellung){
-    $conn =connectdb();
+function insertAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $aufgabenstellung)
+{
+    $conn = connectdb();
     $sql = "INSERT INTO AUFGABEN(KURS_ID, KAPITEL_NR,AUFGABEN_NR, AUFGABENSTELLUNG) VALUE (?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss",$kursID,$kapitelNr,$aufgabenNr,$aufgabenstellung);
-    return $stmt->execute();
+    $stmt->bind_param("ssss", $kursID, $kapitelNr, $aufgabenNr, $aufgabenstellung);
+    $stmt->execute();
+    return $stmt->insert_id;
 }
 
-function updateAufgabenAufgabenstellung($kursID,$kapitelNr,$aufgabenNr,$aufgabenstellung){
-    $conn =connectdb();
-    $sql = "Update AUFGABEN SET AUFGABENSTELLUNG = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss",$aufgabenstellung,$kursID,$kapitelNr,$aufgabenNr);
-    return $stmt->execute();
-}
-
-function updateAufgabeImgSrc($kursID,$kapitelNr,$aufgabenNr,$imgSrc)
+function updateAufgabenAufgabenstellung($kursID, $kapitelNr, $aufgabenNr, $aufgabenstellung)
 {
-    $conn =connectdb();
-    $sql = "Update AUFGABEN SET IMG_SRC = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?";
+    $conn = connectdb();
+    $sql = "UPDATE AUFGABEN SET AUFGABENSTELLUNG = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss",$imgSrc,$kursID,$kapitelNr,$aufgabenNr);
+    $stmt->bind_param("ssss", $aufgabenstellung, $kursID, $kapitelNr, $aufgabenNr);
+    return $stmt->execute();
+}
+
+function updateAufgabeImgSrc($kursID, $kapitelNr, $aufgabenNr, $imgSrc)
+{
+    $conn = connectdb();
+    $sql = "UPDATE AUFGABEN SET IMG_SRC = ? WHERE KURS_ID = ? AND KAPITEL_NR = ? AND AUFGABEN_NR = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $imgSrc, $kursID, $kapitelNr, $aufgabenNr);
     return $stmt->execute();
 }
 

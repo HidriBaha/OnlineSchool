@@ -19,15 +19,15 @@
                 @if(sizeof($faecher) > 0)
                     @foreach($faecher as $fach)
                         <li class="nav-item">
-                            <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["name"]}}</a>
-                            <ul class="dropdown-menu" aria-labelledby="{{$fach["name"]}}">
+                            <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["NAME"]}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="{{$fach["NAME"]}}">
                                 @php
-                                    $themen = \models\get_Themen($fach["id"]);
+                                    $themen = \models\get_Themen($fach["ID"]);
                                 @endphp
                                 @if(sizeof($themen) > 0)
                                     @foreach($themen as $thema)
                                         @php
-                                            $path = "/kurs-overview?fach=". $fach["name"]. "&thema=". $thema["name"];
+                                            $path = "/kurs-overview?fach=". $fach["NAME"]. "&thema=". $thema["name"];
                                         @endphp
                                         <li><a class ="dropdown-item" href="{{$path}}">{{$thema["name"]}}</a></li>
                                     @endforeach

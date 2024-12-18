@@ -11,5 +11,6 @@ return array(
     '/kurs-overview' => "KursOverviewController@kursOverview",
     '/kurs-edit' => 'KursEditController@kursEdit',
     '/kurs-update' => 'KursEditController@kursUpdate',
+    '/deleteKurs'=>'KursEditController@deleteKurs',
     '/kommunikation' => 'KommunikationsController@kommunikation',
 );

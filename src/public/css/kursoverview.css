@@ -1,3 +1,11 @@
+.title-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.left{
+    margin-left: auto
+}
 .outer{
     display: flex;
     flex-direction: row;

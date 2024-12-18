@@ -4,7 +4,7 @@
     <script-file value="$PROJECT_DIR$/sql/create-kurs.sql" />
     <script-file value="$PROJECT_DIR$/sql/insert-mathe.sql" />
     <script-mode>FILE</script-mode>
-    <data-source id="7d5d8105-b704-4286-8f0f-9019fd43bb4b" namespace="schema/&quot;schuldb&quot;" />
+    <data-source namespace="schema/&quot;schuldb&quot;" />
     <method v="2" />
   </configuration>
 </component>
