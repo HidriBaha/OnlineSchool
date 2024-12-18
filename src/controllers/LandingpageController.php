@@ -12,7 +12,7 @@ class LandingpageController
     public function landingPage()
     {
         $conn=connectdb();
-        $userID=$_SESSION["userID"];
+        $userID=$_SESSION["userId"];
         global  $messages;
         // Sort the messages array by date in descending order to get the most recent messages first
         usort($messages, function ($a, $b) {
