@@ -141,6 +141,8 @@ class Kurs
     private $fach;
     private $kapitel = [];
 
+    private $progress;
+
 
     public function __construct($id, $kurs_nr, $titel, $author, $img, $beschreibung, $thema_id, $fach_id, $fach, $thema)
     {
@@ -345,6 +347,23 @@ class Kurs
     {
         $this->fach_id = $fach_id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProgress()
+    {
+        return $this->progress;
+    }
+
+    /**
+     * @param mixed $progress
+     */
+    public function setProgress($progress): void
+    {
+        $this->progress = $progress;
+    }
+
 
 
 }
