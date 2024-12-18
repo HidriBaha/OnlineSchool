@@ -60,8 +60,59 @@ class KursEditController
         $kursID = (int)($requestData->query["kursID"]);
         $kapitelNr = (int)($requestData->query["kapitelNr"] ?? 1);
         $kurs = loadKurs($kursID);
-        $vars = ["kurs" => $kurs, "kapitelNr" => $kapitelNr];
+
+
+        $userID=$_SESSION["userID"];
+        $conn = connectdb();
+        $query = "SELECT aufgabe_id FROM user_completed_tasks WHERE user_id = $userID";
+        $result = mysqli_query($conn, $query);
+        $completedTasks = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $completedTasks[] = $row['aufgabe_id'];
+        }
+        $vars = ["kurs" => $kurs, "kapitelNr" => $kapitelNr,"completedTasks" => $completedTasks,];
         return view('kursedit.kursedit-schueler', $vars);
+    }
+// In KursEditController.php
+
+    public function markTaskCompleted()
+    {
+        // Establish a database connection
+        $conn = connectdb();
+
+        // Get JSON input from the AJAX request
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Validate the incoming data
+        if (!isset($data['aufgabe_id']) || !isset($_SESSION['userID'])) {
+            echo json_encode(['success' => false, 'error' => 'Invalid request']);
+            return;
+        }
+
+        $aufgabeId = (int)$data['aufgabe_id'];
+        $userId = (int)$_SESSION['userID']; // Assume user ID is stored in session
+
+        // Insert task completion into the database
+        $query = "INSERT IGNORE INTO user_completed_tasks (user_id, aufgabe_id) VALUES ($userId, $aufgabeId)";
+        $result = mysqli_query($conn, $query);
+
+        if ($result && mysqli_affected_rows($conn) > 0) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Failed to update the database']);
+        }
+
+
+
+    // Insert task completion into the database
+        $query = "INSERT IGNORE INTO user_completed_tasks (user_id, aufgabe_id) VALUES ($userId, $aufgabeId)";
+        $result = mysqli_query($conn, $query);
+
+        if ($result && mysqli_affected_rows($conn) > 0) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Failed to update the database']);
+        }
     }
 
 

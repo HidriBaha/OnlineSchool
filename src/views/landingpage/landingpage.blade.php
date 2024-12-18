@@ -7,83 +7,46 @@
             <div id="progressSection" style="display: block;">
                 <h2>Fortschritt</h2>
                 <!-- Geometrie I -->
+                @foreach ($kurse as $thema => $kursePerThema)
+                @foreach ($kursePerThema as $kurs)
+
                 <div class="progress-container mb-4">
-                    <h5>Geometrie I</h5>
+                    <h5>{{$kurs->getTitel()}}</h5>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 60%; background-color: var(--primary-btn-color);"
+                        <div class="progress-bar" role="progressbar" style="width: {{round($kurs->getProgress()*100)}}%; background-color: var(--primary-btn-color);"
                              aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                            60%
+                           {{round($kurs->getProgress()*100)}}%
                         </div>
                     </div>
                 </div>
+                @endforeach
+                @endforeach
 
-                <!-- Geometrie II -->
-                <div class="progress-container mb-4">
-                    <h5>Geometrie II</h5>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 0; background-color: var(--primary-btn-color);"
-                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            0%
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Geometrie III -->
-                <div class="progress-container mb-4">
-                    <h5>Geometrie III</h5>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 100%; background-color: var(--primary-btn-color);"
-                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                            100%
-                        </div>
-                    </div>
-                </div>
             </div>
+
             <!-- Kursbereich -->
             <!-- Meine Kurse Bereich -->
             <h2 class="mt-4">Meine Kurse</h2>
             <div class="row">
+
+                @foreach ($kurse as $thema => $kursePerThema)
+                    @foreach ($kursePerThema as $kurs)
                 <!-- Kurskarte 1 - Geometrie -->
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="bi bi-rulers" style="font-size: 3rem; color: var(--primary-btn-color);"></i>
+                        <i @if($thema=="Zahlenmenge") class="bi bi-calculator"  @else class="bi bi-rulers" @endif style="font-size: 3rem; color: var(--primary-btn-color);"></i>
                             <!-- Symbol für Geometrie -->
-                            <h5 class="card-title mt-3">Geometrie I</h5>
-                            <p class="card-text"> {{$kurse["geometrie"][0]["beschreibung"]}}</p>
-                            <a href="/kurs-edit?thema=geometrie&kursID=1"
+                            <h5 class="card-title mt-3">{{$kurs->getTitel()}}</h5>
+                            <p class="card-text"> {{$kurs->getBeschreibung()}}</p>
+                            <a href="/kurs-edit?kursID={{$kurs->getID()}}"
                                class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
                 </div>
+                @endforeach
+                @endforeach
 
-                <!-- Kurskarte 2 - Zahlenmenge -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="bi bi-calculator" style="font-size: 3rem; color: var(--primary-btn-color);"></i>
-                            <!-- Symbol für Zahlenmenge -->
-                            <h5 class="card-title mt-3">Zahlenmenge</h5>
-                            <p class="card-text"> {{$kurse["zahlenmengen"][0]["beschreibung"]}}</p>
-                            <a href="/kurs-edit?thema=zahlenmenge&kursID=1"
-                               class="btn btn-primary">Zum Kurs</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kurskarte 3 - Rechengesetze -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="bi bi-journal-text" style="font-size: 3rem; color: var(--primary-btn-color);"></i>
-                            <!-- Symbol für Rechengesetze -->
-                            <h5 class="card-title mt-3">Rechengesetze</h5>
-                            <p class="card-text">{{$kurse["rechengesetze"][0]["beschreibung"]}}</p><br>
-                            <a href="/kurs-edit?thema=rechengesetze&kursID=1"
-                               class="btn btn-primary">Zum Kurs</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Communication Section -->

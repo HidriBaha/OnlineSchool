@@ -61,3 +61,28 @@ ul {
     width: auto;
     border: solid black 0.1vh;
 }
+.progress-container {
+    margin-top: 30px;
+    margin-bottom: 30px; /* More space between progress bars */
+}
+
+.progress-container h5 {
+    margin-bottom: 10px; /* Add space between title and progress bar */
+    font-size: 1.1rem; /* Slightly smaller font size for progress titles */
+}
+
+/* Progress Bar Customization */
+.progress {
+    height: 25px; /* Slightly smaller progress bar height */
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    /* Progress bar color */
+
+    font-size: 1rem; /* Smaller font size for percentage text */
+    line-height: 25px; /* Center the text vertically within the bar */
+    color: white; /* Set the text color to white */
+    text-align: center; /* Center the percentage text */
+}
+
