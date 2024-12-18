@@ -20,6 +20,7 @@ function updateLoesung($id, $loesung):bool
     return $stmt->execute();
 }
 
+
 class Loesung
 {
     private $id;

@@ -12,4 +12,6 @@ return array(
     '/kurs-edit' => 'KursEditController@kursEdit',
     '/kurs-update' => 'KursEditController@kursUpdate',
     '/kommunikation' => 'KommunikationsController@kommunikation',
+   '/mark-task-completed' =>'KursEditController@markTaskCompleted',
+
 );

@@ -23,26 +23,48 @@
                         <br><img id='img-help' alt='Hilfsstellung IMG' src='{{$kapitel["erklaerungen"][0]["img-src"]}}'>
                     @endif
                     <br><br>
-
+                    <?php
+                    $userId = $_SESSION['userID']; // Assuming you store the logged-in user's ID in the session
+                    ?>
                     <h3>Übungen</h3>
                     <ul>
+                        <script>
+                            const completedTasks = @json($completedTasks ?? []);
+                            console.log(completedTasks);
+                        </script>
+
                         @foreach ($kurs->getKapitel()[$kapitelNr]->getAufgaben() as $keyAufgaben => $aufgabe)
+                            @php
+                                // Check if the current task is completed
+                                      $isCompleted = in_array($aufgabe->getId(), $completedTasks ?? []);
+
+                            @endphp
+
                             <li>{{ $aufgabe->getAufgabenstellung() }}</li><br>
                             @if (trim($aufgabe->getImgSrc()) != "")
-                                <img class='img-task' alt='Aufgabe IMG' src='{{$aufgabe->getImgSrc()}}'><br>
+                                <img class="img-task" alt="Aufgabe IMG" src="{{ $aufgabe->getImgSrc() }}"><br>
                             @endif
                             @foreach ($aufgabe->getLoesungen() as $keyLoesungen => $loesung)
-                                <input id="input-{{$keyAufgaben}}-{{$keyLoesungen}}"
-                                       name="submitted-{{$keyAufgaben}}-{{$keyLoesungen}}"
-                                       type="text"
-                                       placeholder="Bitte Loesung eintragen"
-                                       class="form-control form-control-lg my-4 solution-field"
-                                       oninput="checkSolution(this)">
+                                <input
+                                        id="input-{{ $keyAufgaben }}-{{ $keyLoesungen }}"
+                                        name="submitted-{{ $keyAufgaben }}-{{ $keyLoesungen }}"
+                                        type="text"
+                                        data-aufgabe-id="{{ $aufgabe->getId() }}"
+                                        placeholder="Bitte Loesung eintragen"
+                                        class="form-control form-control-lg my-4 solution-field"
+                                        value="{{ $isCompleted ? htmlspecialchars($loesung->getLoesung(), ENT_QUOTES, 'UTF-8') : '' }}"
+                                        {{ $isCompleted ? 'disabled' : '' }}
+                                        oninput="checkSolution(this)"
 
-                                <input type="hidden" id="hidden-solution-{{$keyAufgaben}}-{{$keyLoesungen}}"
+
+
+
+                                >
+                                <pre>{{ print_r($completedTasks) }}</pre>
+                                <input type="hidden" id="hidden-solution-{{ $keyAufgaben }}-{{ $keyLoesungen }}"
                                        value="{{ htmlspecialchars($loesung->getLoesung(), ENT_QUOTES, 'UTF-8') }}">
 
-                                <div id="feedback-{{$keyAufgaben}}-{{$keyLoesungen}}" class="feedback-container"></div>
+                                <div id="feedback-{{ $keyAufgaben }}-{{ $keyLoesungen }}" class="feedback-container"></div>
                             @endforeach
                         @endforeach
                     </ul>
@@ -63,10 +85,15 @@
 @endsection
 
 @section("jsextra")
-    <script src="js/kursedit-schueler.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             initializeProgressBar();
         });
     </script>
+
+
+    <script src="js/kursedit-schueler.js"></script>
+
+
+
 @endsection

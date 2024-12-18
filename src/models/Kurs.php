@@ -72,8 +72,23 @@ function loadAufgaben($kursID,$kapitelNr): array
     }
     return $aufgaben;
 }
-
-
+/*function markTaskAsCompleted($userId, $aufgabeId)
+{
+    $conn = connectdb();
+    $sql = "INSERT INTO user_completed_tasks (USER_ID, AUFGABE_ID) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $userId, $aufgabeId);
+    return $stmt->execute();
+}
+function getCompletedTasks($userId)
+{
+    $conn = connectdb();
+    $query = "SELECT aufgabe_id FROM user_completed_tasks WHERE user_id = :user_id";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([':user_id' => $userId]);
+    $result = $stmt->get_result();
+}
+*/
 
 function loadLoesung(int $getId): array
 {
