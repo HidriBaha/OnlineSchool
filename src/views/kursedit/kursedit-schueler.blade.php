@@ -48,11 +48,15 @@
                         @endforeach
                     </ul>
                 </div>
+                @if(isset($kurs->getKapitel()[$kapitelNr-1]))
+                <a href='/kurs-edit?kursID={{$kurs->getId()}}&kapitelNr={{$kapitelNr-1}}' class='btn btn-secondary'>vorheriges Kapitel</a>
+                @endif
                 @if(isset($kurs->getKapitel()[$kapitelNr+1]))
                     <a href='/kurs-edit?kursID={{$kurs->getId()}}&kapitelNr={{$kapitelNr+1}}' class='btn btn-primary'>nächstes Kapitel</a>
                 @else
                     <a href='/kurs-overview?fach={{$kurs->getFach()}}&thema={{$kurs->getThema()}}' class='btn btn-primary'>zurück zur &Uuml;bersicht</a>
                 @endif
+
             </div>
         </form>
     </div>
