@@ -28,7 +28,7 @@ function updateRecipients() {
     var recipient = document.getElementById('recipient');
     var selectedClass = verteiler.value;
 
-    if (selectedClass !== 'Klassen' && klassenData[selectedClass]) {
+    if (selectedClass !== 'Kurse' && klassenData[selectedClass]) {
         recipient.value = klassenData[selectedClass]['parents'].join(', ');
     } else {
         recipient.value = '';

@@ -3,21 +3,20 @@
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Thema.php';
     require_once $_SERVER['DOCUMENT_ROOT']. '/../models/Suche.php';
     $faecher = \models\get_Faecher();
-    @endphp
+@endphp
 <!DOCTYPE html>
 <html lang="de">
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F2F6F9;">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container" id="navbar-container">
         <!-- Schullogo links -->
         <a class="navbar-brand" href="/">
             <img src="/img/logo.png" class="logo" alt="Schullogo">
         </a>
         <!-- Navbar-Links (Links ausgerichtet) -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 @if(sizeof($faecher) > 0)
-
                     @foreach($faecher as $fach)
                         <li class="nav-item">
                             <a class="subject nav-link dropdown-toggle" href="#" id="{{$fach["name"]}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$fach["NAME"]}}</a>
@@ -41,16 +40,17 @@
                 @endif
             </ul>
         </div>
+
+        <!-- Suchleiste -->
+        <div id="FlexSearch">
+            <form method="POST" id="searchForm" class="nav-item">
+                <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
+                <input type="submit" id="navbar-search-input">
+            </form>
+        </div>
+
         <!-- Symbole rechts -->
         <div class="d-flex">
-            <!-- Suchleiste -->
-            <form method="post" id="searchBar" action="" class="nav-item">
-                <div class="form-group mb-2">
-                    <input type="text" name="search" class="form-control" id="searchInput" placeholder="Suchbegriff eingeben" required>
-                </div>
-                <!-- Der Button ist versteckt, aber das Formular kann trotzdem mit Enter abgesendet werden -->
-                <input type="submit" style="display:none;">
-            </form>
             <!-- Kommunikationssymbol -->
             <div class="nav-item me-3" id="ChatButton">
                 <a href="/kommunikation" class="nav-link">
@@ -68,7 +68,7 @@
                     <li><a class="dropdown-item" href="#">Einstellungen</a></li>
                     <li><a class="dropdown-item" href="/logout">Abmelden</a></li>
                     @if(($_SESSION["role"]??null)=="admin")
-                        <li><a class="dropdown-item" href="/reqistrieren">Registrieren</a></li>
+                        <li><a class="dropdown-item" href="/registrieren">Registrieren</a></li>
                         <li><a class="dropdown-item" href="/users">Useransicht</a></li>
                     @endif
                 </ul>
@@ -107,14 +107,14 @@
                                 @php
                                     $title = "Kurs ". $row["kurs"];
                                     $description = $row["beschreibung"];
-                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=".  strval(intval($row["kurs_nr"]) - 1);
+                                    $path = "/kurs-edit?kursID=".  strval(intval($row["id"]));
                                 @endphp
                                 @break
                             @case("kapitel")
                                 @php
                                     $title = "Kurs ". $row["kurs"];
                                     $description = "<b>". "Kapitel ". $row["kapitel_nr"]. "<br>". $row["header"]. "</b>". "<br><br>". $row["erklaerung"];
-                                    $path = "/kurs-edit?thema=". strtolower($row["thema"]). "&kursID=". strval(intval($row["kurs_nr"]) - 1). "&kapitel=". strval(intval($row["kapitel_nr"]) - 1);
+                                    $path = "/kurs-edit?kursID=". strval(intval($row["id"])). "&kapitelNr=". strval(intval($row["kapitel_nr"]));
                                 @endphp
                                 @break
                         @endswitch
@@ -127,7 +127,7 @@
                                             </div>
                                             <p id="searchResultDescription">{!! $description !!}</p>
                                             <div class="card-body" id="searchResultCards">
-                                                <a href="{{$path}}">{{$path}}</a>
+                                                <a class="btn btn-primary" href="{{$path}}">Zum Ergebnis</a>
                                             </div>
                                         </div>
                                     </div>

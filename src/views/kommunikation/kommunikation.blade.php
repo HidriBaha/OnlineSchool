@@ -27,7 +27,7 @@
                     <td class='messages-td date'>{{$message['date']}}</td>
                 </tr>
                 <tr class="hidden" id="message-{{$index}}">
-                    <td colspan="4">{!! nl2br($message['message']) !!}</td>
+                    <td class="messageContent" colspan="4">{!! nl2br($message['message']) !!}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -40,19 +40,16 @@
             <button id="closeChatBtn" class="btn close"></button>
         </div>
         <div id="chat-bottom">
-            <form action="" method="post">
+            <form method="post">
                 <div>
                     <input type="text" class="msg-input" id="recipient" name="recipient" placeholder="Empfänger eingeben..." required>
                     <select name="verteiler" id="verteiler" class="dropdown" onchange="updateRecipients()">
-                        <option value="Klassen" selected>Klassen</option>
-                        @foreach($klassen as $name => $klasse)
-                            <option class="dropdown-content" value="{{$name}}">{{$name}}</option>
-                        @endforeach
+                        <option value="Kurse" selected>Kurse</option>
                     </select>
                 </div>
                 <input type="text" class="msg-input" id="topic" name="topic" placeholder="Betreff eingeben..." required>
-                <textarea class="msg-input" id="messageInput" name="message" placeholder="Nachricht eingeben..." required></textarea><br>
-                <button type="submit" id="sendMessageBtn" class="btn btn-primary">Senden</button>
+                <textarea type="text" class="msg-input" id="messageInput" name="message" placeholder="Nachricht eingeben..." required></textarea><br>
+                <button type="submit" id="sendMessageBtn" class="btn btn-primary" name="send_message">Senden</button>
             </form>
         </div>
     </div>
@@ -65,6 +62,5 @@
 
 @section("jsextra")
     <script src="/js/kommunikation.js">
-        const klassenData = <?php echo json_encode($klassen); ?>;
     </script>
 @endsection
