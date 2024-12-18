@@ -62,7 +62,7 @@ class KursEditController
         $kurs = loadKurs($kursID);
 
 
-        $userID=$_SESSION["userID"];
+        $userID=$_SESSION["userId"];
         $conn = connectdb();
         $query = "SELECT aufgabe_id FROM user_completed_tasks WHERE user_id = $userID";
         $result = mysqli_query($conn, $query);

@@ -44,22 +44,36 @@ h2 i, h5 i {
     margin-right: 10px; /* Space between icon and text */
     font-size: 1.3rem; /* Slightly larger icons */
 }
-
-/* Custom Card Styling */
 .card {
     margin-bottom: 20px;
-    border-radius: 8px; /* Optional: makes the card corners rounded */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Ensure space between content and button */
+    height: 100%; /* Make all cards the same height */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column; /* Stack content inside the card body */
+    flex-grow: 1; /* Make the card body take up available space */
+    justify-content: space-between; /* Align content and button */
 }
 
 .card-title {
-    font-size: 1.25rem; /* Optional: adjust the font size of the title */
+    font-size: 1.25rem; /* Adjust font size */
     font-weight: bold;
 }
 
 .card-text {
     font-size: 1rem;
-    margin-bottom: 15px;
+    margin-bottom: auto; /* Push the text up */
+}
+
+.btn {
+    margin-top: auto; /* Push the button to the bottom of the card */
+    align-self: center; /* Center the button horizontally */
 }
 
 .btn-primary {

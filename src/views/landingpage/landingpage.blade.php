@@ -34,15 +34,21 @@
                 <!-- Kurskarte 1 - Geometrie -->
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-body text-center">
-                        <i @if($thema=="Zahlenmenge") class="bi bi-calculator"  @else class="bi bi-rulers" @endif style="font-size: 3rem; color: var(--primary-btn-color);"></i>
-                            <!-- Symbol für Geometrie -->
+                        <div class="card-body">
+                            <i
+                                    @if($thema=="Zahlenmenge")
+                                        class="bi bi-calculator"
+                                    @else
+                                        class="bi bi-rulers"
+                                    @endif
+                                    style="font-size: 3rem; color: var(--primary-btn-color);">
+                            </i>
                             <h5 class="card-title mt-3">{{$kurs->getTitel()}}</h5>
-                            <p class="card-text"> {{$kurs->getBeschreibung()}}</p>
-                            <a href="/kurs-edit?kursID={{$kurs->getID()}}"
-                               class="btn btn-primary">Zum Kurs</a>
+                            <p class="card-text">{{$kurs->getBeschreibung()}}</p>
+                            <a href="/kurs-edit?kursID={{$kurs->getID()}}" class="btn btn-primary">Zum Kurs</a>
                         </div>
                     </div>
+
                 </div>
                 @endforeach
                 @endforeach
