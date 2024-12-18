@@ -2,12 +2,7 @@
 @section("content")
     <div class="container kursinhalt">
         <!-- Dynamic Progress Bar -->
-        <div class="progress my-4">
-            <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar"
-                 style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                0%
-            </div>
-        </div>
+
 
         <!-- Course Contents -->
         <input name='amount-tasks' type='hidden' value='{{ count($kurs->getKapitel()[$kapitelNr]->getAufgaben()) }}'>
@@ -16,6 +11,13 @@
             <div class="chapters">
                 <div class="definition">
                     <h2>{{$kurs->getKapitel()[$kapitelNr]->getDefinition()}}</h2><br>
+                    <div class="progress my-4">
+                        <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar"
+                             style="width: {{round($kurs->getProgress()*100)}}%; background-color: var(--primary-btn-color);"
+                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            0%
+                        </div>
+                    </div>
                     <h4>Übungserklärung:</h4>
                     {{$kurs->getKapitel()[$kapitelNr]->getErklaerung()->getErklaerung()}}
                     <br>
@@ -60,7 +62,7 @@
 
 
                                 >
-                                <pre>{{ print_r($completedTasks) }}</pre>
+{{--                                <pre>{{ print_r($completedTasks) }}</pre>--}}
                                 <input type="hidden" id="hidden-solution-{{ $keyAufgaben }}-{{ $keyLoesungen }}"
                                        value="{{ htmlspecialchars($loesung->getLoesung(), ENT_QUOTES, 'UTF-8') }}">
 

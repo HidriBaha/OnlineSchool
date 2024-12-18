@@ -11,10 +11,48 @@ use models\Kapitel;
 use models\Erklaerung;
 use models\Loesung;
 
+function createKurs($userId): int
+{
+
+    $conn = connectdb();
+    $sql = "INSERT INTO KURSE(AUTHOR) VALUE(?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $userId);
+    $stmt->execute();
+    return $stmt->insert_id;
+}
+
+function deleteKurs($kursId)
+{
+    $conn = connectdb();
+    $sql = "DELETE FROM KURSE WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s",$kursId);
+    return $stmt->execute();
+}
+
+function updateTitle($kursId, $title)
+{
+    $conn = connectdb();
+    $sql = "UPDATE KURSE SET TITEL = ? WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$title,$kursId);
+    return $stmt->execute();
+}
+
+function updateBeschreibung($kursId, $beschreibung)
+{
+    $conn = connectdb();
+    $sql = "UPDATE KURSE SET BESCHREIBUNG = ? WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$beschreibung,$kursId);
+    return $stmt->execute();
+}
+
 function loadKurs(mixed $kursID): Kurs
 {
     $conn = connectdb();
-    $sql = "SELECT k.ID, k.KURS_NR, k.TITEL, k.AUTHOR, k.IMG, k.BESCHREIBUNG, k.THEMA_ID, t.NAME as THEMA_NAME, f.NAME as FEACHER_NAME FROM KURSE k Join thema t on k.THEMA_ID = t.ID join FAECHER f on t.FAECHER_ID = f.ID WHERE k.ID = ?";
+    $sql = "SELECT K.ID, K.KURS_NR, K.TITEL, K.AUTHOR, K.IMG, K.BESCHREIBUNG, K.THEMA_ID,T.FAECHER_ID, T.NAME AS THEMA_NAME, F.NAME AS FEACHER_NAME FROM KURSE K JOIN THEMA T ON K.THEMA_ID = T.ID JOIN FAECHER F ON T.FAECHER_ID = F.ID WHERE K.ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $kursID);
     $stmt->execute();
@@ -27,7 +65,7 @@ function loadKurs(mixed $kursID): Kurs
 function getKursFromResult($result): Kurs
 {
     $row = $result->fetch_assoc();
-    return new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID'], $row['FEACHER_NAME'], $row['THEMA_NAME']);
+    return new Kurs($row['ID'], $row['KURS_NR'], $row['TITEL'], $row['AUTHOR'], $row['IMG'], $row['BESCHREIBUNG'], $row['THEMA_ID'], $row["FAECHER_ID"], $row['FEACHER_NAME'], $row['THEMA_NAME']);
 }
 
 function getKapitelByKursID($kursID): array
@@ -49,14 +87,14 @@ function getKapitelFromResult($result, $kursID): array
     while (($row = $result->fetch_assoc()) != null) {
         $kapitel = new Kapitel($row['KURS_ID'], $row['KAPITEL_NR'], $row['DEFINITION']);
         $kapitel->setErklaerung(new Erklaerung($row['KURS_ID'], $row['KAPITEL_NR'], $row['ERKLAERUNGEN_NR'], $row['HEADER'], $row['ERKLAERUNG'], $row['IMG_SRC']));
-        $aufgaben = loadAufgaben($kursID,$kapitel->getKapitelNR());
+        $aufgaben = loadAufgaben($kursID, $kapitel->getKapitelNR());
         $kapitel->setAufgaben($aufgaben);
         $kapitelArr[$kapitel->getKapitelNR()] = $kapitel;
     }
     return $kapitelArr;
 }
 
-function loadAufgaben($kursID,$kapitelNr): array
+function loadAufgaben($kursID, $kapitelNr): array
 {
     $sql = "SELECT ID, AUFGABEN_NR, KURS_ID, KAPITEL_NR, AUFGABENSTELLUNG, TIPP, IMG_SRC FROM AUFGABEN WHERE KURS_ID = ? AND KAPITEL_NR = ?";
     $conn = connectdb();
@@ -72,23 +110,7 @@ function loadAufgaben($kursID,$kapitelNr): array
     }
     return $aufgaben;
 }
-/*function markTaskAsCompleted($userId, $aufgabeId)
-{
-    $conn = connectdb();
-    $sql = "INSERT INTO user_completed_tasks (USER_ID, AUFGABE_ID) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $userId, $aufgabeId);
-    return $stmt->execute();
-}
-function getCompletedTasks($userId)
-{
-    $conn = connectdb();
-    $query = "SELECT aufgabe_id FROM user_completed_tasks WHERE user_id = :user_id";
-    $stmt = $conn->prepare($query);
-    $stmt->execute([':user_id' => $userId]);
-    $result = $stmt->get_result();
-}
-*/
+
 
 function loadLoesung(int $getId): array
 {
@@ -115,10 +137,14 @@ class Kurs
     private $beschreibung;
     private $thema_id;
     private $thema;
+    private $fach_id;
     private $fach;
     private $kapitel = [];
 
-    public function __construct($id, $kurs_nr, $titel, $author, $img, $beschreibung, $thema_id, $fach, $thema)
+    private $progress;
+
+
+    public function __construct($id, $kurs_nr, $titel, $author, $img, $beschreibung, $thema_id, $fach_id, $fach, $thema)
     {
         $this->id = $id;
         $this->kurs_nr = $kurs_nr;
@@ -127,6 +153,7 @@ class Kurs
         $this->img = $img;
         $this->beschreibung = $beschreibung;
         $this->thema_id = $thema_id;
+        $this->fach_id = $fach_id;
         $this->thema = $thema;
         $this->fach = $fach;
     }
@@ -304,6 +331,39 @@ class Kurs
     {
         $this->fach = $fach;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFachId()
+    {
+        return $this->fach_id;
+    }
+
+    /**
+     * @param mixed $fach_id
+     */
+    public function setFachId($fach_id): void
+    {
+        $this->fach_id = $fach_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgress()
+    {
+        return $this->progress;
+    }
+
+    /**
+     * @param mixed $progress
+     */
+    public function setProgress($progress): void
+    {
+        $this->progress = $progress;
+    }
+
 
 
 }
